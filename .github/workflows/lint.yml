@@ -24,6 +24,7 @@ jobs:
           go-version: 'stable'
           check-latest: true
 
+      - run: chmod +x .itbasis/builder
       - run: make go-dependencies
 
       - run: make go-generate && git diff --exit-code

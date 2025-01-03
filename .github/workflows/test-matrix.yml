@@ -25,6 +25,7 @@ jobs:
           go-version: ${{ matrix.go }}
           check-latest: true
 
+      - run: chmod +x .itbasis/builder
       - run: make go-dependencies
       - run: make go-all-tests
 
