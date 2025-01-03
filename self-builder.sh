@@ -8,7 +8,7 @@ go run ${builderGoPath} \
 	--build-version="${version}" \
 	--build-os=windows \
 	--build-arch=amd64 \
-	--output=".itbasis/itbasis-builder.exe" \
+	--output=".itbasis/builder.exe" \
 	${builderGoPath}
 
 go run ${builderGoPath} \
@@ -17,5 +17,5 @@ go run ${builderGoPath} \
 	--build-version="${version}" \
 	--build-os=linux \
 	--build-arch=amd64 \
-	--output=".itbasis/itbasis-builder" \
+	--output=".itbasis/builder" \
 	${builderGoPath}
