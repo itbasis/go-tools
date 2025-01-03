@@ -1,0 +1,36 @@
+name: lint & diff
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test-gomod:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: 'stable'
+      - run: go mod tidy && git diff --exit-code go.mod go.sum
+
+  test-generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: 'stable'
+          check-latest: true
+
+      - run: make go-dependencies
+
+      - run: make go-generate && git diff --exit-code
+
+  editorconfig:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: editorconfig-checker/action-editorconfig-checker@main
+      - run: editorconfig-checker

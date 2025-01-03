@@ -1,0 +1,50 @@
+name: Matrix tests
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test-matrix:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        go: [ "1.22.x","1.23.x", "oldstable", "stable" ]
+        continueOnError: [ false ]
+    #        include:
+    #          - go: ">=1.23.0-rc.1"
+    #            continueOnError: true
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: ${{ matrix.go }}
+          check-latest: true
+
+      - run: make go-dependencies
+      - run: make go-all-tests
+
+      - name: Test Summary
+        uses: test-summary/action@v2
+        with:
+          paths: "junit-report.xml"
+        if: always()
+
+      - name: Upload test results to Codecov
+        if: ${{ !cancelled() }}
+        uses: codecov/test-results-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: "junit-report.xml"
+          verbose: true
+
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./coverage-unit.out
+          verbose: true

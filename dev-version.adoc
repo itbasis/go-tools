@@ -1,0 +1,6 @@
+= Development version
+:icons: font
+
+[no-bullet]
+- icon:wrench[] Replaced use of zap with slog
+- icon:wrench[] Replaced UUID usage from link:https://github.com/gofrs/uuid[gofrs] package to link:https://github.com/google/uuid[google] package

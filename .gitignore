@@ -1,0 +1,16 @@
+.DS_Store
+tmp.*
+
+# Go
+/bin/
+/build/
+
+# Reports
+ginkgo-coverage-*.out
+junit-report.xml
+
+# JetBrains
+.idea/*
+!.idea/vcs.xml
+!.idea/protobuf.xml
+!.idea/externalDependencies.xml
