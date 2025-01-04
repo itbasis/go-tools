@@ -1,0 +1,8 @@
+= Builder
+:toc:
+
+Утилита для управления сборками
+
+include::cmd/dependencies/README.adoc[]
+
+include::cmd/test/README.adoc[]

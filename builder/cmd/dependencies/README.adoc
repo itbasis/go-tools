@@ -1,0 +1,13 @@
+== Команда `dependencies`
+
+Установка необходимых для builder утилит в Go-окружение - устанавливаются только те, работают "за пределами" билдера как самостоятельные утилиты.
+
+Список устанавливаемых зависимостей:
+
+* link:https://github.com/golangci/golangci-lint[golangci-lint]
+* link:https://github.com/uber-go/mock[mockgen]
+* link:https://github.com/editorconfig-checker/editorconfig-checker[editorconfig-checker]
+
+Список зависимостей, "упакованные" в builder:
+
+* link:https://onsi.github.io/ginkgo/[Ginkgo]

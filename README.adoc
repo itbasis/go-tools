@@ -1,0 +1,19 @@
+= Go Tools
+---
+
+image:https://img.shields.io/github/go-mod/go-version/itbasis/go-tools[GitHub go.mod Go version]
+image:https://img.shields.io/badge/godoc-reference-blue.svg[link=https://pkg.go.dev/github.com/itbasis/go-tools]
+image:https://img.shields.io/github/v/release/itbasis/go-tools[GitHub Release]
+https://codecov.io/gh/itbasis/go-tools[image:https://codecov.io/gh/itbasis/go-tools/graph/badge.svg?token=7nCfsLsE2e[codecov]]
+https://goreportcard.com/report/github.com/itbasis/go-tools[image:https://goreportcard.com/badge/github.com/itbasis/go-tools[Go Report Card]]
+
+
+[NOTE]
+====
+Description and examples of work in progress...
+====
+
+== Список утилит
+
+* {empty}
+xref:builder/README.adoc[builder]

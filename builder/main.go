@@ -3,12 +3,12 @@ package main
 import (
 	"log"
 
-	"github.com/itbasis/tools/builder/cmd/build"
-	"github.com/itbasis/tools/builder/cmd/dependencies"
-	"github.com/itbasis/tools/builder/cmd/generate"
-	"github.com/itbasis/tools/builder/cmd/lint"
-	"github.com/itbasis/tools/builder/cmd/test"
-	"github.com/itbasis/tools/builder/cmd/update"
+	builderCmdBuild "github.com/itbasis/tools/builder/cmd/build"
+	builderCmdDependencies "github.com/itbasis/tools/builder/cmd/dependencies"
+	builderCmdGenerate "github.com/itbasis/tools/builder/cmd/generate"
+	builderCmdLint "github.com/itbasis/tools/builder/cmd/lint"
+	builderCmdTest "github.com/itbasis/tools/builder/cmd/test"
+	builderCmdUpdate "github.com/itbasis/tools/builder/cmd/update"
 	itbasisMiddlewareApp "github.com/itbasis/tools/middleware/app"
 	itbasisMiddlewareCmd "github.com/itbasis/tools/middleware/cmd"
 )
@@ -20,12 +20,12 @@ func main() {
 	}
 
 	cmdRoot.AddCommand(
-		dependencies.CmdDependencies,
-		update.CmdUpdate,
-		generate.CmdGenerate,
-		lint.CmdLint,
-		test.CmdUnitTest,
-		build.NewBuildCommand(),
+		builderCmdDependencies.CmdDependencies,
+		builderCmdUpdate.CmdUpdate,
+		builderCmdGenerate.CmdGenerate,
+		builderCmdLint.CmdLint,
+		builderCmdTest.CmdUnitTest,
+		builderCmdBuild.NewBuildCommand(),
 	)
 
 	itbasisMiddlewareApp.NewApp(cmdRoot).Run()

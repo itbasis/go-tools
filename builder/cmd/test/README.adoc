@@ -1,0 +1,3 @@
+== Команда `unit-test`
+
+Запускает тесты на базе фреймворка https://onsi.github.io/ginkgo/[Ginkgo] и подготавливает Coverage отчёт. Результат складируется в каталог `build/reports`
