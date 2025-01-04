@@ -5,4 +5,6 @@
 
 include::cmd/dependencies/README.adoc[]
 
+include::cmd/lint/README.adoc[]
+
 include::cmd/test/README.adoc[]

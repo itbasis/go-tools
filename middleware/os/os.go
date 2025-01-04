@@ -2,8 +2,11 @@ package os
 
 import (
 	"log"
+	"log/slog"
 	"os"
 	"path/filepath"
+
+	itbasisMiddlewareLog "github.com/itbasis/tools/middleware/log"
 )
 
 const (
@@ -36,4 +39,15 @@ func ExecutableDir() string {
 	}
 
 	return filepath.Dir(executable)
+}
+
+func BeARegularFile(path string) bool {
+	fileInfo, err := os.Stat(path)
+	if err != nil {
+		slog.Debug("fail get file info", itbasisMiddlewareLog.SlogAttrError(err))
+
+		return false
+	}
+
+	return fileInfo.Mode().IsRegular()
 }

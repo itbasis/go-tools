@@ -1,0 +1,9 @@
+== Команда `lint`
+
+Запуск различных проверок.
+
+Список используемых утилит:
+
+* link:https://github.com/editorconfig-checker/editorconfig-checker[editorconfig-checker] - пропускается, если указан аргумент `--skip-editor-config-checker` или в каталоге отсутствует файл `.editorconfig`
+* link:https://golangci-lint.run[golangci-lint] - пропускается, если указан аргумент `--skip-golangci-lint`
+
