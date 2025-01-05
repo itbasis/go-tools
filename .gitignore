@@ -4,6 +4,7 @@ tmp.*
 # Go
 /bin/
 /build/
+/.itbasis/
 
 # Reports
 ginkgo-coverage-*.out

@@ -34,7 +34,7 @@ jobs:
       - name: Test Summary
         uses: test-summary/action@v2
         with:
-          paths: "junit-report.xml"
+          paths: "build/reports/junit-report.xml"
         if: always()
 
       - name: Upload test results to Codecov
@@ -42,12 +42,12 @@ jobs:
         uses: codecov/test-results-action@v1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          files: "junit-report.xml"
+          files: "build/reports/junit-report.xml"
           verbose: true
 
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          files: ./coverage-unit.out
+          files: build/reports/coverage-unit.out
           verbose: true

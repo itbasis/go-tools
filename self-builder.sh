@@ -3,7 +3,7 @@
 builderGoPath=builder/main.go
 builderOutput=.itbasis/builder
 
-echo "${OSTYPE}"
+echo "os: ${OSTYPE}"
 if [[ "$OSTYPE" == "msys" ]]; then
 	builderOutput="${builderOutput}.exe"
 fi
