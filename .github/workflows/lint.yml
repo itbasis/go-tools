@@ -25,8 +25,20 @@ jobs:
           check-latest: true
 
       - run: go run builder/main.go dependencies
-
       - run: go run builder/main.go generate && git diff --exit-code
+
+  test-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: 'stable'
+          check-latest: true
+
+      - run: go run builder/main.go dependencies
+      - run: go run builder/main.go lint
 
   editorconfig:
     runs-on: ubuntu-latest

@@ -18,7 +18,6 @@ jobs:
 
       - run: go run builder/main.go dependencies
       - run: go run builder/main.go generate
-      - run: go run builder/main.go lint
       - run: go run builder/main.go unit-test
 
       - name: Test Summary
