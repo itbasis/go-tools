@@ -42,6 +42,13 @@ var CmdUnitTest = &cobra.Command{
 				OutWriter:      cmd.OutOrStdout(),
 				ErrWriter:      cmd.ErrOrStderr(),
 				DefaultCommand: ginkgoRun.BuildRunCommand(),
+				Exiter: func(code int) {
+					slog.Debug(fmt.Sprintf("Ginkgo exit code: %d", code))
+
+					if code != 0 {
+						os.Exit(code)
+					}
+				},
 			}).RunAndExit(
 				[]string{
 					"-race",

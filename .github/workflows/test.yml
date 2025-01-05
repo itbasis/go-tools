@@ -18,7 +18,7 @@ jobs:
 
       - run: go run builder/main.go dependencies
       - run: go run builder/main.go generate
-      - run: go run builder/main.go unit-test
+      - run: go run builder/main.go unit-test --debug
       - run: ls -laFRh build/
 
       - name: Test Summary

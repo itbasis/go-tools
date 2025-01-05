@@ -6,7 +6,7 @@ on:
     - cron: '0 0 * * 0'
 
 jobs:
-  tests:
+  gosec-tests:
     runs-on: ubuntu-latest
     permissions:
       security-events: write
