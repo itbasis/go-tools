@@ -26,9 +26,10 @@ jobs:
           go-version: 'stable'
           check-latest: true
 
-      - run: chmod +x .itbasis/builder
-      - run: make go-dependencies
-      - run: make go-all-tests
+      - run: go builder/main.go dependencies
+      - run: go builder/main.go generate
+      - run: go builder/main.go lint
+      - run: go builder/main.go unit-test
 
       - name: Test Summary
         uses: test-summary/action@v2

@@ -53,9 +53,6 @@ ij_yaml_keep_indents_on_empty_lines = false
 insert_final_newline = false
 indent_style = unset
 
-[Makefile]
-ij_wrap_on_typing = false
-
 [*.sh]
 ij_shell_binary_ops_start_line = true
 

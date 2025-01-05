@@ -1,8 +1,6 @@
 package generate
 
 import (
-	"fmt"
-
 	builderCmd "github.com/itbasis/tools/builder/internal/cmd"
 	itbasisBuilderExec "github.com/itbasis/tools/builder/internal/exec"
 	itbasisMiddlewareCmd "github.com/itbasis/tools/middleware/cmd"

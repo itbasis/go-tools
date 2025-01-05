@@ -24,10 +24,9 @@ jobs:
           go-version: 'stable'
           check-latest: true
 
-      - run: chmod +x .itbasis/builder
-      - run: make go-dependencies
+      - run: go builder/main.go dependencies
 
-      - run: make go-generate && git diff --exit-code
+      - run: go builder/main.go generate && git diff --exit-code
 
   editorconfig:
     runs-on: ubuntu-latest
