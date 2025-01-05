@@ -66,6 +66,7 @@ var CmdUnitTest = &cobra.Command{
 			itbasisMiddlewareCmd.RequireNoError(
 				cmd,
 				goToolCoverExec.Execute(
+					exec.WithRerun(),
 					exec.WithRestoreArgsIncludePrevious(
 						exec.IncludePrevArgsBefore,
 						"cover",
@@ -78,6 +79,7 @@ var CmdUnitTest = &cobra.Command{
 			itbasisMiddlewareCmd.RequireNoError(
 				cmd,
 				goToolCoverExec.Execute(
+					exec.WithRerun(),
 					exec.WithRestoreArgsIncludePrevious(
 						exec.IncludePrevArgsBefore,
 						"cover",
