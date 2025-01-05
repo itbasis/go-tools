@@ -19,7 +19,7 @@ jobs:
       - run: go run builder/main.go dependencies
       - run: go run builder/main.go generate
       - run: go run builder/main.go unit-test
-          - run: ls -laFRh build/
+      - run: ls -laFRh build/
 
       - name: Test Summary
         uses: test-summary/action@v2
