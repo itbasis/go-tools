@@ -1,3 +1,4 @@
+//nolint:govet // Example file
 package main_test
 
 // tag::documentation[]

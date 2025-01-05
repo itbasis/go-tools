@@ -9,7 +9,7 @@ import (
 )
 
 func NewGoExecutable(opts ...itbasisMiddlewareOption.Option[exec.Cmd]) (*itbasisMiddlewareExec.Executable, error) {
-	return itbasisMiddlewareExec.NewExecutable("go", opts...)
+	return itbasisMiddlewareExec.NewExecutable("go", opts...) //nolint:wrapcheck // _
 }
 
 func NewGoInstallWithCobra(cmd *cobra.Command) (*itbasisMiddlewareExec.Executable, error) {

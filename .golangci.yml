@@ -1,92 +1,99 @@
 #file: noinspection SpellCheckingInspection
 run:
-  concurrency: 4
-  modules-download-mode: readonly
+    concurrency: 4
+    modules-download-mode: readonly
 
 issues:
-  exclude-dirs:
-    - testdata
+    exclude-dirs:
+        - testdata
 
 linters-settings:
-  gosec:
-    exclude-generated: true
-    severity: medium
-    confidence: medium
-  varnamelen:
-    ignore-type-assert-ok: true
-    ignore-map-index-ok: true
-    ignore-names:
-      - db
-      - err
-  ginkgolinter:
-    force-expect-to: true
-    validate-async-intervals: true
-  govet:
-    enable-all: true
-    disable:
-      - fieldalignment
-  nolintlint:
-    require-explanation: true
-    require-specific: true
-  lll:
-    line-length: 150
+    gosec:
+        exclude-generated: true
+        severity: medium
+        confidence: medium
+    varnamelen:
+        ignore-type-assert-ok: true
+        ignore-map-index-ok: true
+        ignore-names:
+            - db
+            - err
+    ginkgolinter:
+        force-expect-to: true
+        validate-async-intervals: true
+    govet:
+        enable-all: true
+        disable:
+            - fieldalignment
+    nolintlint:
+        require-explanation: true
+        require-specific: true
+    lll:
+        line-length: 150
+    mnd:
+        ignored-numbers:
+            - '0755'
+    tagliatelle:
+        case:
+            rules:
+                json: snake
 
 # https://golangci-lint.run/usage/configuration/#linters-configuration
 linters:
-  disable-all: true
-  enable:
-    #    - unused
-    - asasalint
-    - bodyclose
-    - containedctx
-    - contextcheck
-    - copyloopvar
-    - cyclop
-    - dogsled
-    - err113
-    - errcheck
-    - errname
-    - errorlint
-    - exhaustive
-    - forbidigo
-    - funlen
-    - ginkgolinter
-    #    - gochecknoinits
-    - goconst
-    - gocritic
-    - gocyclo
-    - goimports
-    - gomoddirectives
-    - goprintffuncname
-    - gosec
-    - gosimple
-    - govet
-    - grouper
-    - ineffassign
-    - interfacebloat
-    - lll
-    - misspell
-    - mnd
-    - nilerr
-    - nlreturn
-    - noctx
-    - nolintlint
-    - nonamedreturns
-    - prealloc
-    - predeclared
-    - promlinter
-    - revive
-    - staticcheck
-    - stylecheck
-    - tagliatelle
-    - tenv
-    - testpackage
-    - typecheck
-    - unconvert
-    - unparam
-    - usestdlibvars
-    - varnamelen
-    - wastedassign
-    - whitespace
-    - wrapcheck
-    - wsl
+    disable-all: true
+    enable:
+        #    - unused
+        - asasalint
+        - bodyclose
+        - containedctx
+        - contextcheck
+        - copyloopvar
+        - cyclop
+        - dogsled
+        - err113
+        - errcheck
+        - errname
+        - errorlint
+        - exhaustive
+        - forbidigo
+        - funlen
+        - ginkgolinter
+        #    - gochecknoinits
+        - goconst
+        - gocritic
+        - gocyclo
+        - goimports
+        - gomoddirectives
+        - goprintffuncname
+        - gosec
+        - gosimple
+        - govet
+        - grouper
+        - ineffassign
+        - interfacebloat
+        - lll
+        - misspell
+        - mnd
+        - nilerr
+        - nlreturn
+        - noctx
+        - nolintlint
+        - nonamedreturns
+        - prealloc
+        - predeclared
+        - promlinter
+        - revive
+        - staticcheck
+        - stylecheck
+        - tagliatelle
+        - tenv
+        - testpackage
+        - typecheck
+        - unconvert
+        - unparam
+        - usestdlibvars
+        - varnamelen
+        - wastedassign
+        - whitespace
+        - wrapcheck
+        - wsl

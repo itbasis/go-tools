@@ -15,6 +15,7 @@ import (
 	itbasisMiddlewareLog "github.com/itbasis/tools/middleware/log"
 	ginkgoCommand "github.com/onsi/ginkgo/v2/ginkgo/command"
 	ginkgoRun "github.com/onsi/ginkgo/v2/ginkgo/run"
+	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 )
 
@@ -26,9 +27,7 @@ var (
 	coverUnitHTML      = coverUnit + ".html"
 	ginkgoCoverUnitOut = "ginkgo-" + coverUnitOut
 
-	reportGinkgoCoverUnitOut = path.Join(reportDir, ginkgoCoverUnitOut)
-
-	junitReportOut = path.Join(reportDir, "junit-report.xml")
+	junitReportOut = "junit-report.xml"
 )
 
 var CmdUnitTest = &cobra.Command{
@@ -58,7 +57,8 @@ var CmdUnitTest = &cobra.Command{
 				},
 			)
 
-			itbasisMiddlewareCmd.RequireNoError(cmd, moveAndFilterCoverage(ginkgoCoverUnitOut, reportGinkgoCoverUnitOut))
+			itbasisMiddlewareCmd.RequireNoError(cmd, moveJunitReport(junitReportOut, path.Join(reportDir, junitReportOut)))
+			itbasisMiddlewareCmd.RequireNoError(cmd, moveAndFilterCoverage(ginkgoCoverUnitOut, path.Join(reportDir, ginkgoCoverUnitOut)))
 
 			var goToolCoverExec, err = itbasisBuilderExec.NewGoToolWithCobra(cmd)
 			itbasisMiddlewareCmd.RequireNoError(cmd, err)
@@ -93,12 +93,22 @@ var CmdUnitTest = &cobra.Command{
 	),
 }
 
+func moveJunitReport(source, target string) error {
+	slog.Debug("moving Junit report", slog.String("source", source), slog.String("target", target))
+
+	if err := os.Rename(source, target); err != nil {
+		return errors.Wrap(err, ErrMoveFile.Error())
+	}
+
+	return nil
+}
+
 func moveAndFilterCoverage(source, target string) error {
-	slog.Debug("filtering anf moving coverage", slog.String("source", source), slog.String("target", target))
+	slog.Debug("filtering and moving coverage", slog.String("source", source), slog.String("target", target))
 
 	var sourceFile, errOpenFile = os.Open(source)
 	if errOpenFile != nil {
-		return errOpenFile
+		return errors.Wrap(errOpenFile, ErrMoveFile.Error())
 	}
 
 	defer func() {
@@ -109,7 +119,7 @@ func moveAndFilterCoverage(source, target string) error {
 
 	var targetFile, errCreateFile = os.Create(target)
 	if errCreateFile != nil {
-		return errCreateFile
+		return errors.Wrap(errCreateFile, ErrMoveFile.Error())
 	}
 
 	defer func() {
@@ -128,9 +138,9 @@ func moveAndFilterCoverage(source, target string) error {
 		}
 
 		if _, errWrite := targetFile.WriteString(line + "\n"); errWrite != nil {
-			return errWrite
+			return errors.Wrap(errWrite, ErrMoveFile.Error())
 		}
 	}
 
-	return scanner.Err()
+	return errors.Wrap(scanner.Err(), ErrMoveFile.Error())
 }
