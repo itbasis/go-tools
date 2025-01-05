@@ -28,7 +28,7 @@ var (
 
 	reportGinkgoCoverUnitOut = path.Join(reportDir, ginkgoCoverUnitOut)
 
-	junitReportOut = "junit-report.xml"
+	junitReportOut = path.Join(reportDir, "junit-report.xml")
 )
 
 var CmdUnitTest = &cobra.Command{
