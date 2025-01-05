@@ -17,3 +17,9 @@ Description and examples of work in progress...
 
 * {empty}
 xref:builder/README.adoc[builder]
+
+== Самосборка
+
+Проект можно запускать на самом себе не только через заранее собранные link:.itbasis/[binary-файлы], но и напрямую через Go CLI
+
+Запуск `go run builder/main.go --help` покажет перечень всех поддерживаемых команд (описаны в xref:builder/README.adoc[builder]). Например `go run builder/main.go unit-test` выполнит запуск выполнения юнит-тестов в проекте.

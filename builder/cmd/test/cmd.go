@@ -8,6 +8,7 @@ import (
 	"path"
 	"strings"
 
+	builderCmd "github.com/itbasis/tools/builder/internal/cmd"
 	itbasisBuilderExec "github.com/itbasis/tools/builder/internal/exec"
 	itbasisMiddlewareCmd "github.com/itbasis/tools/middleware/cmd"
 	"github.com/itbasis/tools/middleware/exec"
@@ -31,10 +32,10 @@ var (
 )
 
 var CmdUnitTest = &cobra.Command{
-	Use:  "unit-test",
-	Args: cobra.NoArgs,
+	Use:  itbasisMiddlewareCmd.BuildUse("unit-test", itbasisMiddlewareCmd.UseFlags, builderCmd.UseArgPackages),
+	Args: cobra.MatchAll(cobra.OnlyValidArgs, cobra.MaximumNArgs(1)),
 	Run: itbasisMiddlewareCmd.WrapActionLogging(
-		func(cmd *cobra.Command, _ []string) {
+		func(cmd *cobra.Command, args []string) {
 			itbasisMiddlewareCmd.RequireNoError(cmd, os.MkdirAll(reportDir, 0755))
 
 			(&ginkgoCommand.Program{
@@ -46,7 +47,7 @@ var CmdUnitTest = &cobra.Command{
 					"-race",
 					"--cover", `--coverprofile=` + ginkgoCoverUnitOut,
 					`--junit-report=` + junitReportOut,
-					itbasisBuilderExec.DefaultPackages,
+					builderCmd.ArgPackages(builderCmd.DefaultPackages, args),
 				},
 			)
 

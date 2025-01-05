@@ -11,7 +11,7 @@ import (
 )
 
 var CmdDependencies = &cobra.Command{
-	Use:   "dependencies",
+	Use:   itbasisMiddlewareCmd.BuildUse("dependencies", itbasisMiddlewareCmd.UseFlags),
 	Short: "Install dependencies",
 	Args:  cobra.NoArgs,
 	Run: itbasisMiddlewareCmd.WrapActionLogging(

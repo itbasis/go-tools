@@ -8,10 +8,6 @@ import (
 	"github.com/spf13/cobra"
 )
 
-const (
-	DefaultPackages = "./..."
-)
-
 func NewGoExecutable(opts ...itbasisMiddlewareOption.Option[exec.Cmd]) (*itbasisMiddlewareExec.Executable, error) {
 	return itbasisMiddlewareExec.NewExecutable("go", opts...)
 }

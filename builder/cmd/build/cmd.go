@@ -6,7 +6,8 @@ import (
 	"path/filepath"
 	"reflect"
 
-	"github.com/itbasis/tools/builder/internal/exec"
+	builderCmd "github.com/itbasis/tools/builder/internal/cmd"
+	itbasisBuilderExec "github.com/itbasis/tools/builder/internal/exec"
 	itbasisMiddlewareCmd "github.com/itbasis/tools/middleware/cmd"
 	itbasisMiddlewareExec "github.com/itbasis/tools/middleware/exec"
 	itbasisMiddlewareLog "github.com/itbasis/tools/middleware/log"
@@ -18,15 +19,14 @@ var (
 	_flagOs      string
 	_flagArch    string
 	_flagOutput  string
-	_flagVersion string = "0.0.0"
+	_flagVersion = itbasisMiddlewareVersion.Unversioned
 )
 
 var _cmdBuild = &cobra.Command{
-	Use:        "build [flags] {<path>}",
-	Short:      "Building an application for the current platform",
-	ArgAliases: []string{"path"},
-	Args:       cobra.MatchAll(cobra.OnlyValidArgs),
-	Run:        _run,
+	Use:   itbasisMiddlewareCmd.BuildUse("build", itbasisMiddlewareCmd.UseFlags, builderCmd.UseArgPath),
+	Short: "Building an application for the current platform",
+	Args:  cobra.MatchAll(cobra.OnlyValidArgs, cobra.MaximumNArgs(1)),
+	Run:   _run,
 }
 
 func NewBuildCommand() *cobra.Command {
@@ -59,7 +59,7 @@ func _run(cmd *cobra.Command, args []string) {
 
 	slog.Debug("build with arguments", itbasisMiddlewareLog.SlogAttrStringsWithSeparator("buildArgs", " ", buildArgs))
 
-	execGoBuild, errGoBuild := exec.NewGoBuildWithCobra(cmd)
+	execGoBuild, errGoBuild := itbasisBuilderExec.NewGoBuildWithCobra(cmd)
 	itbasisMiddlewareCmd.RequireNoError(cmd, errGoBuild)
 	itbasisMiddlewareCmd.RequireNoError(
 		cmd,

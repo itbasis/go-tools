@@ -16,7 +16,7 @@ var (
 )
 
 var CmdLint = &cobra.Command{
-	Use:  "lint",
+	Use:  itbasisMiddlewareCmd.BuildUse("lint", itbasisMiddlewareCmd.UseFlags),
 	Args: cobra.NoArgs,
 	Run: itbasisMiddlewareCmd.WrapActionLogging(
 		func(cmd *cobra.Command, _ []string) {

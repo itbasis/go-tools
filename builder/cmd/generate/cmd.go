@@ -1,6 +1,7 @@
 package generate
 
 import (
+	builderCmd "github.com/itbasis/tools/builder/internal/cmd"
 	itbasisBuilderExec "github.com/itbasis/tools/builder/internal/exec"
 	itbasisMiddlewareCmd "github.com/itbasis/tools/middleware/cmd"
 	"github.com/itbasis/tools/middleware/exec"
@@ -8,17 +9,20 @@ import (
 )
 
 var CmdGenerate = &cobra.Command{
-	Use:  "generate",
-	Args: cobra.NoArgs,
+	Use:  itbasisMiddlewareCmd.BuildUse("generate", itbasisMiddlewareCmd.UseFlags, builderCmd.UseArgPackages),
+	Args: cobra.MatchAll(cobra.OnlyValidArgs, cobra.MaximumNArgs(1)),
 	Run: itbasisMiddlewareCmd.WrapActionLogging(
-		func(cmd *cobra.Command, _ []string) {
+		func(cmd *cobra.Command, args []string) {
 			// itbasisMiddlewareCmd.ExecuteRequireNoError(dependencies.CmdDependencies)
 
 			execGoGenerate, err := itbasisBuilderExec.NewGoGenerateWithCobra(cmd)
 			itbasisMiddlewareCmd.RequireNoError(cmd, err)
 			itbasisMiddlewareCmd.RequireNoError(
 				cmd, execGoGenerate.Execute(
-					exec.WithRestoreArgsIncludePrevious(exec.IncludePrevArgsBefore, itbasisBuilderExec.DefaultPackages),
+					exec.WithRestoreArgsIncludePrevious(
+						exec.IncludePrevArgsBefore,
+						builderCmd.ArgPackages(builderCmd.DefaultPackages, args),
+					),
 				),
 			)
 

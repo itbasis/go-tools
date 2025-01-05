@@ -1,10 +1,15 @@
 = Builder
 :toc:
+:toclevels: 1
 
 Утилита для управления сборками
 
 include::cmd/dependencies/README.adoc[]
 
+include::cmd/generate/README.adoc[]
+
 include::cmd/lint/README.adoc[]
 
 include::cmd/test/README.adoc[]
+
+include::cmd/update/README.adoc[]

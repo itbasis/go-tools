@@ -15,7 +15,7 @@ func InitDefaultCmdRoot(shortName string, opts ...itbasisMiddlewareOption.Option
 			_optionVersionKey:   WithDefaultVersion,
 			_optionOutKey:       WithDefaultOut,
 			_optionErrKey:       WithDefaultErr,
-			_optionDebugFlagKey: WithDefaultDebugAction,
+			_optionDebugFlagKey: WithDefaultFlagDebug,
 		},
 	); err != nil {
 		return nil, err

@@ -1,6 +1,8 @@
 package option
 
-import "log/slog"
+import (
+	"log/slog"
+)
 
 type LazyOptionFunc[T any] func() Option[T]
 
