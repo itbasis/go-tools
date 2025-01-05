@@ -1,15 +1,24 @@
 = Builder
 :toc:
-:toclevels: 1
+:toclevels: 2
 
 Утилита для управления сборками
 
-include::cmd/dependencies/README.adoc[]
+== Возможность запуска в сторонних проектах
 
-include::cmd/generate/README.adoc[]
+[source,go]
+----
+include::main_example_test.go[tag=documentation]
+----
 
-include::cmd/lint/README.adoc[]
+== Команды
 
-include::cmd/test/README.adoc[]
+include::cmd/dependencies/README.adoc[leveloffset=+1]
 
-include::cmd/update/README.adoc[]
+include::cmd/generate/README.adoc[leveloffset=+1]
+
+include::cmd/lint/README.adoc[leveloffset=+1]
+
+include::cmd/test/README.adoc[leveloffset=+1]
+
+include::cmd/update/README.adoc[leveloffset=+1]

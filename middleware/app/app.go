@@ -17,6 +17,10 @@ func NewApp(cmdRoot *cobra.Command) *App {
 	}
 }
 
-func (app *App) Run() {
+func (app *App) Run(args ...string) {
+	if len(args) > 0 {
+		app.cmdRoot.SetArgs(args)
+	}
+
 	_ = app.cmdRoot.Execute()
 }
