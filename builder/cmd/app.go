@@ -20,11 +20,11 @@ func InitApp() *itbasisMiddlewareApp.App {
 	}
 
 	cmdRoot.AddCommand(
-		builderCmdDependencies.CmdDependencies,
-		builderCmdUpdate.CmdUpdate,
-		builderCmdGenerate.CmdGenerate,
-		builderCmdLint.CmdLint,
-		builderCmdTest.CmdUnitTest,
+		builderCmdDependencies.NewDependenciesCommand(),
+		builderCmdUpdate.NewUpdateCommand(),
+		builderCmdGenerate.NewGenerateCommand(),
+		builderCmdLint.NewLintCommand(),
+		builderCmdTest.NewUnitTestCommand(),
 		builderCmdBuild.NewBuildCommand(),
 	)
 

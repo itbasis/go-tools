@@ -20,10 +20,11 @@ func NewExecutable(cli string, opts ...itbasisMiddlewareOption.Option[exec.Cmd])
 
 	if err := itbasisMiddlewareOption.ApplyOptions(
 		cmp.cmd, opts, map[itbasisMiddlewareOption.Key]itbasisMiddlewareOption.LazyOptionFunc[exec.Cmd]{
+			_optionInKey:  WithStdIn,
 			_optionOutKey: WithStdOut,
 		},
 	); err != nil {
-		return nil, err
+		return nil, err //nolint:wrapcheck // _
 	}
 
 	return cmp, nil
@@ -42,8 +43,8 @@ func (ge *Executable) Execute(opts ...itbasisMiddlewareOption.RestoreOption[exec
 			err = cmd.Run()
 		},
 	); applyErr != nil {
-		return applyErr
+		return applyErr //nolint:wrapcheck // _
 	}
 
-	return err
+	return err //nolint:wrapcheck // _
 }

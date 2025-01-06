@@ -8,25 +8,24 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var CmdGenerate = &cobra.Command{
-	Use:  itbasisMiddlewareCmd.BuildUse("generate", itbasisMiddlewareCmd.UseFlags, builderCmd.UseArgPackages),
-	Args: cobra.MatchAll(cobra.OnlyValidArgs, cobra.MaximumNArgs(1)),
-	Run: itbasisMiddlewareCmd.WrapActionLogging(
-		func(cmd *cobra.Command, args []string) {
-			// itbasisMiddlewareCmd.ExecuteRequireNoError(dependencies.CmdDependencies)
+func NewGenerateCommand() *cobra.Command {
+	return &cobra.Command{
+		Use:    itbasisMiddlewareCmd.BuildUse("generate", builderCmd.UseArgPackages),
+		Args:   cobra.MatchAll(cobra.OnlyValidArgs, cobra.MaximumNArgs(1)),
+		PreRun: itbasisMiddlewareCmd.LogCommand,
+		Run:    _run,
+	}
+}
 
-			execGoGenerate, err := itbasisBuilderExec.NewGoGenerateWithCobra(cmd)
-			itbasisMiddlewareCmd.RequireNoError(cmd, err)
-			itbasisMiddlewareCmd.RequireNoError(
-				cmd, execGoGenerate.Execute(
-					exec.WithRestoreArgsIncludePrevious(
-						exec.IncludePrevArgsBefore,
-						builderCmd.ArgPackages(builderCmd.DefaultPackages, args),
-					),
-				),
-			)
-
-			// itbasisMiddlewareCmd.ExecuteRequireNoError(update.CmdUpdate)
-		},
-	),
+func _run(cmd *cobra.Command, args []string) {
+	execGoGenerate, err := itbasisBuilderExec.NewGoGenerateWithCobra(cmd)
+	itbasisMiddlewareCmd.RequireNoError(cmd, err)
+	itbasisMiddlewareCmd.RequireNoError(
+		cmd, execGoGenerate.Execute(
+			exec.WithRestoreArgsIncludePrevious(
+				exec.IncludePrevArgsBefore,
+				builderCmd.ArgPackages(builderCmd.DefaultPackages, args),
+			),
+		),
+	)
 }

@@ -4,12 +4,16 @@ import (
 	"os/exec"
 
 	itbasisMiddlewareOption "github.com/itbasis/tools/middleware/option"
+	"github.com/itbasis/tools/middleware/os"
 )
 
 const _optionEnvKey = "option-env"
 
 func WithEnv(env []string) itbasisMiddlewareOption.Option[exec.Cmd] {
 	return &_optionEnv{env: env}
+}
+func WithEnvAsMap(env map[string]string) itbasisMiddlewareOption.Option[exec.Cmd] {
+	return &_optionEnv{env: os.EnvMapToSlices(env)}
 }
 func WithRestoreEnv(env []string) itbasisMiddlewareOption.RestoreOption[exec.Cmd] {
 	return &_optionEnv{env: env, restore: true}

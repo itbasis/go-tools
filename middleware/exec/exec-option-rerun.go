@@ -13,8 +13,11 @@ func WithRerun() itbasisMiddlewareOption.RestoreOption[exec.Cmd] { return &optio
 type optionRerun struct{}
 
 func (r *optionRerun) Key() itbasisMiddlewareOption.Key { return _optionRerunKey }
-func (r *optionRerun) Apply(cmd *exec.Cmd) error        { return nil }
-func (r *optionRerun) Save(cmd *exec.Cmd) error         { return nil }
+
+func (r *optionRerun) Apply(_ *exec.Cmd) error { return nil }
+
+func (r *optionRerun) Save(_ *exec.Cmd) error { return nil }
+
 func (r *optionRerun) Restore(cmd *exec.Cmd) error {
 	cmd.Process = nil
 	cmd.ProcessState = nil

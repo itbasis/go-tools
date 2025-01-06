@@ -33,10 +33,12 @@ func _existKey(keys map[Key]struct{}, key Key, checkKey _checkKey) error {
 		slog.Debug(_msgAlreadyKey, slogAttrOptionKey)
 
 		return nil
+
 	case _checkKeyWarn:
 		slog.Warn(_msgAlreadyKey, slogAttrOptionKey)
 
 		return nil
+
 	case _checkKeyErr:
 		slog.Error(_msgAlreadyKey, slogAttrOptionKey)
 

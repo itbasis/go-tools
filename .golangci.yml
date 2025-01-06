@@ -33,10 +33,17 @@ linters-settings:
     mnd:
         ignored-numbers:
             - '0755'
+        ignored-functions:
+            - '^cobra\.RangeArgs$'
+            - '^cobra\.MaximumNArgs$'
+            - '^cobra\.MinimumNArgs$'
     tagliatelle:
         case:
             rules:
                 json: snake
+    wsl:
+        strict-append: false
+        force-case-trailing-whitespace: 1
 
 # https://golangci-lint.run/usage/configuration/#linters-configuration
 linters:

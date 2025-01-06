@@ -24,11 +24,11 @@ func ApplyRestoreOptions[T any](obj *T, opts []RestoreOption[T], action func()) 
 		keys[key] = struct{}{}
 
 		if err := opt.Save(obj); err != nil {
-			return err
+			return err //nolint:wrapcheck // _
 		}
 
 		if err := opt.Apply(obj); err != nil {
-			return err
+			return err //nolint:wrapcheck // _
 		}
 	}
 
@@ -36,7 +36,7 @@ func ApplyRestoreOptions[T any](obj *T, opts []RestoreOption[T], action func()) 
 
 	for _, opt := range slices.Backward(opts) {
 		if err := opt.Restore(obj); err != nil {
-			return err
+			return err //nolint:wrapcheck // _
 		}
 	}
 

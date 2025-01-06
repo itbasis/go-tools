@@ -17,27 +17,30 @@ var (
 	_flagSkipGolangCiLint        bool
 )
 
-var CmdLint = &cobra.Command{
-	Use:  itbasisMiddlewareCmd.BuildUse("lint", itbasisMiddlewareCmd.UseFlags, builderCmd.UseArgPackages),
-	Args: cobra.MatchAll(cobra.OnlyValidArgs, cobra.MaximumNArgs(1)),
-	Run: itbasisMiddlewareCmd.WrapActionLogging(
-		func(cmd *cobra.Command, args []string) {
-			withCobraOut := itbasisMiddlewareExec.WithCobraOut(cmd)
+func NewLintCommand() *cobra.Command {
+	var cmd = &cobra.Command{
+		Use:    itbasisMiddlewareCmd.BuildUse("lint", builderCmd.UseArgPackages),
+		Args:   cobra.MatchAll(cobra.OnlyValidArgs, cobra.MaximumNArgs(1)),
+		PreRun: itbasisMiddlewareCmd.LogCommand,
+		Run:    _run,
+	}
 
-			if !_flagSkipEditorConfigChecker || itbasisMiddlewareOs.BeARegularFile(".editorconfig") {
-				itbasisMiddlewareCmd.RequireNoError(cmd, _execEditorConfigChecker(withCobraOut))
-			}
+	cmd.Flags().BoolVar(&_flagSkipEditorConfigChecker, "skip-editor-config-checker", false, "skip editor config checker")
+	cmd.Flags().BoolVar(&_flagSkipGolangCiLint, "skip-golangci-lint", false, "skip golangci-lint")
 
-			if !_flagSkipGolangCiLint {
-				itbasisMiddlewareCmd.RequireNoError(cmd, _execGolangCiLint(builderCmd.ArgPackages(builderCmd.DefaultPackages, args), withCobraOut))
-			}
-		},
-	),
+	return cmd
 }
 
-func init() {
-	CmdLint.Flags().BoolVar(&_flagSkipEditorConfigChecker, "skip-editor-config-checker", false, "skip editor config checker")
-	CmdLint.Flags().BoolVar(&_flagSkipGolangCiLint, "skip-golangci-lint", false, "skip golangci-lint")
+func _run(cmd *cobra.Command, args []string) {
+	withCobraOut := itbasisMiddlewareExec.WithCobraOut(cmd)
+
+	if !_flagSkipEditorConfigChecker || itbasisMiddlewareOs.BeARegularFile(".editorconfig") {
+		itbasisMiddlewareCmd.RequireNoError(cmd, _execEditorConfigChecker(withCobraOut))
+	}
+
+	if !_flagSkipGolangCiLint {
+		itbasisMiddlewareCmd.RequireNoError(cmd, _execGolangCiLint(builderCmd.ArgPackages(builderCmd.DefaultPackages, args), withCobraOut))
+	}
 }
 
 func _execEditorConfigChecker(opts ...itbasisMiddlewareOption.Option[exec.Cmd]) error {

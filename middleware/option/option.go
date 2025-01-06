@@ -30,7 +30,6 @@ func ApplyOptions[O ~[]Option[T], T any](obj *T, opts O, defaults map[Key]LazyOp
 }
 
 func _applyOption[T any](keys map[Key]struct{}, checkKey _checkKey, opt Option[T], obj *T) error {
-
 	var (
 		key               = opt.Key()
 		slogAttrOptionKey = _slogAttrOptionKey(key)
@@ -44,5 +43,5 @@ func _applyOption[T any](keys map[Key]struct{}, checkKey _checkKey, opt Option[T
 
 	keys[key] = struct{}{}
 
-	return opt.Apply(obj)
+	return opt.Apply(obj) //nolint:wrapcheck // _
 }

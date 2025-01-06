@@ -30,8 +30,8 @@ type _optionDebugFlag struct {
 }
 
 func (r *_optionDebugFlag) Key() itbasisMiddlewareOption.Key { return _optionDebugFlagKey }
-func (r *_optionDebugFlag) Apply(cmd *cobra.Command) error {
 
+func (r *_optionDebugFlag) Apply(cmd *cobra.Command) error {
 	var flags *pflag.FlagSet
 
 	if r.persistent {

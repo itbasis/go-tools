@@ -11,7 +11,7 @@ import (
 	builderCmd "github.com/itbasis/tools/builder/internal/cmd"
 	itbasisBuilderExec "github.com/itbasis/tools/builder/internal/exec"
 	itbasisMiddlewareCmd "github.com/itbasis/tools/middleware/cmd"
-	"github.com/itbasis/tools/middleware/exec"
+	itbasisMiddlewareExec "github.com/itbasis/tools/middleware/exec"
 	itbasisMiddlewareLog "github.com/itbasis/tools/middleware/log"
 	ginkgoCommand "github.com/onsi/ginkgo/v2/ginkgo/command"
 	ginkgoRun "github.com/onsi/ginkgo/v2/ginkgo/run"
@@ -30,67 +30,68 @@ var (
 	junitReportOut = "junit-report.xml"
 )
 
-var CmdUnitTest = &cobra.Command{
-	Use:  itbasisMiddlewareCmd.BuildUse("unit-test", itbasisMiddlewareCmd.UseFlags, builderCmd.UseArgPackages),
-	Args: cobra.MatchAll(cobra.OnlyValidArgs, cobra.MaximumNArgs(1)),
-	Run: itbasisMiddlewareCmd.WrapActionLogging(
-		func(cmd *cobra.Command, args []string) {
-			itbasisMiddlewareCmd.RequireNoError(cmd, os.MkdirAll(reportDir, 0755))
+func NewUnitTestCommand() *cobra.Command {
+	return &cobra.Command{
+		Use:    itbasisMiddlewareCmd.BuildUse("unit-test", builderCmd.UseArgPackages),
+		Args:   cobra.MatchAll(cobra.OnlyValidArgs, cobra.MaximumNArgs(1)),
+		PreRun: itbasisMiddlewareCmd.LogCommand,
+		Run:    _run,
+	}
+}
 
-			(&ginkgoCommand.Program{
-				OutWriter:      cmd.OutOrStdout(),
-				ErrWriter:      cmd.ErrOrStderr(),
-				DefaultCommand: ginkgoRun.BuildRunCommand(),
-				Exiter: func(code int) {
-					slog.Debug(fmt.Sprintf("Ginkgo exit code: %d", code))
+func _run(cmd *cobra.Command, args []string) {
+	itbasisMiddlewareCmd.RequireNoError(cmd, os.MkdirAll(reportDir, 0755))
 
-					if code != 0 {
-						os.Exit(code)
-					}
-				},
-			}).RunAndExit(
-				[]string{
-					"-race",
-					"--cover", `--coverprofile=` + ginkgoCoverUnitOut,
-					`--junit-report=` + junitReportOut,
-					builderCmd.ArgPackages(builderCmd.DefaultPackages, args),
-				},
-			)
+	(&ginkgoCommand.Program{
+		OutWriter:      cmd.OutOrStdout(),
+		ErrWriter:      cmd.ErrOrStderr(),
+		DefaultCommand: ginkgoRun.BuildRunCommand(),
+		Exiter: func(code int) {
+			slog.Debug(fmt.Sprintf("Ginkgo exit code: %d", code))
 
-			itbasisMiddlewareCmd.RequireNoError(cmd, moveJunitReport(junitReportOut, path.Join(reportDir, junitReportOut)))
-			itbasisMiddlewareCmd.RequireNoError(cmd, moveAndFilterCoverage(ginkgoCoverUnitOut, path.Join(reportDir, ginkgoCoverUnitOut)))
-
-			var goToolCoverExec, err = itbasisBuilderExec.NewGoToolWithCobra(cmd)
-			itbasisMiddlewareCmd.RequireNoError(cmd, err)
-
-			itbasisMiddlewareCmd.RequireNoError(
-				cmd,
-				goToolCoverExec.Execute(
-					exec.WithRerun(),
-					exec.WithRestoreArgsIncludePrevious(
-						exec.IncludePrevArgsBefore,
-						"cover",
-						// "-func", reportGinkgoCoverUnitOut,
-						"-func", ginkgoCoverUnitOut,
-						"-o", path.Join(reportDir, coverUnitOut),
-					),
-				),
-			)
-			itbasisMiddlewareCmd.RequireNoError(
-				cmd,
-				goToolCoverExec.Execute(
-					exec.WithRerun(),
-					exec.WithRestoreArgsIncludePrevious(
-						exec.IncludePrevArgsBefore,
-						"cover",
-						"-html", ginkgoCoverUnitOut,
-						// "-html", reportGinkgoCoverUnitOut,
-						"-o", path.Join(reportDir, coverUnitHTML),
-					),
-				),
-			)
+			if code != 0 {
+				os.Exit(code)
+			}
 		},
-	),
+	}).RunAndExit(
+		[]string{
+			"-race",
+			"--cover", `--coverprofile=` + ginkgoCoverUnitOut,
+			`--junit-report=` + junitReportOut,
+			builderCmd.ArgPackages(builderCmd.DefaultPackages, args),
+		},
+	)
+
+	itbasisMiddlewareCmd.RequireNoError(cmd, moveJunitReport(junitReportOut, path.Join(reportDir, junitReportOut)))
+	itbasisMiddlewareCmd.RequireNoError(cmd, moveAndFilterCoverage(ginkgoCoverUnitOut, path.Join(reportDir, ginkgoCoverUnitOut)))
+
+	var goToolCoverExec, err = itbasisBuilderExec.NewGoToolWithCobra(cmd)
+
+	itbasisMiddlewareCmd.RequireNoError(cmd, err)
+	itbasisMiddlewareCmd.RequireNoError(
+		cmd,
+		goToolCoverExec.Execute(
+			itbasisMiddlewareExec.WithRerun(),
+			itbasisMiddlewareExec.WithRestoreArgsIncludePrevious(
+				itbasisMiddlewareExec.IncludePrevArgsBefore,
+				"cover",
+				"-func", ginkgoCoverUnitOut,
+				"-o", path.Join(reportDir, coverUnitOut),
+			),
+		),
+	)
+	itbasisMiddlewareCmd.RequireNoError(
+		cmd,
+		goToolCoverExec.Execute(
+			itbasisMiddlewareExec.WithRerun(),
+			itbasisMiddlewareExec.WithRestoreArgsIncludePrevious(
+				itbasisMiddlewareExec.IncludePrevArgsBefore,
+				"cover",
+				"-html", ginkgoCoverUnitOut,
+				"-o", path.Join(reportDir, coverUnitHTML),
+			),
+		),
+	)
 }
 
 func moveJunitReport(source, target string) error {

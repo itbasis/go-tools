@@ -2,6 +2,12 @@ package cmd
 
 import "strings"
 
-func BuildUse(uses ...string) string {
-	return strings.ReplaceAll(strings.Join(uses, " "), " ", " ")
+func BuildUse(args ...string) string {
+	var result string
+
+	for _, arg := range args {
+		result = result + strings.TrimSpace(arg) + " "
+	}
+
+	return strings.TrimSpace(result)
 }

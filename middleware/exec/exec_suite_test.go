@@ -1,4 +1,4 @@
-package exec
+package exec_test
 
 import (
 	"testing"

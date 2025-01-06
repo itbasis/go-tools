@@ -22,20 +22,21 @@ var (
 	_flagVersion = itbasisMiddlewareVersion.Unversioned
 )
 
-var _cmdBuild = &cobra.Command{
-	Use:   itbasisMiddlewareCmd.BuildUse("build", itbasisMiddlewareCmd.UseFlags, builderCmd.UseArgPath),
-	Short: "Building an application for the current platform",
-	Args:  cobra.MatchAll(cobra.OnlyValidArgs, cobra.MaximumNArgs(1)),
-	Run:   _run,
-}
-
 func NewBuildCommand() *cobra.Command {
-	_cmdBuild.Flags().StringVarP(&_flagOutput, "output", "", "", "")
-	_cmdBuild.Flags().StringVarP(&_flagOs, "build-os", "", "", "")
-	_cmdBuild.Flags().StringVarP(&_flagArch, "build-arch", "", "", "")
-	_cmdBuild.Flags().StringVarP(&_flagVersion, "build-version", "", _flagVersion, "")
+	cmd := &cobra.Command{
+		Use:    itbasisMiddlewareCmd.BuildUse("build", builderCmd.UseArgPath),
+		Short:  "Building an application for the current platform",
+		Args:   cobra.MatchAll(cobra.OnlyValidArgs, cobra.MaximumNArgs(1)),
+		PreRun: itbasisMiddlewareCmd.LogCommand,
+		Run:    _run,
+	}
 
-	return _cmdBuild
+	cmd.Flags().StringVarP(&_flagOutput, "output", "", "", "")
+	cmd.Flags().StringVarP(&_flagOs, "build-os", "", "", "")
+	cmd.Flags().StringVarP(&_flagArch, "build-arch", "", "", "")
+	cmd.Flags().StringVarP(&_flagVersion, "build-version", "", _flagVersion, "")
+
+	return cmd
 }
 
 func _run(cmd *cobra.Command, args []string) {
