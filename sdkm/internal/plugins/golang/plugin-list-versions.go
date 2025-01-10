@@ -8,14 +8,14 @@ import (
 )
 
 func (receiver *goPlugin) ListAllVersions(ctx context.Context) ([]sdkmSDKVersion.SDKVersion, error) {
-	return receiver.sdkVersions.AllVersions(ctx) //nolint:wrapcheck // _
+	return receiver.sdkVersions.AllVersions(ctx) //nolint:wrapcheck // TODO
 }
 
 func (receiver *goPlugin) ListAllVersionsByPrefix(ctx context.Context, prefix string) ([]sdkmSDKVersion.SDKVersion, error) {
 	var allVersions, err = receiver.sdkVersions.AllVersions(ctx)
 
 	if err != nil {
-		return nil, err //nolint:wrapcheck // _
+		return nil, err //nolint:wrapcheck // TODO
 	}
 
 	if prefix == "" {

@@ -189,20 +189,6 @@ func (mr *MockSDKMPluginMockRecorder) ListAllVersionsByPrefix(ctx, prefix any) *
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListAllVersionsByPrefix", reflect.TypeOf((*MockSDKMPlugin)(nil).ListAllVersionsByPrefix), ctx, prefix)
 }
 
-// WithBasePlugin mocks base method.
-func (m *MockSDKMPlugin) WithBasePlugin(basePlugin BasePlugin) SDKMPlugin {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "WithBasePlugin", basePlugin)
-	ret0, _ := ret[0].(SDKMPlugin)
-	return ret0
-}
-
-// WithBasePlugin indicates an expected call of WithBasePlugin.
-func (mr *MockSDKMPluginMockRecorder) WithBasePlugin(basePlugin any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "WithBasePlugin", reflect.TypeOf((*MockSDKMPlugin)(nil).WithBasePlugin), basePlugin)
-}
-
 // WithVersions mocks base method.
 func (m *MockSDKMPlugin) WithVersions(versions sdkversion.SDKVersions) SDKMPlugin {
 	m.ctrl.T.Helper()

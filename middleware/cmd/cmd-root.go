@@ -18,7 +18,7 @@ func InitDefaultCmdRoot(shortName string, opts ...itbasisMiddlewareOption.Option
 			_optionDebugFlagKey: WithDefaultFlagDebug,
 		},
 	); err != nil {
-		return nil, err //nolint:wrapcheck // _
+		return nil, err //nolint:wrapcheck // TODO
 	}
 
 	return cmd, nil

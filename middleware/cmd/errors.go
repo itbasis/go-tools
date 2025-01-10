@@ -7,7 +7,7 @@ import (
 )
 
 func Fatal(cmd *cobra.Command, err error) {
-	cmd.PrintErr(err)
+	cmd.PrintErrln(err)
 
 	os.Exit(1)
 }

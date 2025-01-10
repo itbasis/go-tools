@@ -7,7 +7,7 @@ import (
 
 //go:generate mockgen -source=$GOFILE -package=$GOPACKAGE -destination=cache-storage.mock.go
 type CacheStorage interface {
-	fmt.Stringer
+	fmt.GoStringer
 
 	Valid(ctx context.Context) bool
 

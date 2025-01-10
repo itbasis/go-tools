@@ -5,7 +5,7 @@ import (
 	"path"
 	"strings"
 
-	itbasisMiddlewareOs "github.com/itbasis/tools/middleware/os"
+	itbasisMiddlewareOption "github.com/itbasis/tools/middleware/option"
 	sdkmPlugin "github.com/itbasis/tools/sdkm/pkg/plugin"
 )
 
@@ -13,28 +13,40 @@ type basePlugin struct {
 	sdkDir string
 }
 
-func NewBasePlugin() sdkmPlugin.BasePlugin {
-	return &basePlugin{sdkDir: path.Join(itbasisMiddlewareOs.UserHomeDir(), "sdk")}
+func NewBasePlugin(opts ...itbasisMiddlewareOption.Option[basePlugin]) (sdkmPlugin.BasePlugin, error) {
+	cmp := &basePlugin{}
+
+	if err := itbasisMiddlewareOption.ApplyOptions(
+		cmp, opts, map[itbasisMiddlewareOption.Key]itbasisMiddlewareOption.LazyOptionFunc[basePlugin]{
+			_optionSdkDirKey: WithDefaultSdkDir,
+		},
+	); err != nil {
+		return nil, err //nolint:wrapcheck // TODO
+	}
+
+	return cmp, nil
 }
 
-func (receiver *basePlugin) WithSDKDir(sdkDir string) sdkmPlugin.BasePlugin {
-	receiver.sdkDir = sdkDir
+func (receiver *basePlugin) GoString() string {
+	if receiver == nil {
+		return "<nil>"
+	}
 
-	return receiver
+	return "basePlugin{sdkDir: " + receiver.sdkDir + "}"
 }
 
 func (receiver *basePlugin) GetSDKDir() string {
 	return receiver.sdkDir
 }
 
-func (receiver *basePlugin) GetSDKVersionDir(pluginName, version string) string {
-	sdkFullName := strings.Join([]string{pluginName, version}, "-")
+func (receiver *basePlugin) GetSDKVersionDir(pluginID sdkmPlugin.ID, version string) string {
+	sdkFullName := strings.Join([]string{string(pluginID), version}, "-")
 
 	return path.Join(receiver.GetSDKDir(), sdkFullName)
 }
 
-func (receiver *basePlugin) HasInstalled(pluginName, version string) bool {
-	sdkFullPath := receiver.GetSDKVersionDir(pluginName, version)
+func (receiver *basePlugin) HasInstalled(pluginID sdkmPlugin.ID, version string) bool {
+	sdkFullPath := receiver.GetSDKVersionDir(pluginID, version)
 
 	fi, err := os.Stat(sdkFullPath)
 	if err != nil && os.IsNotExist(err) {

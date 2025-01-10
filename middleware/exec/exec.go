@@ -24,7 +24,7 @@ func NewExecutable(cli string, opts ...itbasisMiddlewareOption.Option[exec.Cmd])
 			_optionOutKey: WithStdOut,
 		},
 	); err != nil {
-		return nil, err //nolint:wrapcheck // _
+		return nil, err //nolint:wrapcheck // TODO
 	}
 
 	return cmp, nil
@@ -43,8 +43,8 @@ func (ge *Executable) Execute(opts ...itbasisMiddlewareOption.RestoreOption[exec
 			err = cmd.Run()
 		},
 	); applyErr != nil {
-		return applyErr //nolint:wrapcheck // _
+		return applyErr //nolint:wrapcheck // TODO
 	}
 
-	return err //nolint:wrapcheck // _
+	return err //nolint:wrapcheck // TODO
 }

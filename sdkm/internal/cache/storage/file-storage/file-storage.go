@@ -13,6 +13,7 @@ import (
 	"github.com/itbasis/go-clock/v2"
 	itbasisMiddlewareLog "github.com/itbasis/tools/middleware/log"
 	itbasisMiddlewareOs "github.com/itbasis/tools/middleware/os"
+	sdkmPlugin "github.com/itbasis/tools/sdkm/pkg/plugin"
 	itbasisSdkmSDKVersion "github.com/itbasis/tools/sdkm/pkg/sdk-version"
 )
 
@@ -30,8 +31,8 @@ type fileStorage struct {
 	filePath string
 }
 
-func NewFileCacheStorage(pluginName string) itbasisSdkmSDKVersion.CacheStorage {
-	return NewFileCacheStorageCustomPath(path.Join(itbasisMiddlewareOs.ExecutableDir(), ".cache", pluginName+".json"))
+func NewFileCacheStorage(pluginID sdkmPlugin.ID) itbasisSdkmSDKVersion.CacheStorage {
+	return NewFileCacheStorageCustomPath(path.Join(itbasisMiddlewareOs.ExecutableDir(), ".cache", string(pluginID)+".json"))
 }
 
 func NewFileCacheStorageCustomPath(filePath string) itbasisSdkmSDKVersion.CacheStorage {
@@ -40,7 +41,7 @@ func NewFileCacheStorageCustomPath(filePath string) itbasisSdkmSDKVersion.CacheS
 	return &fileStorage{filePath: filePath}
 }
 
-func (receiver *fileStorage) String() string {
+func (receiver *fileStorage) GoString() string {
 	return "FileCacheStorage[file=" + receiver.filePath + "]"
 }
 

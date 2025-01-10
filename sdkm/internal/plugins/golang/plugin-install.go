@@ -26,7 +26,7 @@ func (receiver *goPlugin) Install(ctx context.Context, baseDir string) error {
 }
 
 func (receiver *goPlugin) InstallVersion(_ context.Context, version string) error {
-	if receiver.basePlugin.HasInstalled(pluginGoConsts.PluginName, version) {
+	if receiver.basePlugin.HasInstalled(pluginGoConsts.PluginID, version) {
 		slog.Info("SDK already installed: " + version)
 
 		return nil
@@ -38,7 +38,7 @@ func (receiver *goPlugin) InstallVersion(_ context.Context, version string) erro
 	}
 
 	if errUnpack := receiver.downloader.Unpack(
-		archiveFilePath, receiver.basePlugin.GetSDKVersionDir(pluginGoConsts.PluginName, version),
+		archiveFilePath, receiver.basePlugin.GetSDKVersionDir(pluginGoConsts.PluginID, version),
 	); errUnpack != nil {
 		return errors.Wrap(plugin.ErrSDKInstall, errUnpack.Error())
 	}

@@ -39,11 +39,12 @@ var _ = ginkgo.Describe(
 				)
 
 				mockBasePlugin.EXPECT().GetSDKDir().Return(sdkVersionDir).AnyTimes()
-				mockBasePlugin.EXPECT().GetSDKVersionDir(pluginGoConsts.PluginName, sdkVersion).Return(sdkVersionDir).AnyTimes()
+				mockBasePlugin.EXPECT().GetSDKVersionDir(pluginGoConsts.PluginID, sdkVersion).Return(sdkVersionDir).AnyTimes()
 
-				var envs, err = sdkmPluginGo.GetPlugin().
-					WithBasePlugin(mockBasePlugin).
-					EnvByVersion(context.Background(), sdkVersion)
+				var pluginGo, errGetPlugin = sdkmPluginGo.GetPlugin(mockBasePlugin)
+				gomega.Expect(errGetPlugin).To(gomega.Succeed())
+
+				var envs, err = pluginGo.EnvByVersion(context.Background(), sdkVersion)
 
 				gomega.Expect(err).To(gomega.Succeed())
 				gomega.Expect(envs).To(

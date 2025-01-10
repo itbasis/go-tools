@@ -25,7 +25,7 @@ func NewLintCommand() *cobra.Command {
 		Run:    _run,
 	}
 
-	cmd.Flags().BoolVar(&_flagSkipEditorConfigChecker, "skip-editor-config-checker", false, "skip editor config checker")
+	cmd.Flags().BoolVar(&_flagSkipEditorConfigChecker, "skip-editorconfig-checker", false, "skip editor config checker")
 	cmd.Flags().BoolVar(&_flagSkipGolangCiLint, "skip-golangci-lint", false, "skip golangci-lint")
 
 	return cmd
@@ -34,7 +34,7 @@ func NewLintCommand() *cobra.Command {
 func _run(cmd *cobra.Command, args []string) {
 	withCobraOut := itbasisMiddlewareExec.WithCobraOut(cmd)
 
-	if !_flagSkipEditorConfigChecker || itbasisMiddlewareOs.BeARegularFile(".editorconfig") {
+	if !_flagSkipEditorConfigChecker && itbasisMiddlewareOs.BeARegularFile(".editorconfig") {
 		itbasisMiddlewareCmd.RequireNoError(cmd, _execEditorConfigChecker(withCobraOut))
 	}
 

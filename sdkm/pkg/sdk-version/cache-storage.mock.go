@@ -40,6 +40,20 @@ func (m *MockCacheStorage) EXPECT() *MockCacheStorageMockRecorder {
 	return m.recorder
 }
 
+// GoString mocks base method.
+func (m *MockCacheStorage) GoString() string {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GoString")
+	ret0, _ := ret[0].(string)
+	return ret0
+}
+
+// GoString indicates an expected call of GoString.
+func (mr *MockCacheStorageMockRecorder) GoString() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GoString", reflect.TypeOf((*MockCacheStorage)(nil).GoString))
+}
+
 // Load mocks base method.
 func (m *MockCacheStorage) Load(ctx context.Context) map[VersionType][]SDKVersion {
 	m.ctrl.T.Helper()
@@ -64,20 +78,6 @@ func (m *MockCacheStorage) Store(ctx context.Context, versions map[VersionType][
 func (mr *MockCacheStorageMockRecorder) Store(ctx, versions any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Store", reflect.TypeOf((*MockCacheStorage)(nil).Store), ctx, versions)
-}
-
-// String mocks base method.
-func (m *MockCacheStorage) String() string {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "String")
-	ret0, _ := ret[0].(string)
-	return ret0
-}
-
-// String indicates an expected call of String.
-func (mr *MockCacheStorageMockRecorder) String() *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "String", reflect.TypeOf((*MockCacheStorage)(nil).String))
 }
 
 // Valid mocks base method.

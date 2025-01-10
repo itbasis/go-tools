@@ -1,7 +1,6 @@
 package option
 
 import (
-	"fmt"
 	"log/slog"
 
 	"github.com/pkg/errors"
@@ -19,7 +18,7 @@ const (
 	_checkKeyErr    _checkKey = iota
 )
 
-func _existKey(keys map[Key]struct{}, key Key, checkKey _checkKey) error {
+func _existKey(keys map[Key]struct{}, key Key) error {
 	slogAttrOptionKey := _slogAttrOptionKey(key)
 
 	if _, exist := keys[key]; !exist {
@@ -28,23 +27,7 @@ func _existKey(keys map[Key]struct{}, key Key, checkKey _checkKey) error {
 		return nil
 	}
 
-	switch checkKey {
-	case _checkKeySilent:
-		slog.Debug(_msgAlreadyKey, slogAttrOptionKey)
-
-		return nil
-
-	case _checkKeyWarn:
-		slog.Warn(_msgAlreadyKey, slogAttrOptionKey)
-
-		return nil
-
-	case _checkKeyErr:
-		slog.Error(_msgAlreadyKey, slogAttrOptionKey)
-
-	default:
-		slog.Error(fmt.Sprintf("unknown checkKey enum: %d", checkKey), slogAttrOptionKey)
-	}
+	slog.Debug(_msgAlreadyKey, slogAttrOptionKey)
 
 	return errors.New(_msgAlreadyKey)
 }

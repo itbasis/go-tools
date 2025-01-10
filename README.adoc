@@ -15,8 +15,8 @@ Description and examples of work in progress...
 
 == Список утилит
 
-* {empty}
-xref:builder/README.adoc[builder]
+* xref:builder/README.adoc[builder]
+* xref:sdkm/README.adoc[SDK Manager]
 
 == Самосборка
 

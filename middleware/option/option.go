@@ -4,6 +4,11 @@ import (
 	"log/slog"
 )
 
+const (
+	_msgAlreadyBefore     = "the option has already been applied before"
+	_msgAlreadyAndIgnored = "the option has already been applied before and will be ignored"
+)
+
 type LazyOptionFunc[T any] func() Option[T]
 
 type Option[T any] interface {
@@ -35,13 +40,28 @@ func _applyOption[T any](keys map[Key]struct{}, checkKey _checkKey, opt Option[T
 		slogAttrOptionKey = _slogAttrOptionKey(key)
 	)
 
-	slog.Debug("apply option", slogAttrOptionKey, slog.Int("check_key", int(checkKey)))
+	if err := _existKey(keys, key); err != nil {
+		switch checkKey {
+		case _checkKeyErr:
+			slog.Error(_msgAlreadyBefore, slogAttrOptionKey)
 
-	if err := _existKey(keys, key, checkKey); err != nil && checkKey == _checkKeyErr {
-		return err
+			return err
+
+		case _checkKeyWarn:
+			slog.Warn(_msgAlreadyAndIgnored, slogAttrOptionKey)
+
+			return nil
+
+		case _checkKeySilent:
+			slog.Debug(_msgAlreadyAndIgnored, slogAttrOptionKey)
+
+			return nil
+		}
 	}
+
+	slog.Debug("apply option", slogAttrOptionKey, slog.Int("check_key", int(checkKey)))
 
 	keys[key] = struct{}{}
 
-	return opt.Apply(obj) //nolint:wrapcheck // _
+	return opt.Apply(obj) //nolint:wrapcheck // TODO
 }

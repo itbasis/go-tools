@@ -9,8 +9,9 @@ import (
 
 func NewReshimCommand() *cobra.Command {
 	return &cobra.Command{
-		Use:   itbasisMiddlewareCmd.BuildUse("reshim"),
-		Short: "Unpacking scripts and shims",
+		Use:    itbasisMiddlewareCmd.BuildUse("reshim"),
+		Short:  "Unpacking scripts and shims",
+		PreRun: itbasisMiddlewareCmd.LogCommand,
 		RunE: func(_ *cobra.Command, _ []string) error {
 			return sdkmScripts.Unpack(itbasisMiddlewareOs.ExecutableDir())
 		},
