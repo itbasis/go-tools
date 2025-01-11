@@ -8,7 +8,7 @@ require (
 	github.com/google/uuid v1.6.0
 	github.com/grpc-ecosystem/go-grpc-middleware/v2 v2.2.0
 	github.com/itbasis/go-clock/v2 v2.1.0
-	github.com/itbasis/go-test-utils/v4 v4.2.1
+	github.com/itbasis/go-test-utils/v4 v4.2.2
 	github.com/onsi/ginkgo/v2 v2.22.2
 	github.com/onsi/gomega v1.36.2
 	github.com/pkg/errors v0.9.1
