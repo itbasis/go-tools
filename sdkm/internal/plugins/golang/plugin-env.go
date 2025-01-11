@@ -2,11 +2,11 @@ package golang
 
 import (
 	"context"
-	"fmt"
 	"log/slog"
 	"os"
 	"path"
 
+	"github.com/itbasis/tools/middleware/log"
 	itbasisMiddlewareOs "github.com/itbasis/tools/middleware/os"
 	pluginGoConsts "github.com/itbasis/tools/sdkm/internal/plugins/golang/consts"
 )
@@ -53,7 +53,7 @@ func (receiver *goPlugin) EnvByVersion(_ context.Context, version string) (map[s
 		),
 	}
 
-	slog.Debug(fmt.Sprintf("envs: %v", envs))
+	slog.Debug("envs", log.SlogAttrMap("envs", envs))
 
 	return envs, nil
 }

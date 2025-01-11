@@ -3,7 +3,6 @@ package base
 import (
 	"os"
 	"path"
-	"strings"
 
 	itbasisMiddlewareOption "github.com/itbasis/tools/middleware/option"
 	sdkmPlugin "github.com/itbasis/tools/sdkm/pkg/plugin"
@@ -40,9 +39,7 @@ func (receiver *basePlugin) GetSDKDir() string {
 }
 
 func (receiver *basePlugin) GetSDKVersionDir(pluginID sdkmPlugin.ID, version string) string {
-	sdkFullName := strings.Join([]string{string(pluginID), version}, "-")
-
-	return path.Join(receiver.GetSDKDir(), sdkFullName)
+	return path.Join(receiver.GetSDKDir(), string(pluginID), version)
 }
 
 func (receiver *basePlugin) HasInstalled(pluginID sdkmPlugin.ID, version string) bool {

@@ -40,6 +40,7 @@ var _ = ginkgo.Describe(
 
 				mockBasePlugin.EXPECT().GetSDKDir().Return(sdkVersionDir).AnyTimes()
 				mockBasePlugin.EXPECT().GetSDKVersionDir(pluginGoConsts.PluginID, sdkVersion).Return(sdkVersionDir).AnyTimes()
+				mockBasePlugin.EXPECT().HasInstalled(pluginGoConsts.PluginID, sdkVersion).Return(true).AnyTimes()
 
 				var pluginGo, errGetPlugin = sdkmPluginGo.GetPlugin(mockBasePlugin)
 				gomega.Expect(errGetPlugin).To(gomega.Succeed())
@@ -63,8 +64,8 @@ var _ = ginkgo.Describe(
 				gomega.Expect(actualPaths[1]).To(gomega.Equal(wantGoCachePath))
 				gomega.Expect(actualPaths[2]).To(gomega.Equal(itbasisMiddlewareOs.ExecutableDir()))
 			},
-			ginkgo.Entry(nil, "1.23.0", path.Join("sdk", "1.23.0", "bin"), path.Join(itbasisMiddlewareOs.UserHomeDir(), "go", "1.23.0", "bin")),
-			ginkgo.Entry(nil, "1.20.1", path.Join("sdk", "1.20.1", "bin"), path.Join(itbasisMiddlewareOs.UserHomeDir(), "go", "1.20.1", "bin")),
+			ginkgo.Entry(nil, "1.23.0", path.Join("sdk", "1.23.0", "bin"), path.Join("1.23.0", "bin")),
+			ginkgo.Entry(nil, "1.20.1", path.Join("sdk", "1.20.1", "bin"), path.Join("1.20.1", "bin")),
 		)
 	},
 )
