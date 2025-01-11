@@ -32,6 +32,7 @@ var _ = ginkgo.Describe(
 
 				mockBasePlugin := sdkmPlugin.NewMockBasePlugin(mockController)
 				mockBasePlugin.EXPECT().GetSDKDir().Return("").AnyTimes()
+				mockBasePlugin.EXPECT().HasInstalled(pluginGoConsts.PluginID, gomock.Any()).Return(false)
 
 				plugin, err := sdkmPluginGo.GetPlugin(mockBasePlugin)
 				gomega.Expect(err).To(gomega.Succeed())
