@@ -18,6 +18,8 @@ linters-settings:
         ignore-names:
             - db
             - err
+            - id
+            - os
     ginkgolinter:
         force-expect-to: true
         validate-async-intervals: true

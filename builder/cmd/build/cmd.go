@@ -58,7 +58,7 @@ func _run(cmd *cobra.Command, args []string) {
 
 	buildArgs = append(buildArgs, args[0])
 
-	slog.Debug("build with arguments", itbasisMiddlewareLog.SlogAttrStringsWithSeparator("buildArgs", " ", buildArgs))
+	slog.Debug("build with arguments", itbasisMiddlewareLog.SlogAttrSliceWithSeparator("buildArgs", " ", buildArgs))
 
 	execGoBuild, errGoBuild := itbasisBuilderExec.NewGoBuildWithCobra(cmd)
 	itbasisMiddlewareCmd.RequireNoError(cmd, errGoBuild)

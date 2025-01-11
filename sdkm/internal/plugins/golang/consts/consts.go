@@ -1,7 +1,9 @@
 package consts
 
+import sdkmPlugin "github.com/itbasis/tools/sdkm/pkg/plugin"
+
 const (
-	PluginName = "go"
+	PluginID sdkmPlugin.ID = "go"
 
 	URLReleases = "https://go.dev/dl"
 )

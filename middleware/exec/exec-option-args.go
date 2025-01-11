@@ -59,7 +59,7 @@ func (r *optionArgs) Apply(cmd *exec.Cmd) error {
 		return NewUnsupportedIncludePrevArgsError(r.includePrevArgs)
 	}
 
-	slog.Debug("applied args", log.SlogAttrStringsWithSeparator("args", " ", cmd.Args))
+	slog.Debug("applied args", log.SlogAttrSliceWithSeparator("args", " ", cmd.Args))
 
 	return nil
 }

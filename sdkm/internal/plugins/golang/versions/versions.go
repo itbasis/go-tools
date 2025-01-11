@@ -49,7 +49,7 @@ func NewVersions(urlReleases string) sdkmSDKVersion.SDKVersions {
 }
 
 func (receiver *versions) WithCache(cache sdkmSDKVersion.Cache) sdkmSDKVersion.SDKVersions {
-	slog.Debug(fmt.Sprintf("setting cache: %s", cache))
+	slog.Debug("setting cache: " + cache.GoString())
 
 	receiver.cache = cache
 
@@ -123,4 +123,8 @@ func (receiver *versions) parseVersions(
 	slog.Debug(fmt.Sprintf("found %d SDK versions for version type: %s", len(sdkVersions), versionType))
 
 	receiver.cache.Store(ctx, versionType, sdkVersions)
+}
+
+func (receiver *versions) GoString() string {
+	return "versions{" + receiver.urlReleases + "}"
 }

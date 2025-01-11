@@ -5,6 +5,7 @@ import (
 	"fmt"
 
 	sdkmPluginGo "github.com/itbasis/tools/sdkm/internal/plugins/golang"
+	pluginGoConsts "github.com/itbasis/tools/sdkm/internal/plugins/golang/consts"
 	sdkmPlugin "github.com/itbasis/tools/sdkm/pkg/plugin"
 	sdkmSDKVersion "github.com/itbasis/tools/sdkm/pkg/sdk-version"
 	"github.com/onsi/ginkgo/v2"
@@ -32,9 +33,9 @@ var _ = ginkgo.Describe(
 				mockBasePlugin := sdkmPlugin.NewMockBasePlugin(mockController)
 				mockBasePlugin.EXPECT().GetSDKDir().Return("").AnyTimes()
 
-				pluginGo = sdkmPluginGo.GetPlugin().
-					WithBasePlugin(mockBasePlugin).
-					WithVersions(mockSDKVersions)
+				plugin, err := sdkmPluginGo.GetPlugin(mockBasePlugin)
+				gomega.Expect(err).To(gomega.Succeed())
+				pluginGo = plugin.WithVersions(mockSDKVersions)
 
 			},
 		)
@@ -96,11 +97,11 @@ var _ = ginkgo.Describe(
 
 				mockBasePlugin := sdkmPlugin.NewMockBasePlugin(mockController)
 				mockBasePlugin.EXPECT().GetSDKDir().Return("").AnyTimes()
-				mockBasePlugin.EXPECT().HasInstalled("go", gomock.Any()).Return(false).AnyTimes()
+				mockBasePlugin.EXPECT().HasInstalled(pluginGoConsts.PluginID, gomock.Any()).Return(false).AnyTimes()
 
-				pluginGo = sdkmPluginGo.GetPlugin().
-					WithBasePlugin(mockBasePlugin).
-					WithVersions(mockSDKVersions)
+				plugin, err := sdkmPluginGo.GetPlugin(mockBasePlugin)
+				gomega.Expect(err).To(gomega.Succeed())
+				pluginGo = plugin.WithVersions(mockSDKVersions)
 			},
 		)
 

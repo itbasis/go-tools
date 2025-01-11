@@ -69,43 +69,43 @@ func (mr *MockBasePluginMockRecorder) GetSDKDir() *gomock.Call {
 }
 
 // GetSDKVersionDir mocks base method.
-func (m *MockBasePlugin) GetSDKVersionDir(pluginName, version string) string {
+func (m *MockBasePlugin) GetSDKVersionDir(pluginID ID, version string) string {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetSDKVersionDir", pluginName, version)
+	ret := m.ctrl.Call(m, "GetSDKVersionDir", pluginID, version)
 	ret0, _ := ret[0].(string)
 	return ret0
 }
 
 // GetSDKVersionDir indicates an expected call of GetSDKVersionDir.
-func (mr *MockBasePluginMockRecorder) GetSDKVersionDir(pluginName, version any) *gomock.Call {
+func (mr *MockBasePluginMockRecorder) GetSDKVersionDir(pluginID, version any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetSDKVersionDir", reflect.TypeOf((*MockBasePlugin)(nil).GetSDKVersionDir), pluginName, version)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetSDKVersionDir", reflect.TypeOf((*MockBasePlugin)(nil).GetSDKVersionDir), pluginID, version)
+}
+
+// GoString mocks base method.
+func (m *MockBasePlugin) GoString() string {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GoString")
+	ret0, _ := ret[0].(string)
+	return ret0
+}
+
+// GoString indicates an expected call of GoString.
+func (mr *MockBasePluginMockRecorder) GoString() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GoString", reflect.TypeOf((*MockBasePlugin)(nil).GoString))
 }
 
 // HasInstalled mocks base method.
-func (m *MockBasePlugin) HasInstalled(pluginName, version string) bool {
+func (m *MockBasePlugin) HasInstalled(pluginID ID, version string) bool {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "HasInstalled", pluginName, version)
+	ret := m.ctrl.Call(m, "HasInstalled", pluginID, version)
 	ret0, _ := ret[0].(bool)
 	return ret0
 }
 
 // HasInstalled indicates an expected call of HasInstalled.
-func (mr *MockBasePluginMockRecorder) HasInstalled(pluginName, version any) *gomock.Call {
+func (mr *MockBasePluginMockRecorder) HasInstalled(pluginID, version any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "HasInstalled", reflect.TypeOf((*MockBasePlugin)(nil).HasInstalled), pluginName, version)
-}
-
-// WithSDKDir mocks base method.
-func (m *MockBasePlugin) WithSDKDir(dir string) BasePlugin {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "WithSDKDir", dir)
-	ret0, _ := ret[0].(BasePlugin)
-	return ret0
-}
-
-// WithSDKDir indicates an expected call of WithSDKDir.
-func (mr *MockBasePluginMockRecorder) WithSDKDir(dir any) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "WithSDKDir", reflect.TypeOf((*MockBasePlugin)(nil).WithSDKDir), dir)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "HasInstalled", reflect.TypeOf((*MockBasePlugin)(nil).HasInstalled), pluginID, version)
 }

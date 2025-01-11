@@ -55,6 +55,20 @@ func (mr *MockSDKVersionsMockRecorder) AllVersions(ctx any) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AllVersions", reflect.TypeOf((*MockSDKVersions)(nil).AllVersions), ctx)
 }
 
+// GoString mocks base method.
+func (m *MockSDKVersions) GoString() string {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GoString")
+	ret0, _ := ret[0].(string)
+	return ret0
+}
+
+// GoString indicates an expected call of GoString.
+func (mr *MockSDKVersionsMockRecorder) GoString() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GoString", reflect.TypeOf((*MockSDKVersions)(nil).GoString))
+}
+
 // LatestVersion mocks base method.
 func (m *MockSDKVersions) LatestVersion(ctx context.Context) (SDKVersion, error) {
 	m.ctrl.T.Helper()

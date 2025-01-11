@@ -3,8 +3,10 @@ package downloader_test
 import (
 	pluginGoConsts "github.com/itbasis/tools/sdkm/internal/plugins/golang/consts"
 	"github.com/itbasis/tools/sdkm/internal/plugins/golang/downloader"
+	sdkmPlugin "github.com/itbasis/tools/sdkm/pkg/plugin"
 	"github.com/onsi/ginkgo/v2"
 	"github.com/onsi/gomega"
+	"go.uber.org/mock/gomock"
 )
 
 var _ = ginkgo.Describe(
@@ -13,8 +15,13 @@ var _ = ginkgo.Describe(
 
 		ginkgo.DescribeTable(
 			"success", func(os, arch, version, wantURL string) {
+				var (
+					mockController = gomock.NewController(ginkgo.GinkgoT())
+					mockBasePlugin = sdkmPlugin.NewMockBasePlugin(mockController)
+				)
+
 				gomega.Expect(
-					downloader.NewDownloader(os, arch, pluginGoConsts.URLReleases, ginkgo.GinkgoT().TempDir()).
+					downloader.NewDownloader(os, arch, pluginGoConsts.URLReleases, mockBasePlugin).
 						URLForDownload(version),
 				).
 					To(gomega.Equal(wantURL))

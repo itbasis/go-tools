@@ -3,28 +3,32 @@ package exec
 import (
 	itbasisMiddlewareCmd "github.com/itbasis/tools/middleware/cmd"
 	itbasisMiddlewareOs "github.com/itbasis/tools/middleware/os"
-	sdkmCmd "github.com/itbasis/tools/sdkm/internal/cmd"
+	"github.com/itbasis/tools/sdkm/plugins"
 	"github.com/spf13/cobra"
 )
 
-const (
-	_idxArgPlugin = 0
-)
-
 func NewExecCommand() *cobra.Command {
-	return &cobra.Command{
-		Use:                itbasisMiddlewareCmd.BuildUse("exec", sdkmCmd.UseArgRequirePlugins, "{<program>}", "[<args...>]"),
+	var cmd = &cobra.Command{
+		Use:                "exec",
 		Short:              "Execute a command in a plugin",
 		DisableFlagParsing: true,
-		Args:               cobra.MatchAll(cobra.MinimumNArgs(2)),
-		ArgAliases:         []string{sdkmCmd.ArgAliasPlugin, "program"},
-		RunE:               _runE,
 	}
+
+	plugins.AddPluginsAsSubCommands(
+		cmd, func(cmdChild *cobra.Command) {
+			cmdChild.Use = itbasisMiddlewareCmd.BuildUse(cmdChild.Use, "{<program>}", "[<args...>]")
+			cmdChild.Args = cobra.MinimumNArgs(1)
+			cmdChild.ArgAliases = []string{"program"}
+			cmdChild.RunE = _runE
+		},
+	)
+
+	return cmd
 }
 
 func _runE(cmd *cobra.Command, args []string) error {
-	//nolint:wrapcheck // _
-	return sdkmCmd.GetPluginByName(cmd, args[_idxArgPlugin]).
+	//nolint:wrapcheck // TODO
+	return plugins.GetPluginByID(cmd).
 		Exec(
 			cmd.Context(),
 			itbasisMiddlewareOs.Pwd(),

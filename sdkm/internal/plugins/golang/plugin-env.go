@@ -2,17 +2,18 @@ package golang
 
 import (
 	"context"
-	"fmt"
 	"log/slog"
 	"os"
 	"path"
 
+	"github.com/itbasis/tools/middleware/log"
 	itbasisMiddlewareOs "github.com/itbasis/tools/middleware/os"
 	pluginGoConsts "github.com/itbasis/tools/sdkm/internal/plugins/golang/consts"
 )
 
 func (receiver *goPlugin) Env(ctx context.Context, baseDir string) (map[string]string, error) {
 	sdkVersion, errCurrent := receiver.Current(ctx, baseDir)
+
 	if errCurrent != nil {
 		return map[string]string{}, errCurrent
 	}
@@ -41,18 +42,18 @@ func (receiver *goPlugin) EnvByVersion(_ context.Context, version string) (map[s
 		"SDKM_GOPATH_ORIGIN": os.Getenv("GOPATH"),
 		"SDKM_GOBIN_ORIGIN":  os.Getenv("GOBIN"),
 		//
-		"GOROOT": receiver.basePlugin.GetSDKVersionDir(pluginGoConsts.PluginName, version),
+		"GOROOT": receiver.basePlugin.GetSDKVersionDir(pluginGoConsts.PluginID, version),
 		"GOPATH": goCacheDir,
 		"GOBIN":  goBin,
 		"PATH": itbasisMiddlewareOs.AddBeforePath(
 			originPath,
-			path.Join(receiver.basePlugin.GetSDKVersionDir(pluginGoConsts.PluginName, version), "bin"),
+			path.Join(receiver.basePlugin.GetSDKVersionDir(pluginGoConsts.PluginID, version), "bin"),
 			goBin,
 			itbasisMiddlewareOs.ExecutableDir(),
 		),
 	}
 
-	slog.Debug(fmt.Sprintf("envs: %v", envs))
+	slog.Debug("envs", log.SlogAttrMap("envs", envs))
 
 	return envs, nil
 }

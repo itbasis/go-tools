@@ -29,6 +29,16 @@ It is necessary to add the line `source $SDKM_HOME/hook.zsh` to `~/.zshrc`
 +
 It is necessary to add the line `source $SDKM_HOME/hook.bash` to `~/.bashrc`
 
+== SDK installation location
+
+The `{SDK_ROOT_DIR}/{pluginID}/{sdk-version}` directory is used.
+
+By default `SDK_ROOT_DIR` is "${HOME}/sdk". You can set the path via the `SDKM_SDK_ROOT_DIR` environment variable or via the `--sdk-root-dir` argument on the command line (takes precedence over the environment variable)
+
 == Caching available versions
 
-To optimize the number of requests, the application caches the list of received SDK versions in `$SDKM_HOME/.cache` for a day
+WARNING: Not all plugins may support - see help for specific plugin
+
+The `{CACHE_ROOT_DIR}/{pluginID}/{sdk-version}` directory is used
+
+By default `CACHE_ROOT_DIR` is "${HOME}/.cache". You can set the path via the `SDKM_CACHE_ROOT_DIR` environment variable or via the `--cache-root-dir` argument on the command line (takes precedence over the environment variable)

@@ -7,13 +7,11 @@ import (
 	sdkmSDKVersion "github.com/itbasis/tools/sdkm/pkg/sdk-version"
 )
 
-type GetPluginFunc func() SDKMPlugin
-
 //nolint:interfacebloat // TODO
 //go:generate mockgen -source=$GOFILE -package=$GOPACKAGE -destination=plugin.mock.go
 type SDKMPlugin interface {
 	WithVersions(versions sdkmSDKVersion.SDKVersions) SDKMPlugin
-	WithBasePlugin(basePlugin BasePlugin) SDKMPlugin
+	// WithBasePlugin(basePlugin BasePlugin) SDKMPlugin
 	// WithDownloader(downloader) SDKMPlugin
 
 	ListAllVersions(ctx context.Context) ([]sdkmSDKVersion.SDKVersion, error)

@@ -16,7 +16,7 @@ const (
 )
 
 func WithDefaultFlagDebug() itbasisMiddlewareOption.Option[cobra.Command] {
-	return &_optionDebugFlag{persistent: true}
+	return WithFlagDebug(true)
 }
 
 func WithFlagDebug(persistent bool) itbasisMiddlewareOption.Option[cobra.Command] {
@@ -29,7 +29,7 @@ type _optionDebugFlag struct {
 	flag bool
 }
 
-func (r *_optionDebugFlag) Key() itbasisMiddlewareOption.Key { return _optionDebugFlagKey }
+func (_ *_optionDebugFlag) Key() itbasisMiddlewareOption.Key { return _optionDebugFlagKey }
 
 func (r *_optionDebugFlag) Apply(cmd *cobra.Command) error {
 	var flags *pflag.FlagSet

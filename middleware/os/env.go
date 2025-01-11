@@ -5,7 +5,7 @@ import (
 )
 
 func EnvMapToSlices(envMap map[string]string) []string {
-	var result = make([]string, len(envMap))
+	var result = make([]string, 0, len(envMap))
 
 	for k, v := range envMap {
 		result = append(result, k+"="+v)

@@ -21,16 +21,6 @@ func NewCache() itbasisSdkmSDKVersion.Cache {
 	}
 }
 
-func (receiver *cache) String() string {
-	var result = "SDKVersionCache"
-
-	if receiver.cacheStorage != nil {
-		result = result + " (" + receiver.cacheStorage.String() + ")"
-	}
-
-	return result
-}
-
 func (receiver *cache) WithExternalStore(cacheStorage itbasisSdkmSDKVersion.CacheStorage) itbasisSdkmSDKVersion.Cache {
 	receiver.cacheStorage = cacheStorage
 	maps.Clear(receiver.cache)
@@ -75,4 +65,14 @@ func (receiver *cache) Store(
 	if receiver.cacheStorage != nil {
 		receiver.cacheStorage.Store(ctx, receiver.cache)
 	}
+}
+
+func (receiver *cache) GoString() string {
+	var result = "SDKVersionCache"
+
+	if receiver.cacheStorage != nil {
+		result = result + " (" + receiver.cacheStorage.GoString() + ")"
+	}
+
+	return result
 }

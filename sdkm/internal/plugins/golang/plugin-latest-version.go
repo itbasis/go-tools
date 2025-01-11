@@ -11,7 +11,14 @@ import (
 )
 
 func (receiver *goPlugin) LatestVersion(ctx context.Context) (sdkmSDKVersion.SDKVersion, error) {
-	return receiver.sdkVersions.LatestVersion(ctx) //nolint:wrapcheck // _
+	sdkVersion, err := receiver.sdkVersions.LatestVersion(ctx)
+	if err != nil {
+		return sdkmSDKVersion.SDKVersion{}, err //nolint:wrapcheck // TODO
+	}
+
+	receiver.enrichSDKVersion(&sdkVersion)
+
+	return sdkVersion, nil
 }
 
 func (receiver *goPlugin) LatestVersionByPrefix(ctx context.Context, prefix string) (sdkmSDKVersion.SDKVersion, error) {

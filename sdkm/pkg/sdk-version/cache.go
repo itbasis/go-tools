@@ -7,7 +7,7 @@ import (
 
 //go:generate mockgen -source=$GOFILE -package=$GOPACKAGE -destination=cache.mock.go
 type Cache interface {
-	fmt.Stringer
+	fmt.GoStringer
 
 	WithExternalStore(cacheStorage CacheStorage) Cache
 

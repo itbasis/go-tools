@@ -19,6 +19,8 @@ import (
 )
 
 type Downloader struct {
+	fmt.GoStringer
+
 	httpClient *http.Client
 
 	urlReleases string
@@ -26,22 +28,22 @@ type Downloader struct {
 	os   string
 	arch string
 
-	sdkDir string
+	basePlugin sdkmPlugin.BasePlugin
 }
 
-func NewDownloader(os, arch, urlReleases, sdkDir string) *Downloader {
+func NewDownloader(os, arch, urlReleases string, basePlugin sdkmPlugin.BasePlugin) *Downloader {
 	return &Downloader{
 		os:          os,
 		arch:        arch,
 		urlReleases: urlReleases,
-		sdkDir:      sdkDir,
+		basePlugin:  basePlugin,
 		httpClient:  sdkmHttp.NewHTTPClient(time.Minute),
 	}
 }
 
 func (receiver *Downloader) Download(version string) (string, error) {
 	url := receiver.URLForDownload(version)
-	outFilePath := filepath.Join(receiver.sdkDir, ".download", filepath.Base(url))
+	outFilePath := filepath.Join(receiver.basePlugin.GetSDKDir(), ".download", filepath.Base(url))
 
 	if err := os.MkdirAll(filepath.Dir(outFilePath), itbasisMiddlewareOs.DefaultDirMode); err != nil {
 		return "", errors.Wrapf(sdkmPlugin.ErrDownloadFailed, "fail make directories: %s", err.Error())
@@ -88,7 +90,7 @@ func (receiver *Downloader) Download(version string) (string, error) {
 func (receiver *Downloader) Unpack(archiveFilePath, targetDir string) error {
 	slog.Debug(fmt.Sprintf("unpacking '%s' to '%s'", archiveFilePath, targetDir))
 
-	tmpDirPath, errTmpDirPath := os.MkdirTemp("", "sdkm-"+pluginGoConsts.PluginName)
+	tmpDirPath, errTmpDirPath := os.MkdirTemp("", "sdkm-"+string(pluginGoConsts.PluginID))
 	if errTmpDirPath != nil {
 		return errors.Wrapf(sdkmPlugin.ErrDownloadFailed, "fail create temporary dir: %s", errTmpDirPath)
 	}
@@ -115,4 +117,8 @@ func (receiver *Downloader) Unpack(archiveFilePath, targetDir string) error {
 
 func (receiver *Downloader) URLForDownload(version string) string {
 	return fmt.Sprintf("%s/go%s.%s-%s.tar.gz", receiver.urlReleases, version, receiver.os, receiver.arch)
+}
+
+func (receiver *Downloader) GoString() string {
+	return "downloader{os=" + receiver.os + "; arch=" + receiver.arch + "; urlReleases: " + receiver.urlReleases + "}"
 }
