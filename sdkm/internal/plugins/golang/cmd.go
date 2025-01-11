@@ -17,7 +17,7 @@ func CmdExtPlugin(cmd *cobra.Command) {
 
 func (receiver *goPlugin) InitProcessCommandFlags(cmd *cobra.Command) {
 	if receiver.goCacheRootDir = sdkmCmd.GetCacheRootDir(cmd); receiver.goCacheRootDir == "" {
-		receiver.goCacheRootDir = path.Join(itbasisMiddlewareOs.UserHomeDir(), string(pluginGoConsts.PluginID))
+		receiver.goCacheRootDir = path.Join(itbasisMiddlewareOs.UserHomeDir(), ".cache", string(pluginGoConsts.PluginID))
 	}
 
 	receiver.sdkVersions = receiver.sdkVersions.WithCache(
