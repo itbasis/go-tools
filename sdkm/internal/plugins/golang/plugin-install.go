@@ -37,6 +37,8 @@ func (receiver *goPlugin) InstallVersion(_ context.Context, version string) erro
 		return errors.Wrap(plugin.ErrSDKInstall, errDownload.Error())
 	}
 
+	slog.Debug(fmt.Sprintf("Downloading SDK version: %s", version), slog.String("archiveFilePath", archiveFilePath))
+
 	if errUnpack := receiver.downloader.Unpack(
 		archiveFilePath, receiver.basePlugin.GetSDKVersionDir(pluginGoConsts.PluginID, version),
 	); errUnpack != nil {

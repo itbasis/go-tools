@@ -29,7 +29,7 @@ var _ = ginkgo.Describe(
 			// stable
 			ginkgo.Entry(nil, "darwin", "amd64", "1.22.5", "https://go.dev/dl/go1.22.5.darwin-amd64.tar.gz"),
 			ginkgo.Entry(nil, "darwin", "arm64", "1.22.5", "https://go.dev/dl/go1.22.5.darwin-arm64.tar.gz"),
-			ginkgo.Entry(nil, "windows", "amd64", "1.22.5", "https://go.dev/dl/go1.22.5.windows-amd64.tar.gz"),
+			ginkgo.Entry(nil, "windows", "amd64", "1.22.5", "https://go.dev/dl/go1.22.5.windows-amd64.zip"),
 			ginkgo.Entry(nil, "linux", "386", "1.22.5", "https://go.dev/dl/go1.22.5.linux-386.tar.gz"),
 			ginkgo.Entry(nil, "linux", "amd64", "1.22.5", "https://go.dev/dl/go1.22.5.linux-amd64.tar.gz"),
 			// unstable

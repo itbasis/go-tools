@@ -53,6 +53,17 @@ var _ = ginkgo.Describe(
 					{ID: "1.22.5", Type: sdkmSDKVersion.TypeArchived},
 				},
 			),
+			ginkgo.Entry(
+				nil, "003.html", 304, []sdkmSDKVersion.SDKVersion{
+					{ID: "1.24rc1", Type: sdkmSDKVersion.TypeUnstable},
+					{ID: "1.23.4", Type: sdkmSDKVersion.TypeStable},
+					{ID: "1.23.0", Type: sdkmSDKVersion.TypeArchived},
+					{ID: "1.23rc2", Type: sdkmSDKVersion.TypeArchived},
+					{ID: "1.22.10", Type: sdkmSDKVersion.TypeStable},
+					{ID: "1.22.6", Type: sdkmSDKVersion.TypeArchived},
+					{ID: "1.22.5", Type: sdkmSDKVersion.TypeArchived},
+				},
+			),
 		)
 	},
 )

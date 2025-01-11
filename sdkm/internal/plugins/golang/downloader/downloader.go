@@ -12,7 +12,6 @@ import (
 
 	itbasisMiddlewareOs "github.com/itbasis/tools/middleware/os"
 	sdkmHttp "github.com/itbasis/tools/sdkm/internal/http"
-	pluginGoConsts "github.com/itbasis/tools/sdkm/internal/plugins/golang/consts"
 	sdkmPlugin "github.com/itbasis/tools/sdkm/pkg/plugin"
 	"github.com/pkg/errors"
 	"golift.io/xtractr"
@@ -90,10 +89,12 @@ func (receiver *Downloader) Download(version string) (string, error) {
 func (receiver *Downloader) Unpack(archiveFilePath, targetDir string) error {
 	slog.Debug(fmt.Sprintf("unpacking '%s' to '%s'", archiveFilePath, targetDir))
 
-	tmpDirPath, errTmpDirPath := os.MkdirTemp("", "sdkm-"+string(pluginGoConsts.PluginID))
-	if errTmpDirPath != nil {
-		return errors.Wrapf(sdkmPlugin.ErrDownloadFailed, "fail create temporary dir: %s", errTmpDirPath)
+	var tmpDirPath = path.Clean(filepath.FromSlash(targetDir + ".tmp"))
+	if err := os.MkdirAll(tmpDirPath, itbasisMiddlewareOs.DefaultDirMode); err != nil {
+		return errors.Wrapf(sdkmPlugin.ErrDownloadFailed, "fail create temporary dir: %s", err)
 	}
+
+	slog.Debug("creating tmp dir for unpack: " + tmpDirPath)
 
 	defer func(path string) {
 		if err := os.RemoveAll(path); err != nil {
@@ -101,14 +102,24 @@ func (receiver *Downloader) Unpack(archiveFilePath, targetDir string) error {
 		}
 	}(tmpDirPath)
 
-	if _, _, err := xtractr.ExtractTarGzip(
-		&xtractr.XFile{FilePath: archiveFilePath, OutputDir: tmpDirPath, DirMode: xtractr.DefaultDirMode, FileMode: xtractr.DefaultFileMode},
-	); err != nil {
+	var errExtract error
+
+	if filepath.Ext(archiveFilePath) == ".zip" {
+		slog.Debug(fmt.Sprintf("unpacking zip archive '%s' to '%s'", archiveFilePath, tmpDirPath))
+
+		_, _, errExtract = xtractr.ExtractZIP(&xtractr.XFile{FilePath: archiveFilePath, OutputDir: tmpDirPath})
+	} else {
+		slog.Debug(fmt.Sprintf("unpacking tar.gz archive '%s' to '%s'", archiveFilePath, tmpDirPath))
+
+		_, _, errExtract = xtractr.ExtractTarGzip(&xtractr.XFile{FilePath: archiveFilePath, OutputDir: tmpDirPath, DirMode: xtractr.DefaultDirMode, FileMode: xtractr.DefaultFileMode})
+	}
+
+	if errExtract != nil {
 		return errors.Wrapf(sdkmPlugin.ErrDownloadFailed, "extracting %s failed", archiveFilePath)
 	}
 
 	// issue https://github.com/golift/xtractr/issues/70
-	if errRename := os.Rename(path.Join(tmpDirPath, "go"), targetDir); errRename != nil {
+	if errRename := os.Rename(path.Join(tmpDirPath, "go"), path.Clean(filepath.FromSlash(targetDir))); errRename != nil {
 		return errors.Wrapf(sdkmPlugin.ErrDownloadFailed, "failed rename: %s", errRename.Error())
 	}
 
@@ -116,7 +127,13 @@ func (receiver *Downloader) Unpack(archiveFilePath, targetDir string) error {
 }
 
 func (receiver *Downloader) URLForDownload(version string) string {
-	return fmt.Sprintf("%s/go%s.%s-%s.tar.gz", receiver.urlReleases, version, receiver.os, receiver.arch)
+	switch receiver.os {
+	case "windows":
+		return fmt.Sprintf("%s/go%s.%s-%s.zip", receiver.urlReleases, version, receiver.os, receiver.arch)
+
+	default:
+		return fmt.Sprintf("%s/go%s.%s-%s.tar.gz", receiver.urlReleases, version, receiver.os, receiver.arch)
+	}
 }
 
 func (receiver *Downloader) GoString() string {
