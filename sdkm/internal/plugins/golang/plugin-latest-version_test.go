@@ -25,7 +25,7 @@ var _ = ginkgo.Describe(
 				mockController := gomock.NewController(ginkgo.GinkgoT())
 
 				mockSDKVersions := sdkmSDKVersion.NewMockSDKVersions(mockController)
-				mockSDKVersions.EXPECT().LatestVersion(gomock.Any()).Return(
+				mockSDKVersions.EXPECT().LatestVersion(gomock.Any(), false).Return(
 					sdkmSDKVersion.SDKVersion{ID: "1.22.5", Type: sdkmSDKVersion.TypeStable},
 					nil,
 				)
@@ -43,7 +43,7 @@ var _ = ginkgo.Describe(
 
 		ginkgo.DescribeTable(
 			"LatestVersion", func(wantSDKVersion sdkmSDKVersion.SDKVersion) {
-				gomega.Expect(pluginGo.LatestVersion(context.Background())).
+				gomega.Expect(pluginGo.LatestVersion(context.Background(), false)).
 					To(
 						gomega.HaveValue(
 							gstruct.MatchFields(
@@ -72,14 +72,14 @@ var _ = ginkgo.Describe(
 
 				mockSDKVersions := sdkmSDKVersion.NewMockSDKVersions(mockController)
 				mockSDKVersions.EXPECT().
-					LatestVersion(gomock.Any()).
+					LatestVersion(gomock.Any(), false).
 					Return(
 						sdkmSDKVersion.SDKVersion{ID: "1.22.5", Type: sdkmSDKVersion.TypeStable},
 						nil,
 					).
 					MaxTimes(1)
 				mockSDKVersions.EXPECT().
-					AllVersions(gomock.Any()).
+					AllVersions(gomock.Any(), false).
 					Return(
 						[]sdkmSDKVersion.SDKVersion{
 							{ID: "1.22.5", Type: sdkmSDKVersion.TypeStable},
@@ -108,7 +108,7 @@ var _ = ginkgo.Describe(
 
 		ginkgo.DescribeTable(
 			"success", func(prefix string, wantSDKVersion sdkmSDKVersion.SDKVersion) {
-				gomega.Expect(pluginGo.LatestVersionByPrefix(context.Background(), prefix)).
+				gomega.Expect(pluginGo.LatestVersionByPrefix(context.Background(), false, prefix)).
 					To(
 						gomega.HaveValue(
 							gstruct.MatchFields(
@@ -130,7 +130,7 @@ var _ = ginkgo.Describe(
 
 		ginkgo.DescribeTable(
 			"fail", func(prefix string) {
-				gomega.Expect(pluginGo.LatestVersionByPrefix(context.Background(), prefix)).Error().To(
+				gomega.Expect(pluginGo.LatestVersionByPrefix(context.Background(), false, prefix)).Error().To(
 					gomega.MatchError(fmt.Sprintf("version by prefix %s: SDK version not found", prefix)),
 				)
 			},

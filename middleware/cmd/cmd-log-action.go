@@ -11,6 +11,6 @@ func LogCommand(cmd *cobra.Command, args []string) {
 	slog.Debug(
 		"execute command",
 		slog.String("command", cmd.Name()),
-		log.SlogAttrSliceWithSeparator("args", "", args),
+		log.SlogAttrSliceWithSeparator("args", " ", args),
 	)
 }

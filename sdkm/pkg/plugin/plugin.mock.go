@@ -43,33 +43,33 @@ func (m *MockSDKMPlugin) EXPECT() *MockSDKMPluginMockRecorder {
 }
 
 // Current mocks base method.
-func (m *MockSDKMPlugin) Current(ctx context.Context, baseDir string) (sdkversion.SDKVersion, error) {
+func (m *MockSDKMPlugin) Current(ctx context.Context, rebuildCache bool, baseDir string) (sdkversion.SDKVersion, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Current", ctx, baseDir)
+	ret := m.ctrl.Call(m, "Current", ctx, rebuildCache, baseDir)
 	ret0, _ := ret[0].(sdkversion.SDKVersion)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
 // Current indicates an expected call of Current.
-func (mr *MockSDKMPluginMockRecorder) Current(ctx, baseDir any) *gomock.Call {
+func (mr *MockSDKMPluginMockRecorder) Current(ctx, rebuildCache, baseDir any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Current", reflect.TypeOf((*MockSDKMPlugin)(nil).Current), ctx, baseDir)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Current", reflect.TypeOf((*MockSDKMPlugin)(nil).Current), ctx, rebuildCache, baseDir)
 }
 
 // Env mocks base method.
-func (m *MockSDKMPlugin) Env(ctx context.Context, baseDir string) (map[string]string, error) {
+func (m *MockSDKMPlugin) Env(ctx context.Context, rebuildCache bool, baseDir string) (map[string]string, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Env", ctx, baseDir)
+	ret := m.ctrl.Call(m, "Env", ctx, rebuildCache, baseDir)
 	ret0, _ := ret[0].(map[string]string)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
 // Env indicates an expected call of Env.
-func (mr *MockSDKMPluginMockRecorder) Env(ctx, baseDir any) *gomock.Call {
+func (mr *MockSDKMPluginMockRecorder) Env(ctx, rebuildCache, baseDir any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Env", reflect.TypeOf((*MockSDKMPlugin)(nil).Env), ctx, baseDir)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Env", reflect.TypeOf((*MockSDKMPlugin)(nil).Env), ctx, rebuildCache, baseDir)
 }
 
 // EnvByVersion mocks base method.
@@ -88,31 +88,31 @@ func (mr *MockSDKMPluginMockRecorder) EnvByVersion(ctx, version any) *gomock.Cal
 }
 
 // Exec mocks base method.
-func (m *MockSDKMPlugin) Exec(ctx context.Context, baseDir string, stdIn io.Reader, stdOut, stdErr io.Writer, args []string) error {
+func (m *MockSDKMPlugin) Exec(ctx context.Context, rebuildCache bool, baseDir string, stdIn io.Reader, stdOut, stdErr io.Writer, args []string) error {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Exec", ctx, baseDir, stdIn, stdOut, stdErr, args)
+	ret := m.ctrl.Call(m, "Exec", ctx, rebuildCache, baseDir, stdIn, stdOut, stdErr, args)
 	ret0, _ := ret[0].(error)
 	return ret0
 }
 
 // Exec indicates an expected call of Exec.
-func (mr *MockSDKMPluginMockRecorder) Exec(ctx, baseDir, stdIn, stdOut, stdErr, args any) *gomock.Call {
+func (mr *MockSDKMPluginMockRecorder) Exec(ctx, rebuildCache, baseDir, stdIn, stdOut, stdErr, args any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Exec", reflect.TypeOf((*MockSDKMPlugin)(nil).Exec), ctx, baseDir, stdIn, stdOut, stdErr, args)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Exec", reflect.TypeOf((*MockSDKMPlugin)(nil).Exec), ctx, rebuildCache, baseDir, stdIn, stdOut, stdErr, args)
 }
 
 // Install mocks base method.
-func (m *MockSDKMPlugin) Install(ctx context.Context, baseDir string) error {
+func (m *MockSDKMPlugin) Install(ctx context.Context, rebuildCache bool, baseDir string) error {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Install", ctx, baseDir)
+	ret := m.ctrl.Call(m, "Install", ctx, rebuildCache, baseDir)
 	ret0, _ := ret[0].(error)
 	return ret0
 }
 
 // Install indicates an expected call of Install.
-func (mr *MockSDKMPluginMockRecorder) Install(ctx, baseDir any) *gomock.Call {
+func (mr *MockSDKMPluginMockRecorder) Install(ctx, rebuildCache, baseDir any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Install", reflect.TypeOf((*MockSDKMPlugin)(nil).Install), ctx, baseDir)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Install", reflect.TypeOf((*MockSDKMPlugin)(nil).Install), ctx, rebuildCache, baseDir)
 }
 
 // InstallVersion mocks base method.
@@ -130,63 +130,63 @@ func (mr *MockSDKMPluginMockRecorder) InstallVersion(ctx, version any) *gomock.C
 }
 
 // LatestVersion mocks base method.
-func (m *MockSDKMPlugin) LatestVersion(ctx context.Context) (sdkversion.SDKVersion, error) {
+func (m *MockSDKMPlugin) LatestVersion(ctx context.Context, rebuildCache bool) (sdkversion.SDKVersion, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "LatestVersion", ctx)
+	ret := m.ctrl.Call(m, "LatestVersion", ctx, rebuildCache)
 	ret0, _ := ret[0].(sdkversion.SDKVersion)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
 // LatestVersion indicates an expected call of LatestVersion.
-func (mr *MockSDKMPluginMockRecorder) LatestVersion(ctx any) *gomock.Call {
+func (mr *MockSDKMPluginMockRecorder) LatestVersion(ctx, rebuildCache any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "LatestVersion", reflect.TypeOf((*MockSDKMPlugin)(nil).LatestVersion), ctx)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "LatestVersion", reflect.TypeOf((*MockSDKMPlugin)(nil).LatestVersion), ctx, rebuildCache)
 }
 
 // LatestVersionByPrefix mocks base method.
-func (m *MockSDKMPlugin) LatestVersionByPrefix(ctx context.Context, prefix string) (sdkversion.SDKVersion, error) {
+func (m *MockSDKMPlugin) LatestVersionByPrefix(ctx context.Context, rebuildCache bool, prefix string) (sdkversion.SDKVersion, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "LatestVersionByPrefix", ctx, prefix)
+	ret := m.ctrl.Call(m, "LatestVersionByPrefix", ctx, rebuildCache, prefix)
 	ret0, _ := ret[0].(sdkversion.SDKVersion)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
 // LatestVersionByPrefix indicates an expected call of LatestVersionByPrefix.
-func (mr *MockSDKMPluginMockRecorder) LatestVersionByPrefix(ctx, prefix any) *gomock.Call {
+func (mr *MockSDKMPluginMockRecorder) LatestVersionByPrefix(ctx, rebuildCache, prefix any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "LatestVersionByPrefix", reflect.TypeOf((*MockSDKMPlugin)(nil).LatestVersionByPrefix), ctx, prefix)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "LatestVersionByPrefix", reflect.TypeOf((*MockSDKMPlugin)(nil).LatestVersionByPrefix), ctx, rebuildCache, prefix)
 }
 
 // ListAllVersions mocks base method.
-func (m *MockSDKMPlugin) ListAllVersions(ctx context.Context) ([]sdkversion.SDKVersion, error) {
+func (m *MockSDKMPlugin) ListAllVersions(ctx context.Context, rebuildCache bool) ([]sdkversion.SDKVersion, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "ListAllVersions", ctx)
+	ret := m.ctrl.Call(m, "ListAllVersions", ctx, rebuildCache)
 	ret0, _ := ret[0].([]sdkversion.SDKVersion)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
 // ListAllVersions indicates an expected call of ListAllVersions.
-func (mr *MockSDKMPluginMockRecorder) ListAllVersions(ctx any) *gomock.Call {
+func (mr *MockSDKMPluginMockRecorder) ListAllVersions(ctx, rebuildCache any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListAllVersions", reflect.TypeOf((*MockSDKMPlugin)(nil).ListAllVersions), ctx)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListAllVersions", reflect.TypeOf((*MockSDKMPlugin)(nil).ListAllVersions), ctx, rebuildCache)
 }
 
 // ListAllVersionsByPrefix mocks base method.
-func (m *MockSDKMPlugin) ListAllVersionsByPrefix(ctx context.Context, prefix string) ([]sdkversion.SDKVersion, error) {
+func (m *MockSDKMPlugin) ListAllVersionsByPrefix(ctx context.Context, rebuildCache bool, prefix string) ([]sdkversion.SDKVersion, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "ListAllVersionsByPrefix", ctx, prefix)
+	ret := m.ctrl.Call(m, "ListAllVersionsByPrefix", ctx, rebuildCache, prefix)
 	ret0, _ := ret[0].([]sdkversion.SDKVersion)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
 // ListAllVersionsByPrefix indicates an expected call of ListAllVersionsByPrefix.
-func (mr *MockSDKMPluginMockRecorder) ListAllVersionsByPrefix(ctx, prefix any) *gomock.Call {
+func (mr *MockSDKMPluginMockRecorder) ListAllVersionsByPrefix(ctx, rebuildCache, prefix any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListAllVersionsByPrefix", reflect.TypeOf((*MockSDKMPlugin)(nil).ListAllVersionsByPrefix), ctx, prefix)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "ListAllVersionsByPrefix", reflect.TypeOf((*MockSDKMPlugin)(nil).ListAllVersionsByPrefix), ctx, rebuildCache, prefix)
 }
 
 // WithVersions mocks base method.

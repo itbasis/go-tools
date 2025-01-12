@@ -21,7 +21,7 @@ var _ = ginkgo.Describe(
 
 				sdkVersions := pluginGoVersions.NewVersions(server.URL())
 
-				gomega.Expect(sdkVersions.AllVersions(context.Background())).
+				gomega.Expect(sdkVersions.AllVersions(context.Background(), false)).
 					To(
 						gomega.SatisfyAll(
 							gomega.HaveLen(wantLen),

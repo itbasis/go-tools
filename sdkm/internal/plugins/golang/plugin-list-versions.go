@@ -7,12 +7,12 @@ import (
 	sdkmSDKVersion "github.com/itbasis/tools/sdkm/pkg/sdk-version"
 )
 
-func (receiver *goPlugin) ListAllVersions(ctx context.Context) ([]sdkmSDKVersion.SDKVersion, error) {
-	return receiver.sdkVersions.AllVersions(ctx) //nolint:wrapcheck // TODO
+func (receiver *goPlugin) ListAllVersions(ctx context.Context, rebuildCache bool) ([]sdkmSDKVersion.SDKVersion, error) {
+	return receiver.sdkVersions.AllVersions(ctx, rebuildCache) //nolint:wrapcheck // TODO
 }
 
-func (receiver *goPlugin) ListAllVersionsByPrefix(ctx context.Context, prefix string) ([]sdkmSDKVersion.SDKVersion, error) {
-	var allVersions, err = receiver.sdkVersions.AllVersions(ctx)
+func (receiver *goPlugin) ListAllVersionsByPrefix(ctx context.Context, rebuildCache bool, prefix string) ([]sdkmSDKVersion.SDKVersion, error) {
+	var allVersions, err = receiver.sdkVersions.AllVersions(ctx, rebuildCache)
 
 	if err != nil {
 		return nil, err //nolint:wrapcheck // TODO

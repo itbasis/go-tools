@@ -3,6 +3,7 @@ package exec
 import (
 	itbasisMiddlewareCmd "github.com/itbasis/tools/middleware/cmd"
 	itbasisMiddlewareOs "github.com/itbasis/tools/middleware/os"
+	sdkmCmd "github.com/itbasis/tools/sdkm/internal/cmd"
 	"github.com/itbasis/tools/sdkm/plugins"
 	"github.com/spf13/cobra"
 )
@@ -13,6 +14,8 @@ func NewExecCommand() *cobra.Command {
 		Short:              "Execute a command in a plugin",
 		DisableFlagParsing: true,
 	}
+
+	sdkmCmd.InitFlagRebuildCache(cmd.PersistentFlags())
 
 	plugins.AddPluginsAsSubCommands(
 		cmd, func(cmdChild *cobra.Command) {
@@ -31,10 +34,11 @@ func _runE(cmd *cobra.Command, args []string) error {
 	return plugins.GetPluginByID(cmd).
 		Exec(
 			cmd.Context(),
+			sdkmCmd.IsFlagRebuildCache(cmd),
 			itbasisMiddlewareOs.Pwd(),
 			cmd.InOrStdin(),
 			cmd.OutOrStdout(),
 			cmd.OutOrStderr(),
-			args[1:],
+			args,
 		)
 }

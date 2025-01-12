@@ -92,9 +92,7 @@ func (receiver *versions) parseVersions(
 		receiver.contentReleases, _ = receiver.getContent(receiver.urlReleases)
 
 		if cleanContent {
-			defer func() {
-				receiver.contentReleases = ""
-			}()
+			defer receiver.cleanContent()
 		}
 	}
 
@@ -123,6 +121,26 @@ func (receiver *versions) parseVersions(
 	slog.Debug(fmt.Sprintf("found %d SDK versions for version type: %s", len(sdkVersions), versionType))
 
 	receiver.cache.Store(ctx, versionType, sdkVersions)
+}
+
+func (receiver *versions) cleanContent() {
+	receiver.contentReleases = ""
+}
+
+func (receiver *versions) updateCache(ctx context.Context, stable, unstable, archived bool) {
+	if stable {
+		receiver.parseVersions(ctx, sdkmSDKVersion.TypeStable, receiver.reStableGroupVersions, false)
+	}
+
+	if unstable {
+		receiver.parseVersions(ctx, sdkmSDKVersion.TypeUnstable, receiver.reUnstableGroupVersions, false)
+	}
+
+	if archived {
+		receiver.parseVersions(ctx, sdkmSDKVersion.TypeArchived, receiver.reArchivedGroupVersions, false)
+	}
+
+	receiver.cleanContent()
 }
 
 func (receiver *versions) GoString() string {

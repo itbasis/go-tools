@@ -10,7 +10,7 @@ import (
 	sdkmSDKVersion "github.com/itbasis/tools/sdkm/pkg/sdk-version"
 )
 
-func (receiver *goPlugin) Current(ctx context.Context, baseDir string) (sdkmSDKVersion.SDKVersion, error) {
+func (receiver *goPlugin) Current(ctx context.Context, rebuildCache bool, baseDir string) (sdkmSDKVersion.SDKVersion, error) {
 	goModFile, errGoModFile := modfile.ReadGoModFile(baseDir)
 	if errGoModFile != nil {
 		slog.Error("Failed to read go.mod file", log.SlogAttrError(errGoModFile))
@@ -24,9 +24,9 @@ func (receiver *goPlugin) Current(ctx context.Context, baseDir string) (sdkmSDKV
 	)
 
 	if toolchain := goModFile.Toolchain; toolchain != nil {
-		sdkVersion, err = receiver.LatestVersionByPrefix(ctx, toolchain.Name[2:])
+		sdkVersion, err = receiver.LatestVersionByPrefix(ctx, rebuildCache, toolchain.Name[2:])
 	} else {
-		sdkVersion, err = receiver.LatestVersionByPrefix(ctx, goModFile.Go.Version)
+		sdkVersion, err = receiver.LatestVersionByPrefix(ctx, rebuildCache, goModFile.Go.Version)
 	}
 
 	slog.Debug(fmt.Sprintf("sdkVersion: %++v", sdkVersion))

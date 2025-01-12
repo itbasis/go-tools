@@ -21,7 +21,7 @@ var _ = ginkgo.Describe(
 
 				sdkVersions := pluginGoVersions.NewVersions(server.URL())
 
-				gomega.Expect(sdkVersions.LatestVersion(context.Background())).
+				gomega.Expect(sdkVersions.LatestVersion(context.Background(), false)).
 					To(gomega.Equal(wantSDKVersion))
 			},
 			ginkgo.Entry(nil, "001.html", sdkmSDKVersion.SDKVersion{ID: "1.22.5", Type: sdkmSDKVersion.TypeStable}),

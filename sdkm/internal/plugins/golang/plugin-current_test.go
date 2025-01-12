@@ -35,7 +35,7 @@ var _ = ginkgo.Describe(
 				mockController := gomock.NewController(ginkgo.GinkgoT())
 
 				mockSDKVersions := sdkmSDKVersion.NewMockSDKVersions(mockController)
-				mockSDKVersions.EXPECT().AllVersions(gomock.Any()).Return(
+				mockSDKVersions.EXPECT().AllVersions(gomock.Any(), false).Return(
 					[]sdkmSDKVersion.SDKVersion{
 						{ID: "1.22.5"},
 						{ID: "1.22.4"},
@@ -68,7 +68,7 @@ var _ = ginkgo.Describe(
 				slog.Debug("baseDir: " + baseDir)
 				gomega.Expect(baseDir).To(gomega.BeADirectory())
 
-				gomega.Expect(pluginGo.Current(context.Background(), baseDir)).
+				gomega.Expect(pluginGo.Current(context.Background(), false, baseDir)).
 					To(
 						gomega.HaveValue(
 							gstruct.MatchFields(

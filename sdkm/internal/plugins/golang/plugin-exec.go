@@ -10,11 +10,12 @@ import (
 
 func (receiver *goPlugin) Exec(
 	ctx context.Context,
+	rebuildCache bool,
 	baseDir string,
 	stdIn io.Reader, stdOut, stdErr io.Writer,
 	args []string,
 ) error {
-	environ, errEnviron := receiver.Env(ctx, baseDir)
+	environ, errEnviron := receiver.Env(ctx, rebuildCache, baseDir)
 	if errEnviron != nil {
 		return errors.Wrapf(plugin.ErrExecuteFailed, "failed get environment: %s", errEnviron.Error())
 	}

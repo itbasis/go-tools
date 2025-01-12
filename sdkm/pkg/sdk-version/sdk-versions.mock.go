@@ -41,18 +41,18 @@ func (m *MockSDKVersions) EXPECT() *MockSDKVersionsMockRecorder {
 }
 
 // AllVersions mocks base method.
-func (m *MockSDKVersions) AllVersions(ctx context.Context) ([]SDKVersion, error) {
+func (m *MockSDKVersions) AllVersions(ctx context.Context, rebuildCache bool) ([]SDKVersion, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "AllVersions", ctx)
+	ret := m.ctrl.Call(m, "AllVersions", ctx, rebuildCache)
 	ret0, _ := ret[0].([]SDKVersion)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
 // AllVersions indicates an expected call of AllVersions.
-func (mr *MockSDKVersionsMockRecorder) AllVersions(ctx any) *gomock.Call {
+func (mr *MockSDKVersionsMockRecorder) AllVersions(ctx, rebuildCache any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AllVersions", reflect.TypeOf((*MockSDKVersions)(nil).AllVersions), ctx)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AllVersions", reflect.TypeOf((*MockSDKVersions)(nil).AllVersions), ctx, rebuildCache)
 }
 
 // GoString mocks base method.
@@ -70,18 +70,18 @@ func (mr *MockSDKVersionsMockRecorder) GoString() *gomock.Call {
 }
 
 // LatestVersion mocks base method.
-func (m *MockSDKVersions) LatestVersion(ctx context.Context) (SDKVersion, error) {
+func (m *MockSDKVersions) LatestVersion(ctx context.Context, rebuildCache bool) (SDKVersion, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "LatestVersion", ctx)
+	ret := m.ctrl.Call(m, "LatestVersion", ctx, rebuildCache)
 	ret0, _ := ret[0].(SDKVersion)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
 // LatestVersion indicates an expected call of LatestVersion.
-func (mr *MockSDKVersionsMockRecorder) LatestVersion(ctx any) *gomock.Call {
+func (mr *MockSDKVersionsMockRecorder) LatestVersion(ctx, rebuildCache any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "LatestVersion", reflect.TypeOf((*MockSDKVersions)(nil).LatestVersion), ctx)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "LatestVersion", reflect.TypeOf((*MockSDKVersions)(nil).LatestVersion), ctx, rebuildCache)
 }
 
 // WithCache mocks base method.

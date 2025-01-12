@@ -31,7 +31,7 @@ var _ = ginkgo.Describe(
 
 				mockSDKVersions := sdkmSDKVersion.NewMockSDKVersions(mockController)
 				mockSDKVersions.EXPECT().
-					AllVersions(gomock.Any()).
+					AllVersions(gomock.Any(), false).
 					Return(
 						[]sdkmSDKVersion.SDKVersion{
 							{ID: "1.22.5", Type: sdkmSDKVersion.TypeStable},
@@ -68,7 +68,7 @@ var _ = ginkgo.Describe(
 
 		ginkgo.It(
 			"", func() {
-				gomega.Expect(pluginGo.ListAllVersions(context.Background())).
+				gomega.Expect(pluginGo.ListAllVersions(context.Background(), false)).
 					To(
 						gomega.SatisfyAll(
 							gomega.HaveLen(18),
@@ -91,7 +91,7 @@ var _ = ginkgo.Describe(
 			"By Prefix", func() {
 				ginkgo.It(
 					"empty prefix", func() {
-						gomega.Expect(pluginGo.ListAllVersionsByPrefix(context.Background(), "")).
+						gomega.Expect(pluginGo.ListAllVersionsByPrefix(context.Background(), false, "")).
 							To(
 								gomega.SatisfyAll(
 									gomega.HaveLen(18),
@@ -112,7 +112,7 @@ var _ = ginkgo.Describe(
 
 				ginkgo.DescribeTable(
 					"success", func(prefix string, wantCount int, wantSDKVersions []sdkmSDKVersion.SDKVersion) {
-						gomega.Expect(pluginGo.ListAllVersionsByPrefix(context.Background(), prefix)).
+						gomega.Expect(pluginGo.ListAllVersionsByPrefix(context.Background(), false, prefix)).
 							To(
 								gomega.SatisfyAll(
 									gomega.HaveLen(wantCount),

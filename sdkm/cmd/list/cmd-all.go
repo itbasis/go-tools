@@ -37,10 +37,12 @@ func _run(cmd *cobra.Command, args []string) {
 		err         error
 	)
 
+	var flagRebuildCache = sdkmCmd.IsFlagRebuildCache(cmd)
+
 	if len(args) == 0 {
-		sdkVersions, err = plugin.ListAllVersions(cmd.Context())
+		sdkVersions, err = plugin.ListAllVersions(cmd.Context(), flagRebuildCache)
 	} else {
-		sdkVersions, err = plugin.ListAllVersionsByPrefix(cmd.Context(), args[_idxArgVersion])
+		sdkVersions, err = plugin.ListAllVersionsByPrefix(cmd.Context(), flagRebuildCache, args[_idxArgVersion])
 	}
 
 	if err != nil {

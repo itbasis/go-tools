@@ -35,10 +35,18 @@ The `{SDK_ROOT_DIR}/{pluginID}/{sdk-version}` directory is used.
 
 By default `SDK_ROOT_DIR` is "${HOME}/sdk". You can set the path via the `SDKM_SDK_ROOT_DIR` environment variable or via the `--sdk-root-dir` argument on the command line (takes precedence over the environment variable)
 
-== Caching available versions
+== SDK caches
 
-WARNING: Not all plugins may support - see help for specific plugin
-
-The `{CACHE_ROOT_DIR}/{pluginID}/{sdk-version}` directory is used
+Some SDKs use a separate directory for their caches.
+For example, in Go it is located in `${GOPATH}`.
+By default, the SDKM sets the directory `{CACHE_ROOT_DIR}/{pluginID}/{sdk-version}` for this directory.
 
 By default `CACHE_ROOT_DIR` is "${HOME}/.cache". You can set the path via the `SDKM_CACHE_ROOT_DIR` environment variable or via the `--cache-root-dir` argument on the command line (takes precedence over the environment variable)
+
+== Caching SDK versions
+
+When receiving a list of SDK versions, SDKM caches the received list locally for 1 day to avoid redundant requests to the Internet and improve application responsiveness.
+
+The cache is located in the path `${SDKM_HOME}/.cache/{pluginID}.json`.
+
+It can be forced to update for some commands via the command line argument "--rebuild-cache"

@@ -14,19 +14,19 @@ type SDKMPlugin interface {
 	// WithBasePlugin(basePlugin BasePlugin) SDKMPlugin
 	// WithDownloader(downloader) SDKMPlugin
 
-	ListAllVersions(ctx context.Context) ([]sdkmSDKVersion.SDKVersion, error)
-	ListAllVersionsByPrefix(ctx context.Context, prefix string) ([]sdkmSDKVersion.SDKVersion, error)
+	ListAllVersions(ctx context.Context, rebuildCache bool) ([]sdkmSDKVersion.SDKVersion, error)
+	ListAllVersionsByPrefix(ctx context.Context, rebuildCache bool, prefix string) ([]sdkmSDKVersion.SDKVersion, error)
 
-	LatestVersion(ctx context.Context) (sdkmSDKVersion.SDKVersion, error)
-	LatestVersionByPrefix(ctx context.Context, prefix string) (sdkmSDKVersion.SDKVersion, error)
+	LatestVersion(ctx context.Context, rebuildCache bool) (sdkmSDKVersion.SDKVersion, error)
+	LatestVersionByPrefix(ctx context.Context, rebuildCache bool, prefix string) (sdkmSDKVersion.SDKVersion, error)
 
-	Current(ctx context.Context, baseDir string) (sdkmSDKVersion.SDKVersion, error)
+	Current(ctx context.Context, rebuildCache bool, baseDir string) (sdkmSDKVersion.SDKVersion, error)
 
-	Install(ctx context.Context, baseDir string) error
+	Install(ctx context.Context, rebuildCache bool, baseDir string) error
 	InstallVersion(ctx context.Context, version string) error
 
-	Env(ctx context.Context, baseDir string) (map[string]string, error)
+	Env(ctx context.Context, rebuildCache bool, baseDir string) (map[string]string, error)
 	EnvByVersion(ctx context.Context, version string) (map[string]string, error)
 
-	Exec(ctx context.Context, baseDir string, stdIn io.Reader, stdOut, stdErr io.Writer, args []string) error
+	Exec(ctx context.Context, rebuildCache bool, baseDir string, stdIn io.Reader, stdOut, stdErr io.Writer, args []string) error
 }

@@ -111,7 +111,9 @@ func (receiver *Downloader) Unpack(archiveFilePath, targetDir string) error {
 	} else {
 		slog.Debug(fmt.Sprintf("unpacking tar.gz archive '%s' to '%s'", archiveFilePath, tmpDirPath))
 
-		_, _, errExtract = xtractr.ExtractTarGzip(&xtractr.XFile{FilePath: archiveFilePath, OutputDir: tmpDirPath, DirMode: xtractr.DefaultDirMode, FileMode: xtractr.DefaultFileMode})
+		_, _, errExtract = xtractr.ExtractTarGzip(
+			&xtractr.XFile{FilePath: archiveFilePath, OutputDir: tmpDirPath, DirMode: xtractr.DefaultDirMode, FileMode: xtractr.DefaultFileMode},
+		)
 	}
 
 	if errExtract != nil {

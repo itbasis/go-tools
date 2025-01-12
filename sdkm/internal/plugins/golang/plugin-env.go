@@ -11,8 +11,8 @@ import (
 	pluginGoConsts "github.com/itbasis/tools/sdkm/internal/plugins/golang/consts"
 )
 
-func (receiver *goPlugin) Env(ctx context.Context, baseDir string) (map[string]string, error) {
-	sdkVersion, errCurrent := receiver.Current(ctx, baseDir)
+func (receiver *goPlugin) Env(ctx context.Context, rebuildCache bool, baseDir string) (map[string]string, error) {
+	sdkVersion, errCurrent := receiver.Current(ctx, rebuildCache, baseDir)
 
 	if errCurrent != nil {
 		return map[string]string{}, errCurrent

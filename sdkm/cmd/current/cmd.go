@@ -1,29 +1,36 @@
 package current
 
 import (
-	"strings"
-
 	itbasisMiddlewareCmd "github.com/itbasis/tools/middleware/cmd"
 	itbasisMiddlewareOs "github.com/itbasis/tools/middleware/os"
-	"github.com/itbasis/tools/sdkm/plugins"
+	sdkmCmd "github.com/itbasis/tools/sdkm/internal/cmd"
+	sdkmPlugins "github.com/itbasis/tools/sdkm/plugins"
 	"github.com/spf13/cobra"
 )
 
 func NewCurrentCommand() *cobra.Command {
-	return &cobra.Command{
-		Use:        itbasisMiddlewareCmd.BuildUse("current", "{"+strings.Join(plugins.PluginNames, "|")+"}"),
-		Short:      "Display current version",
-		ArgAliases: []string{"plugin"},
-		Args:       cobra.MatchAll(cobra.ExactArgs(1), cobra.OnlyValidArgs),
-		PreRun:     itbasisMiddlewareCmd.LogCommand,
-		Run:        _run,
+	var cmd = &cobra.Command{
+		Use:   "current",
+		Short: "Display current version",
 	}
+
+	sdkmCmd.InitFlagRebuildCache(cmd.PersistentFlags())
+
+	sdkmPlugins.AddPluginsAsSubCommands(
+		cmd, func(cmdChild *cobra.Command) {
+			cmdChild.Args = cobra.NoArgs
+			cmdChild.Run = _run
+		},
+	)
+
+	return cmd
 }
 
 func _run(cmd *cobra.Command, _ []string) {
 	var (
-		sdkmPlugin      = plugins.GetPluginByID(cmd)
-		sdkVersion, err = sdkmPlugin.Current(cmd.Context(), itbasisMiddlewareOs.Pwd())
+		sdkmPlugin       = sdkmPlugins.GetPluginByID(cmd)
+		flagRebuildCache = sdkmCmd.IsFlagRebuildCache(cmd)
+		sdkVersion, err  = sdkmPlugin.Current(cmd.Context(), flagRebuildCache, itbasisMiddlewareOs.Pwd())
 	)
 
 	if err != nil {

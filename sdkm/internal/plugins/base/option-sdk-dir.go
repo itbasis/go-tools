@@ -25,7 +25,7 @@ type _optionSdkDir struct {
 func (r *_optionSdkDir) Key() itbasisMiddlewareOption.Key { return _optionSdkDirKey }
 
 func (r *_optionSdkDir) Apply(cmp *basePlugin) error {
-	slog.Debug("apply SDK directory option", sdkmLog.SlogAttrSdkRootDir(r.dir))
+	slog.Debug("apply SDK directory option", sdkmLog.SlogAttrRootDir(r.dir))
 
 	if r.dir != "" {
 		cmp.sdkDir = r.dir

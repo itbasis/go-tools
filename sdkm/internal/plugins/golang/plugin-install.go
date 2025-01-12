@@ -10,8 +10,8 @@ import (
 	"github.com/pkg/errors"
 )
 
-func (receiver *goPlugin) Install(ctx context.Context, baseDir string) error {
-	sdkVersion, errCurrent := receiver.Current(ctx, baseDir)
+func (receiver *goPlugin) Install(ctx context.Context, rebuildCache bool, baseDir string) error {
+	sdkVersion, errCurrent := receiver.Current(ctx, rebuildCache, baseDir)
 	if errCurrent != nil {
 		return errors.Wrapf(plugin.ErrSDKInstall, "failed get current version: %s", errCurrent.Error())
 	}

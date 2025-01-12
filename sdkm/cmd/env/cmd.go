@@ -38,7 +38,7 @@ func _run(cmd *cobra.Command, args []string) {
 	)
 
 	if len(args) == 0 {
-		envMap, err = sdkmPlugin.Env(cmd.Context(), itbasisMiddlewareOs.Pwd())
+		envMap, err = sdkmPlugin.Env(cmd.Context(), sdkmCmd.IsFlagRebuildCache(cmd), itbasisMiddlewareOs.Pwd())
 	} else {
 		envMap, err = sdkmPlugin.EnvByVersion(cmd.Context(), args[_idxArgVersion])
 	}

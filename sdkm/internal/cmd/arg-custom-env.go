@@ -47,19 +47,19 @@ func _getRootDir(cmd *cobra.Command, flag, envName string) string {
 	itbasisMiddlewareCmd.RequireNoError(cmd, err)
 
 	if rootDir != "" {
-		slog.Debug("using from a command line argument", sdkmLog.SlogAttrSdkRootDir(rootDir))
+		slog.Debug("using from a command line argument", sdkmLog.SlogAttrRootDir(rootDir))
 
 		return rootDir
 	}
 
-	if env := os.Getenv(envName); env != "" {
-		slog.Debug("using from environment variables", sdkmLog.SlogAttrSdkRootDir(rootDir))
+	if rootDir = os.Getenv(envName); rootDir != "" {
+		slog.Debug("using from environment variables", sdkmLog.SlogAttrRootDir(rootDir))
 
-		return env
+		return rootDir
 	}
 
 	rootDir = sdkmSdk.GetDefaultSdkRoot()
-	slog.Debug("using with default value", sdkmLog.SlogAttrSdkRootDir(rootDir))
+	slog.Debug("using with default value", sdkmLog.SlogAttrRootDir(rootDir))
 
 	return rootDir
 }

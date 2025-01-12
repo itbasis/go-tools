@@ -10,8 +10,8 @@ import (
 	"github.com/pkg/errors"
 )
 
-func (receiver *goPlugin) LatestVersion(ctx context.Context) (sdkmSDKVersion.SDKVersion, error) {
-	sdkVersion, err := receiver.sdkVersions.LatestVersion(ctx)
+func (receiver *goPlugin) LatestVersion(ctx context.Context, rebuildCache bool) (sdkmSDKVersion.SDKVersion, error) {
+	sdkVersion, err := receiver.sdkVersions.LatestVersion(ctx, rebuildCache)
 	if err != nil {
 		return sdkmSDKVersion.SDKVersion{}, err //nolint:wrapcheck // TODO
 	}
@@ -21,14 +21,14 @@ func (receiver *goPlugin) LatestVersion(ctx context.Context) (sdkmSDKVersion.SDK
 	return sdkVersion, nil
 }
 
-func (receiver *goPlugin) LatestVersionByPrefix(ctx context.Context, prefix string) (sdkmSDKVersion.SDKVersion, error) {
+func (receiver *goPlugin) LatestVersionByPrefix(ctx context.Context, rebuildCache bool, prefix string) (sdkmSDKVersion.SDKVersion, error) {
 	slog.Debug("searching for latest version by prefix: " + prefix)
 
 	if prefix == "" {
-		return receiver.LatestVersion(ctx)
+		return receiver.LatestVersion(ctx, rebuildCache)
 	}
 
-	sdkVersions, err := receiver.ListAllVersions(ctx)
+	sdkVersions, err := receiver.ListAllVersions(ctx, rebuildCache)
 	if err != nil {
 		return sdkmSDKVersion.SDKVersion{}, errors.Wrap(sdkmPlugin.ErrSDKVersionNotFound, err.Error())
 	}
