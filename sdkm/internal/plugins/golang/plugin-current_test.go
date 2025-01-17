@@ -5,7 +5,7 @@ import (
 	"log/slog"
 	"path"
 
-	itbasisMiddlewareOs "github.com/itbasis/tools/middleware/os"
+	itbasisCoreOs "github.com/itbasis/tools/core/os"
 	sdkmPluginGo "github.com/itbasis/tools/sdkm/internal/plugins/golang"
 	pluginGoConsts "github.com/itbasis/tools/sdkm/internal/plugins/golang/consts"
 	sdkmPlugin "github.com/itbasis/tools/sdkm/pkg/plugin"
@@ -64,7 +64,7 @@ var _ = ginkgo.Describe(
 					Return(testData.wantInstalled).
 					MaxTimes(2)
 
-				baseDir := path.Join(itbasisMiddlewareOs.Pwd(), "testdata/current", testData.dir)
+				baseDir := path.Join(itbasisCoreOs.Pwd(), "testdata/current", testData.dir)
 				slog.Debug("baseDir: " + baseDir)
 				gomega.Expect(baseDir).To(gomega.BeADirectory())
 

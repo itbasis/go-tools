@@ -1,7 +1,7 @@
 package root
 
 import (
-	itbasisMiddlewareCmd "github.com/itbasis/tools/middleware/cmd"
+	itbasisCoreCmd "github.com/itbasis/tools/core/cmd"
 	sdkmCmdCurrent "github.com/itbasis/tools/sdkm/cmd/current"
 	sdkmCmdEnv "github.com/itbasis/tools/sdkm/cmd/env"
 	sdkmCmdExec "github.com/itbasis/tools/sdkm/cmd/exec"
@@ -15,7 +15,7 @@ import (
 )
 
 func NewRootCommand() (*cobra.Command, error) {
-	var cmdRoot, err = itbasisMiddlewareCmd.InitDefaultCmdRoot("SDK Manager")
+	var cmdRoot, err = itbasisCoreCmd.InitDefaultCmdRoot("SDK Manager")
 	if err != nil {
 		return nil, err //nolint:wrapcheck // TODO
 	}

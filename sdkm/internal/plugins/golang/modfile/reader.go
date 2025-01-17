@@ -5,7 +5,7 @@ import (
 	"path"
 	"path/filepath"
 
-	itbasisMiddlewareOs "github.com/itbasis/tools/middleware/os"
+	itbasisCoreOs "github.com/itbasis/tools/core/os"
 	"github.com/pkg/errors"
 	"golang.org/x/mod/modfile"
 )
@@ -15,7 +15,7 @@ const ErrMsgFailedReadGoModFile = "failed to read go.mod file"
 func ReadGoModFile(baseDir string) (modfile.File, error) {
 	var (
 		goModFilePath             = path.Join(baseDir, "go.mod")
-		goModFileRelPath, errPath = filepath.Rel(itbasisMiddlewareOs.Pwd(), goModFilePath)
+		goModFileRelPath, errPath = filepath.Rel(itbasisCoreOs.Pwd(), goModFilePath)
 	)
 
 	if errPath != nil {

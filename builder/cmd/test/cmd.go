@@ -10,9 +10,9 @@ import (
 
 	builderCmd "github.com/itbasis/tools/builder/internal/cmd"
 	itbasisBuilderExec "github.com/itbasis/tools/builder/internal/exec"
-	itbasisMiddlewareCmd "github.com/itbasis/tools/middleware/cmd"
-	itbasisMiddlewareExec "github.com/itbasis/tools/middleware/exec"
-	itbasisMiddlewareLog "github.com/itbasis/tools/middleware/log"
+	itbasisCoreCmd "github.com/itbasis/tools/core/cmd"
+	itbasisCoreExec "github.com/itbasis/tools/core/exec"
+	itbasisCoreLog "github.com/itbasis/tools/core/log"
 	ginkgoCommand "github.com/onsi/ginkgo/v2/ginkgo/command"
 	ginkgoRun "github.com/onsi/ginkgo/v2/ginkgo/run"
 	"github.com/pkg/errors"
@@ -32,15 +32,15 @@ var (
 
 func NewUnitTestCommand() *cobra.Command {
 	return &cobra.Command{
-		Use:    itbasisMiddlewareCmd.BuildUse("unit-test", builderCmd.UseArgPackages),
+		Use:    itbasisCoreCmd.BuildUse("unit-test", builderCmd.UseArgPackages),
 		Args:   cobra.MatchAll(cobra.OnlyValidArgs, cobra.MaximumNArgs(1)),
-		PreRun: itbasisMiddlewareCmd.LogCommand,
+		PreRun: itbasisCoreCmd.LogCommand,
 		Run:    _run,
 	}
 }
 
 func _run(cmd *cobra.Command, args []string) {
-	itbasisMiddlewareCmd.RequireNoError(cmd, os.MkdirAll(reportDir, 0755))
+	itbasisCoreCmd.RequireNoError(cmd, os.MkdirAll(reportDir, 0755))
 
 	(&ginkgoCommand.Program{
 		OutWriter:      cmd.OutOrStdout(),
@@ -62,30 +62,30 @@ func _run(cmd *cobra.Command, args []string) {
 		},
 	)
 
-	itbasisMiddlewareCmd.RequireNoError(cmd, moveJunitReport(junitReportOut, path.Join(reportDir, junitReportOut)))
-	itbasisMiddlewareCmd.RequireNoError(cmd, moveAndFilterCoverage(ginkgoCoverUnitOut, path.Join(reportDir, ginkgoCoverUnitOut)))
+	itbasisCoreCmd.RequireNoError(cmd, moveJunitReport(junitReportOut, path.Join(reportDir, junitReportOut)))
+	itbasisCoreCmd.RequireNoError(cmd, moveAndFilterCoverage(ginkgoCoverUnitOut, path.Join(reportDir, ginkgoCoverUnitOut)))
 
 	var goToolCoverExec, err = itbasisBuilderExec.NewGoToolWithCobra(cmd)
 
-	itbasisMiddlewareCmd.RequireNoError(cmd, err)
-	itbasisMiddlewareCmd.RequireNoError(
+	itbasisCoreCmd.RequireNoError(cmd, err)
+	itbasisCoreCmd.RequireNoError(
 		cmd,
 		goToolCoverExec.Execute(
-			itbasisMiddlewareExec.WithRerun(),
-			itbasisMiddlewareExec.WithRestoreArgsIncludePrevious(
-				itbasisMiddlewareExec.IncludePrevArgsBefore,
+			itbasisCoreExec.WithRerun(),
+			itbasisCoreExec.WithRestoreArgsIncludePrevious(
+				itbasisCoreExec.IncludePrevArgsBefore,
 				"cover",
 				"-func", ginkgoCoverUnitOut,
 				"-o", path.Join(reportDir, coverUnitOut),
 			),
 		),
 	)
-	itbasisMiddlewareCmd.RequireNoError(
+	itbasisCoreCmd.RequireNoError(
 		cmd,
 		goToolCoverExec.Execute(
-			itbasisMiddlewareExec.WithRerun(),
-			itbasisMiddlewareExec.WithRestoreArgsIncludePrevious(
-				itbasisMiddlewareExec.IncludePrevArgsBefore,
+			itbasisCoreExec.WithRerun(),
+			itbasisCoreExec.WithRestoreArgsIncludePrevious(
+				itbasisCoreExec.IncludePrevArgsBefore,
 				"cover",
 				"-html", ginkgoCoverUnitOut,
 				"-o", path.Join(reportDir, coverUnitHTML),
@@ -114,7 +114,7 @@ func moveAndFilterCoverage(source, target string) error {
 
 	defer func() {
 		if err := sourceFile.Close(); err != nil {
-			itbasisMiddlewareLog.Panic(fmt.Sprintf("fail close file: %s", source), itbasisMiddlewareLog.SlogAttrError(err))
+			itbasisCoreLog.Panic(fmt.Sprintf("fail close file: %s", source), itbasisCoreLog.SlogAttrError(err))
 		}
 	}()
 
@@ -125,7 +125,7 @@ func moveAndFilterCoverage(source, target string) error {
 
 	defer func() {
 		if err := targetFile.Close(); err != nil {
-			itbasisMiddlewareLog.Panic(fmt.Sprintf("fail close file: %s", target), itbasisMiddlewareLog.SlogAttrError(err))
+			itbasisCoreLog.Panic(fmt.Sprintf("fail close file: %s", target), itbasisCoreLog.SlogAttrError(err))
 		}
 	}()
 

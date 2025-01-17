@@ -3,7 +3,7 @@ package env
 import (
 	"log/slog"
 
-	itbasisMiddlewareLog "github.com/itbasis/tools/middleware/log"
+	itbasisCoreLog "github.com/itbasis/tools/core/log"
 
 	"github.com/caarlos0/env/v11"
 )
@@ -25,7 +25,7 @@ func ReadEnvConfigWithOptions(cfg any, opts *env.Options) error {
 	}
 
 	if err != nil {
-		logger.Error("failed to parse config", itbasisMiddlewareLog.SlogAttrError(err))
+		logger.Error("failed to parse config", itbasisCoreLog.SlogAttrError(err))
 
 		return ErrFailedReadConfiguration
 	}

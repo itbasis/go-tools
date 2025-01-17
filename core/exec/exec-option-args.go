@@ -4,23 +4,23 @@ import (
 	"log/slog"
 	"os/exec"
 
-	"github.com/itbasis/tools/middleware/log"
-	itbasisMiddlewareOption "github.com/itbasis/tools/middleware/option"
+	itbasisCoreLog "github.com/itbasis/tools/core/log"
+	itbasisCoreOption "github.com/itbasis/tools/core/option"
 )
 
-func WithArgs(args ...string) itbasisMiddlewareOption.Option[exec.Cmd] {
+func WithArgs(args ...string) itbasisCoreOption.Option[exec.Cmd] {
 	return &optionArgs{includePrevArgs: IncludePrevArgsNo, args: args}
 }
 
-func WithArgsIncludePrevious(includePrevArgs IncludePrevArgs, args ...string) itbasisMiddlewareOption.Option[exec.Cmd] {
+func WithArgsIncludePrevious(includePrevArgs IncludePrevArgs, args ...string) itbasisCoreOption.Option[exec.Cmd] {
 	return &optionArgs{includePrevArgs: includePrevArgs, args: args}
 }
 
-func WithRestoreArgs(args ...string) itbasisMiddlewareOption.RestoreOption[exec.Cmd] {
+func WithRestoreArgs(args ...string) itbasisCoreOption.RestoreOption[exec.Cmd] {
 	return &optionArgs{includePrevArgs: IncludePrevArgsNo, args: args, restore: true}
 }
 
-func WithRestoreArgsIncludePrevious(includePrevArgs IncludePrevArgs, args ...string) itbasisMiddlewareOption.RestoreOption[exec.Cmd] {
+func WithRestoreArgsIncludePrevious(includePrevArgs IncludePrevArgs, args ...string) itbasisCoreOption.RestoreOption[exec.Cmd] {
 	return &optionArgs{includePrevArgs: includePrevArgs, args: args, restore: true}
 }
 
@@ -42,7 +42,7 @@ type optionArgs struct {
 	prev []string
 }
 
-func (r *optionArgs) Key() itbasisMiddlewareOption.Key { return _optionArgsKey }
+func (r *optionArgs) Key() itbasisCoreOption.Key { return _optionArgsKey }
 
 func (r *optionArgs) Apply(cmd *exec.Cmd) error {
 	switch r.includePrevArgs {
@@ -59,7 +59,7 @@ func (r *optionArgs) Apply(cmd *exec.Cmd) error {
 		return NewUnsupportedIncludePrevArgsError(r.includePrevArgs)
 	}
 
-	slog.Debug("applied args", log.SlogAttrSliceWithSeparator("args", " ", cmd.Args))
+	slog.Debug("applied args", itbasisCoreLog.SlogAttrSliceWithSeparator("args", " ", cmd.Args))
 
 	return nil
 }

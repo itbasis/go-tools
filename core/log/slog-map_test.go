@@ -3,7 +3,7 @@ package log_test
 import (
 	"log/slog"
 
-	"github.com/itbasis/tools/middleware/log"
+	itbasisCoreLog "github.com/itbasis/tools/core/log"
 	"github.com/onsi/ginkgo/v2"
 	"github.com/onsi/gomega"
 )
@@ -29,9 +29,9 @@ var _ = ginkgo.DescribeTable(
 	},
 	ginkgo.Entry(
 		nil,
-		log.SlogAttrMap("key-string", map[string]int{"w": 1, "p": 2}),
+		itbasisCoreLog.SlogAttrMap("key-string", map[string]int{"w": 1, "p": 2}),
 		"key-string",
 		[]slog.Attr{slog.Int("w", 1), slog.Int("p", 2)},
 	),
-	ginkgo.Entry(nil, log.SlogAttrMap("key-int", map[int]int{0: 1, 1: 2}), "key-int", []slog.Attr{slog.Int("0", 1), slog.Int("1", 2)}),
+	ginkgo.Entry(nil, itbasisCoreLog.SlogAttrMap("key-int", map[int]int{0: 1, 1: 2}), "key-int", []slog.Attr{slog.Int("0", 1), slog.Int("1", 2)}),
 )

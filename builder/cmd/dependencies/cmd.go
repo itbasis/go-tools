@@ -5,17 +5,17 @@ import (
 	"log/slog"
 
 	itbasisBuilderExec "github.com/itbasis/tools/builder/internal/exec"
-	itbasisMiddlewareCmd "github.com/itbasis/tools/middleware/cmd"
-	itbasisMiddlewareExec "github.com/itbasis/tools/middleware/exec"
+	itbasisCoreCmd "github.com/itbasis/tools/core/cmd"
+	itbasisCoreExec "github.com/itbasis/tools/core/exec"
 	"github.com/spf13/cobra"
 )
 
 func NewDependenciesCommand() *cobra.Command {
 	return &cobra.Command{
-		Use:    itbasisMiddlewareCmd.BuildUse("dependencies"),
+		Use:    itbasisCoreCmd.BuildUse("dependencies"),
 		Short:  "Install dependencies",
 		Args:   cobra.NoArgs,
-		PreRun: itbasisMiddlewareCmd.LogCommand,
+		PreRun: itbasisCoreCmd.LogCommand,
 		Run:    _run,
 	}
 }
@@ -23,15 +23,15 @@ func NewDependenciesCommand() *cobra.Command {
 func _run(cmd *cobra.Command, _ []string) {
 	var execGoInstall, err = itbasisBuilderExec.NewGoInstallWithCobra(cmd)
 
-	itbasisMiddlewareCmd.RequireNoError(cmd, err)
+	itbasisCoreCmd.RequireNoError(cmd, err)
 
 	for _, dependency := range _dependencies.GoInstall {
 		slog.Info(fmt.Sprintf("Installing dependency: %s", dependency))
 
-		itbasisMiddlewareCmd.RequireNoError(
+		itbasisCoreCmd.RequireNoError(
 			cmd, execGoInstall.Execute(
-				itbasisMiddlewareExec.WithRerun(),
-				itbasisMiddlewareExec.WithRestoreArgsIncludePrevious(itbasisMiddlewareExec.IncludePrevArgsBefore, dependency.ToString()),
+				itbasisCoreExec.WithRerun(),
+				itbasisCoreExec.WithRestoreArgsIncludePrevious(itbasisCoreExec.IncludePrevArgsBefore, dependency.ToString()),
 			),
 		)
 	}

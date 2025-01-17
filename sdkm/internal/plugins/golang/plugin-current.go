@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"log/slog"
 
-	"github.com/itbasis/tools/middleware/log"
+	itbasisCoreLog "github.com/itbasis/tools/core/log"
 	"github.com/itbasis/tools/sdkm/internal/plugins/golang/modfile"
 	sdkmSDKVersion "github.com/itbasis/tools/sdkm/pkg/sdk-version"
 )
@@ -13,7 +13,7 @@ import (
 func (receiver *goPlugin) Current(ctx context.Context, rebuildCache bool, baseDir string) (sdkmSDKVersion.SDKVersion, error) {
 	goModFile, errGoModFile := modfile.ReadGoModFile(baseDir)
 	if errGoModFile != nil {
-		slog.Error("Failed to read go.mod file", log.SlogAttrError(errGoModFile))
+		slog.Error("Failed to read go.mod file", itbasisCoreLog.SlogAttrError(errGoModFile))
 
 		return sdkmSDKVersion.SDKVersion{}, errGoModFile //nolint:wrapcheck // TODO
 	}

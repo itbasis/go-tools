@@ -3,7 +3,7 @@ package plugins
 import (
 	"log/slog"
 
-	itbasisMiddlewareCmd "github.com/itbasis/tools/middleware/cmd"
+	itbasisCoreCmd "github.com/itbasis/tools/core/cmd"
 	sdkmCmd "github.com/itbasis/tools/sdkm/internal/cmd"
 	pluginBase "github.com/itbasis/tools/sdkm/internal/plugins/base"
 	sdkmPlugin "github.com/itbasis/tools/sdkm/pkg/plugin"
@@ -30,7 +30,7 @@ func GetPluginByID(cmd *cobra.Command) sdkmPlugin.SDKMPlugin {
 	)
 
 	if !ok {
-		itbasisMiddlewareCmd.Fatal(cmd, sdkmPlugin.NewPluginNotFoundError(pluginID))
+		itbasisCoreCmd.Fatal(cmd, sdkmPlugin.NewPluginNotFoundError(pluginID))
 	}
 
 	slog.Debug("found plugin: " + string(pluginID))
@@ -41,7 +41,7 @@ func GetPluginByID(cmd *cobra.Command) sdkmPlugin.SDKMPlugin {
 		pluginExtInit.InitProcessCommandFlags(cmd)
 	}
 
-	itbasisMiddlewareCmd.RequireNoError(cmd, err)
+	itbasisCoreCmd.RequireNoError(cmd, err)
 
 	return sdkPlugin
 }
@@ -50,7 +50,7 @@ func _initBasePlugin(cmd *cobra.Command) sdkmPlugin.BasePlugin {
 	basePlugin, errBasePlugin := pluginBase.NewBasePlugin(
 		pluginBase.WithCustomSdkDir(sdkmCmd.GetSdkRootDir(cmd)),
 	)
-	itbasisMiddlewareCmd.RequireNoError(cmd, errBasePlugin)
+	itbasisCoreCmd.RequireNoError(cmd, errBasePlugin)
 
 	slog.Debug("init base plugin: " + basePlugin.GoString())
 

@@ -1,7 +1,7 @@
 package plugins
 
 import (
-	itbasisMiddlewareCmd "github.com/itbasis/tools/middleware/cmd"
+	itbasisCoreCmd "github.com/itbasis/tools/core/cmd"
 	sdkmPlugin "github.com/itbasis/tools/sdkm/pkg/plugin"
 	"github.com/spf13/cobra"
 )
@@ -14,7 +14,7 @@ func AddPluginsAsSubCommands(cmdParent *cobra.Command, funcEnrichCommand sdkmPlu
 	for _, pluginMeta := range _plugins {
 		cmdChild := &cobra.Command{
 			Use:    string(pluginMeta.ID),
-			PreRun: itbasisMiddlewareCmd.LogCommand,
+			PreRun: itbasisCoreCmd.LogCommand,
 		}
 		cmdChild.Annotations = map[string]string{AnnotationPluginID: string(pluginMeta.ID)}
 

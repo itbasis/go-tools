@@ -1,7 +1,7 @@
 package app
 
 import (
-	itbasisMiddlewareLog "github.com/itbasis/tools/middleware/log"
+	itbasisCoreLog "github.com/itbasis/tools/core/log"
 	"github.com/spf13/cobra"
 )
 
@@ -10,7 +10,7 @@ type App struct {
 }
 
 func NewApp(cmdRoot *cobra.Command) *App {
-	itbasisMiddlewareLog.InitDefaultLoggerWIthConsole(cmdRoot.OutOrStdout())
+	itbasisCoreLog.InitDefaultLoggerWIthConsole(cmdRoot.OutOrStdout())
 
 	return &App{
 		cmdRoot: cmdRoot,

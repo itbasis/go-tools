@@ -3,15 +3,15 @@ package cmd
 import (
 	"log"
 
-	itbasisMiddlewareApp "github.com/itbasis/tools/middleware/app"
+	itbasisCoreApp "github.com/itbasis/tools/core/app"
 	"github.com/itbasis/tools/sdkm/cmd/root"
 )
 
-func InitApp() *itbasisMiddlewareApp.App {
+func InitApp() *itbasisCoreApp.App {
 	var cmdRoot, err = root.NewRootCommand()
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	return itbasisMiddlewareApp.NewApp(cmdRoot)
+	return itbasisCoreApp.NewApp(cmdRoot)
 }

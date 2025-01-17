@@ -4,8 +4,8 @@ import (
 	"io"
 	"os"
 
-	itbasisMiddlewareExec "github.com/itbasis/tools/middleware/exec"
-	itbasisMiddlewareOs "github.com/itbasis/tools/middleware/os"
+	itbasisCoreExec "github.com/itbasis/tools/core/exec"
+	itbasisCoreOs "github.com/itbasis/tools/core/os"
 	"github.com/pkg/errors"
 )
 
@@ -15,28 +15,28 @@ func (receiver *basePlugin) Exec(
 	stdIn io.Reader, stdOut, stdErr io.Writer,
 	args []string,
 ) error {
-	var envMap = itbasisMiddlewareOs.MergeEnvAsMap(os.Environ(), overrideEnv)
+	var envMap = itbasisCoreOs.MergeEnvAsMap(os.Environ(), overrideEnv)
 
 	envMap["SDKM_BACKUP_PATH"] = envMap["PATH"]
-	envMap["PATH"] = itbasisMiddlewareOs.CleanPath(envMap["PATH"], itbasisMiddlewareOs.ExecutableDir())
+	envMap["PATH"] = itbasisCoreOs.CleanPath(envMap["PATH"], itbasisCoreOs.ExecutableDir())
 
 	if err := os.Setenv("PATH", envMap["PATH"]); err != nil {
 		return errors.Wrap(err, "error setting PATH environment variable")
 	}
 
-	cmd, err := itbasisMiddlewareExec.NewExecutable(
+	cmd, err := itbasisCoreExec.NewExecutable(
 		cli,
-		itbasisMiddlewareExec.WithArgs(args...),
-		itbasisMiddlewareExec.WithCustomIn(stdIn),
-		itbasisMiddlewareExec.WithCustomOut(stdOut, stdErr),
-		itbasisMiddlewareExec.WithEnvAsMap(envMap),
+		itbasisCoreExec.WithArgs(args...),
+		itbasisCoreExec.WithCustomIn(stdIn),
+		itbasisCoreExec.WithCustomOut(stdOut, stdErr),
+		itbasisCoreExec.WithEnvAsMap(envMap),
 	)
 	if err != nil {
 		return errors.Wrap(err, "error executing plugin")
 	}
 
 	if err := cmd.Execute(); err != nil {
-		return errors.Wrap(err, itbasisMiddlewareExec.ErrFailedExecuteCommand.Error())
+		return errors.Wrap(err, itbasisCoreExec.ErrFailedExecuteCommand.Error())
 	}
 
 	return nil

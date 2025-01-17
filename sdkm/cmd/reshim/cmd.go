@@ -1,19 +1,19 @@
 package reshim
 
 import (
-	itbasisMiddlewareCmd "github.com/itbasis/tools/middleware/cmd"
-	itbasisMiddlewareOs "github.com/itbasis/tools/middleware/os"
+	itbasisCoreCmd "github.com/itbasis/tools/core/cmd"
+	itbasisCoreOs "github.com/itbasis/tools/core/os"
 	sdkmScripts "github.com/itbasis/tools/sdkm/scripts"
 	"github.com/spf13/cobra"
 )
 
 func NewReshimCommand() *cobra.Command {
 	return &cobra.Command{
-		Use:    itbasisMiddlewareCmd.BuildUse("reshim"),
+		Use:    itbasisCoreCmd.BuildUse("reshim"),
 		Short:  "Unpacking scripts and shims",
-		PreRun: itbasisMiddlewareCmd.LogCommand,
+		PreRun: itbasisCoreCmd.LogCommand,
 		RunE: func(_ *cobra.Command, _ []string) error {
-			return sdkmScripts.Unpack(itbasisMiddlewareOs.ExecutableDir())
+			return sdkmScripts.Unpack(itbasisCoreOs.ExecutableDir())
 		},
 	}
 }

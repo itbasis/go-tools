@@ -11,8 +11,8 @@ import (
 	"time"
 
 	"github.com/itbasis/go-clock/v2"
-	itbasisMiddlewareLog "github.com/itbasis/tools/middleware/log"
-	itbasisMiddlewareOs "github.com/itbasis/tools/middleware/os"
+	itbasisCoreLog "github.com/itbasis/tools/core/log"
+	itbasisCoreOs "github.com/itbasis/tools/core/os"
 	sdkmPlugin "github.com/itbasis/tools/sdkm/pkg/plugin"
 	itbasisSdkmSDKVersion "github.com/itbasis/tools/sdkm/pkg/sdk-version"
 )
@@ -32,7 +32,7 @@ type fileStorage struct {
 }
 
 func NewFileCacheStorage(pluginID sdkmPlugin.ID) itbasisSdkmSDKVersion.CacheStorage {
-	return NewFileCacheStorageCustomPath(path.Join(itbasisMiddlewareOs.ExecutableDir(), ".cache", string(pluginID)+".json"))
+	return NewFileCacheStorageCustomPath(path.Join(itbasisCoreOs.ExecutableDir(), ".cache", string(pluginID)+".json"))
 }
 
 func NewFileCacheStorageCustomPath(filePath string) itbasisSdkmSDKVersion.CacheStorage {
@@ -62,7 +62,7 @@ func (receiver *fileStorage) Valid(ctx context.Context) bool {
 
 		return false
 	} else if errStat != nil {
-		slog.Error("AttrError accessing cache file", itbasisMiddlewareLog.SlogAttrError(errStat))
+		slog.Error("AttrError accessing cache file", itbasisCoreLog.SlogAttrError(errStat))
 
 		return false
 	}
@@ -90,7 +90,7 @@ func (receiver *fileStorage) Load(ctx context.Context) map[itbasisSdkmSDKVersion
 
 	var bytes, errReadFile = os.ReadFile(filePath)
 	if errReadFile != nil {
-		slog.Error("error reading cache file: "+filePath, itbasisMiddlewareLog.SlogAttrError(errReadFile))
+		slog.Error("error reading cache file: "+filePath, itbasisCoreLog.SlogAttrError(errReadFile))
 
 		return emptyLoadResult
 	}
@@ -100,8 +100,8 @@ func (receiver *fileStorage) Load(ctx context.Context) map[itbasisSdkmSDKVersion
 	if errUnmarshal := json.Unmarshal(bytes, &model); errUnmarshal != nil {
 		slog.Error(
 			"error unmarshalling cache file",
-			itbasisMiddlewareLog.SlogAttrError(errUnmarshal),
-			itbasisMiddlewareLog.SlogAttrFilePath(filePath),
+			itbasisCoreLog.SlogAttrError(errUnmarshal),
+			itbasisCoreLog.SlogAttrFilePath(filePath),
 		)
 
 		return emptyLoadResult
@@ -130,21 +130,21 @@ func (receiver *fileStorage) Store(ctx context.Context, versions map[itbasisSdkm
 	if errMarshal != nil {
 		slog.Error(
 			"error marshalling cache file",
-			itbasisMiddlewareLog.SlogAttrError(errMarshal),
-			itbasisMiddlewareLog.SlogAttrFilePath(filePath),
+			itbasisCoreLog.SlogAttrError(errMarshal),
+			itbasisCoreLog.SlogAttrFilePath(filePath),
 		)
 
 		return
 	}
 
 	dir := filepath.Dir(filePath)
-	if errMkdir := os.MkdirAll(dir, itbasisMiddlewareOs.DefaultDirMode); errMkdir != nil {
-		slog.Error("error creating cache dir: "+dir, itbasisMiddlewareLog.SlogAttrError(errMkdir))
+	if errMkdir := os.MkdirAll(dir, itbasisCoreOs.DefaultDirMode); errMkdir != nil {
+		slog.Error("error creating cache dir: "+dir, itbasisCoreLog.SlogAttrError(errMkdir))
 
 		return
 	}
 
-	if errWriteFile := os.WriteFile(filePath, bytes, itbasisMiddlewareOs.DefaultFileMode); errWriteFile != nil {
-		slog.Error("error writing cache file: "+filePath, itbasisMiddlewareLog.SlogAttrError(errWriteFile))
+	if errWriteFile := os.WriteFile(filePath, bytes, itbasisCoreOs.DefaultFileMode); errWriteFile != nil {
+		slog.Error("error writing cache file: "+filePath, itbasisCoreLog.SlogAttrError(errWriteFile))
 	}
 }

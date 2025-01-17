@@ -3,9 +3,9 @@ package sdk
 import (
 	"path"
 
-	itbasisMiddlewareOs "github.com/itbasis/tools/middleware/os"
+	itbasisCoreOs "github.com/itbasis/tools/core/os"
 )
 
 func GetDefaultSdkRoot() string {
-	return path.Join(itbasisMiddlewareOs.UserHomeDir(), "sdk")
+	return path.Join(itbasisCoreOs.UserHomeDir(), "sdk")
 }

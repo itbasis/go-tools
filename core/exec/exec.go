@@ -4,7 +4,7 @@ import (
 	"log/slog"
 	"os/exec"
 
-	itbasisMiddlewareOption "github.com/itbasis/tools/middleware/option"
+	itbasisCoreOption "github.com/itbasis/tools/core/option"
 )
 
 type Executable struct {
@@ -13,13 +13,13 @@ type Executable struct {
 	cli string
 }
 
-func NewExecutable(cli string, opts ...itbasisMiddlewareOption.Option[exec.Cmd]) (*Executable, error) {
+func NewExecutable(cli string, opts ...itbasisCoreOption.Option[exec.Cmd]) (*Executable, error) {
 	var cmp = &Executable{
 		cmd: exec.Command(cli),
 	}
 
-	if err := itbasisMiddlewareOption.ApplyOptions(
-		cmp.cmd, opts, map[itbasisMiddlewareOption.Key]itbasisMiddlewareOption.LazyOptionFunc[exec.Cmd]{
+	if err := itbasisCoreOption.ApplyOptions(
+		cmp.cmd, opts, map[itbasisCoreOption.Key]itbasisCoreOption.LazyOptionFunc[exec.Cmd]{
 			_optionInKey:  WithStdIn,
 			_optionOutKey: WithStdOut,
 		},
@@ -30,13 +30,13 @@ func NewExecutable(cli string, opts ...itbasisMiddlewareOption.Option[exec.Cmd])
 	return cmp, nil
 }
 
-func (ge *Executable) Execute(opts ...itbasisMiddlewareOption.RestoreOption[exec.Cmd]) error {
+func (ge *Executable) Execute(opts ...itbasisCoreOption.RestoreOption[exec.Cmd]) error {
 	var (
 		cmd = ge.cmd
 		err error
 	)
 
-	if applyErr := itbasisMiddlewareOption.ApplyRestoreOptions(
+	if applyErr := itbasisCoreOption.ApplyRestoreOptions(
 		cmd, opts, func() {
 			slog.Info("execute command", slog.String("command", cmd.String()))
 

@@ -3,8 +3,8 @@ package exec_test
 import (
 	"os/exec"
 
-	itbasisMiddlewareExec "github.com/itbasis/tools/middleware/exec"
-	"github.com/itbasis/tools/middleware/option"
+	itbasisCoreExec "github.com/itbasis/tools/core/exec"
+	itbasisCoreOption "github.com/itbasis/tools/core/option"
 	"github.com/onsi/ginkgo/v2"
 	"github.com/onsi/gomega"
 )
@@ -19,7 +19,13 @@ var _ = ginkgo.Describe(
 					"simple", func(args, optionArgs, wantArgs []string) {
 						var cmd = exec.Command(path, args...)
 
-						gomega.Expect(option.ApplyOptions(cmd, []option.Option[exec.Cmd]{itbasisMiddlewareExec.WithArgs(optionArgs...)}, nil)).
+						gomega.Expect(
+							itbasisCoreOption.ApplyOptions(
+								cmd,
+								[]itbasisCoreOption.Option[exec.Cmd]{itbasisCoreExec.WithArgs(optionArgs...)},
+								nil,
+							),
+						).
 							To(gomega.Succeed())
 						gomega.Expect(cmd.Path).To(gomega.Equal(path))
 						gomega.Expect(cmd.Args).To(gomega.HaveExactElements(wantArgs))
@@ -30,14 +36,14 @@ var _ = ginkgo.Describe(
 
 				ginkgo.DescribeTable(
 					"with preservation of path and arguments",
-					func(includePrevArgs itbasisMiddlewareExec.IncludePrevArgs, args, optionArgs, wantArgs []string) {
+					func(includePrevArgs itbasisCoreExec.IncludePrevArgs, args, optionArgs, wantArgs []string) {
 						var cmd = exec.Command(path, args...)
 
 						gomega.Expect(
-							option.ApplyOptions(
+							itbasisCoreOption.ApplyOptions(
 								cmd,
-								[]option.Option[exec.Cmd]{
-									itbasisMiddlewareExec.WithArgsIncludePrevious(includePrevArgs, optionArgs...),
+								[]itbasisCoreOption.Option[exec.Cmd]{
+									itbasisCoreExec.WithArgsIncludePrevious(includePrevArgs, optionArgs...),
 								},
 								nil,
 							),
@@ -45,17 +51,17 @@ var _ = ginkgo.Describe(
 						gomega.Expect(cmd.Path).To(gomega.Equal(path))
 						gomega.Expect(cmd.Args).To(gomega.HaveExactElements(wantArgs))
 					},
-					ginkgo.Entry(nil, itbasisMiddlewareExec.IncludePrevArgsBefore, []string{"arg0"}, []string{}, []string{path, "arg0"}),
+					ginkgo.Entry(nil, itbasisCoreExec.IncludePrevArgsBefore, []string{"arg0"}, []string{}, []string{path, "arg0"}),
 					ginkgo.Entry(
 						nil,
-						itbasisMiddlewareExec.IncludePrevArgsBefore,
+						itbasisCoreExec.IncludePrevArgsBefore,
 						[]string{"arg0"},
 						[]string{"arg1"},
 						[]string{path, "arg0", "arg1"},
 					),
 					ginkgo.Entry(
 						nil,
-						itbasisMiddlewareExec.IncludePrevArgsAfter,
+						itbasisCoreExec.IncludePrevArgsAfter,
 						[]string{"arg0"},
 						[]string{"arg1"},
 						[]string{path, "arg1", "arg0"},
@@ -71,9 +77,9 @@ var _ = ginkgo.Describe(
 						var cmd = exec.Command(path, args...)
 
 						gomega.Expect(
-							option.ApplyRestoreOptions(
+							itbasisCoreOption.ApplyRestoreOptions(
 								cmd,
-								[]option.RestoreOption[exec.Cmd]{itbasisMiddlewareExec.WithRestoreArgs(optionArgs...)}, func() {
+								[]itbasisCoreOption.RestoreOption[exec.Cmd]{itbasisCoreExec.WithRestoreArgs(optionArgs...)}, func() {
 									gomega.Expect(cmd.Args).To(gomega.HaveExactElements(wantArgs))
 								},
 							),
@@ -90,13 +96,13 @@ var _ = ginkgo.Describe(
 
 				ginkgo.DescribeTable(
 					"with preservation of path and arguments",
-					func(includePrevArgs itbasisMiddlewareExec.IncludePrevArgs, args, optionArgs, wantArgs []string) {
+					func(includePrevArgs itbasisCoreExec.IncludePrevArgs, args, optionArgs, wantArgs []string) {
 						var cmd = exec.Command(path, args...)
 
 						gomega.Expect(
-							option.ApplyRestoreOptions(
+							itbasisCoreOption.ApplyRestoreOptions(
 								cmd,
-								[]option.RestoreOption[exec.Cmd]{itbasisMiddlewareExec.WithRestoreArgsIncludePrevious(
+								[]itbasisCoreOption.RestoreOption[exec.Cmd]{itbasisCoreExec.WithRestoreArgsIncludePrevious(
 									includePrevArgs,
 									optionArgs...,
 								)}, func() {
@@ -108,16 +114,16 @@ var _ = ginkgo.Describe(
 						gomega.Expect(cmd.Path).To(gomega.Equal(path))
 						gomega.Expect(cmd.Args).To(gomega.HaveExactElements(append([]string{path}, args...)))
 					},
-					ginkgo.Entry(nil, itbasisMiddlewareExec.IncludePrevArgsNo, []string{"arg0"}, []string{}, []string{path}),
+					ginkgo.Entry(nil, itbasisCoreExec.IncludePrevArgsNo, []string{"arg0"}, []string{}, []string{path}),
 					ginkgo.Entry(
-						nil, itbasisMiddlewareExec.IncludePrevArgsNo, []string{"arg0"}, []string{"arg1"}, []string{path, "arg1"},
+						nil, itbasisCoreExec.IncludePrevArgsNo, []string{"arg0"}, []string{"arg1"}, []string{path, "arg1"},
 					),
-					ginkgo.Entry(nil, itbasisMiddlewareExec.IncludePrevArgsBefore, []string{"arg0"}, []string{}, []string{path, "arg0"}),
+					ginkgo.Entry(nil, itbasisCoreExec.IncludePrevArgsBefore, []string{"arg0"}, []string{}, []string{path, "arg0"}),
 					ginkgo.Entry(
-						nil, itbasisMiddlewareExec.IncludePrevArgsBefore, []string{"arg0"}, []string{"arg1"}, []string{path, "arg0", "arg1"},
+						nil, itbasisCoreExec.IncludePrevArgsBefore, []string{"arg0"}, []string{"arg1"}, []string{path, "arg0", "arg1"},
 					),
 					ginkgo.Entry(
-						nil, itbasisMiddlewareExec.IncludePrevArgsAfter, []string{"arg0"}, []string{"arg1"}, []string{path, "arg1", "arg0"},
+						nil, itbasisCoreExec.IncludePrevArgsAfter, []string{"arg0"}, []string{"arg1"}, []string{path, "arg1", "arg0"},
 					),
 				)
 

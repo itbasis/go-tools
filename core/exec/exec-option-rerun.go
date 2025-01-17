@@ -3,16 +3,16 @@ package exec
 import (
 	"os/exec"
 
-	itbasisMiddlewareOption "github.com/itbasis/tools/middleware/option"
+	itbasisCoreOption "github.com/itbasis/tools/core/option"
 )
 
 const _optionRerunKey = "option-rerun"
 
-func WithRerun() itbasisMiddlewareOption.RestoreOption[exec.Cmd] { return &optionRerun{} }
+func WithRerun() itbasisCoreOption.RestoreOption[exec.Cmd] { return &optionRerun{} }
 
 type optionRerun struct{}
 
-func (r *optionRerun) Key() itbasisMiddlewareOption.Key { return _optionRerunKey }
+func (r *optionRerun) Key() itbasisCoreOption.Key { return _optionRerunKey }
 
 func (r *optionRerun) Apply(_ *exec.Cmd) error { return nil }
 

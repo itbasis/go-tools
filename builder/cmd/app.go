@@ -9,12 +9,12 @@ import (
 	builderCmdLint "github.com/itbasis/tools/builder/cmd/lint"
 	builderCmdTest "github.com/itbasis/tools/builder/cmd/test"
 	builderCmdUpdate "github.com/itbasis/tools/builder/cmd/update"
-	itbasisMiddlewareApp "github.com/itbasis/tools/middleware/app"
-	itbasisMiddlewareCmd "github.com/itbasis/tools/middleware/cmd"
+	itbasisCoreApp "github.com/itbasis/tools/core/app"
+	itbasisCoreCmd "github.com/itbasis/tools/core/cmd"
 )
 
-func InitApp() *itbasisMiddlewareApp.App {
-	var cmdRoot, err = itbasisMiddlewareCmd.InitDefaultCmdRoot("itbasis-builder")
+func InitApp() *itbasisCoreApp.App {
+	var cmdRoot, err = itbasisCoreCmd.InitDefaultCmdRoot("itbasis-builder")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -28,5 +28,5 @@ func InitApp() *itbasisMiddlewareApp.App {
 		builderCmdBuild.NewBuildCommand(),
 	)
 
-	return itbasisMiddlewareApp.NewApp(cmdRoot)
+	return itbasisCoreApp.NewApp(cmdRoot)
 }

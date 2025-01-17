@@ -6,7 +6,7 @@ import (
 	"path"
 	"strings"
 
-	itbasisMiddlewareOs "github.com/itbasis/tools/middleware/os"
+	itbasisCoreOs "github.com/itbasis/tools/core/os"
 	sdkmPluginGo "github.com/itbasis/tools/sdkm/internal/plugins/golang"
 	pluginGoConsts "github.com/itbasis/tools/sdkm/internal/plugins/golang/consts"
 	sdkmPlugin "github.com/itbasis/tools/sdkm/pkg/plugin"
@@ -62,7 +62,7 @@ var _ = ginkgo.Describe(
 				gomega.Expect(actualPaths).To(gomega.HaveLen(countOriginPath + 3))
 				gomega.Expect(actualPaths[0]).To(gomega.Equal(wantSDKPath))
 				gomega.Expect(actualPaths[1]).To(gomega.Equal(wantGoCachePath))
-				gomega.Expect(actualPaths[2]).To(gomega.Equal(itbasisMiddlewareOs.ExecutableDir()))
+				gomega.Expect(actualPaths[2]).To(gomega.Equal(itbasisCoreOs.ExecutableDir()))
 			},
 			ginkgo.Entry(nil, "1.23.0", path.Join("sdk", "1.23.0", "bin"), path.Join("1.23.0", "bin")),
 			ginkgo.Entry(nil, "1.20.1", path.Join("sdk", "1.20.1", "bin"), path.Join("1.20.1", "bin")),

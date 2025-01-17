@@ -6,8 +6,8 @@ import (
 	"os"
 	"path"
 
-	"github.com/itbasis/tools/middleware/log"
-	itbasisMiddlewareOs "github.com/itbasis/tools/middleware/os"
+	itbasisCoreLog "github.com/itbasis/tools/core/log"
+	itbasisCoreOs "github.com/itbasis/tools/core/os"
 	pluginGoConsts "github.com/itbasis/tools/sdkm/internal/plugins/golang/consts"
 )
 
@@ -45,15 +45,15 @@ func (receiver *goPlugin) EnvByVersion(_ context.Context, version string) (map[s
 		"GOROOT": receiver.basePlugin.GetSDKVersionDir(pluginGoConsts.PluginID, version),
 		"GOPATH": goCacheDir,
 		"GOBIN":  goBin,
-		"PATH": itbasisMiddlewareOs.AddBeforePath(
+		"PATH": itbasisCoreOs.AddBeforePath(
 			originPath,
 			path.Join(receiver.basePlugin.GetSDKVersionDir(pluginGoConsts.PluginID, version), "bin"),
 			goBin,
-			itbasisMiddlewareOs.ExecutableDir(),
+			itbasisCoreOs.ExecutableDir(),
 		),
 	}
 
-	slog.Debug("envs", log.SlogAttrMap("envs", envs))
+	slog.Debug("envs", itbasisCoreLog.SlogAttrMap("envs", envs))
 
 	return envs, nil
 }

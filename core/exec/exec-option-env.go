@@ -3,19 +3,19 @@ package exec
 import (
 	"os/exec"
 
-	itbasisMiddlewareOption "github.com/itbasis/tools/middleware/option"
-	"github.com/itbasis/tools/middleware/os"
+	itbasisCoreOption "github.com/itbasis/tools/core/option"
+	itbasisCoreOs "github.com/itbasis/tools/core/os"
 )
 
 const _optionEnvKey = "option-env"
 
-func WithEnv(env []string) itbasisMiddlewareOption.Option[exec.Cmd] {
+func WithEnv(env []string) itbasisCoreOption.Option[exec.Cmd] {
 	return &_optionEnv{env: env}
 }
-func WithEnvAsMap(env map[string]string) itbasisMiddlewareOption.Option[exec.Cmd] {
-	return &_optionEnv{env: os.EnvMapToSlices(env)}
+func WithEnvAsMap(env map[string]string) itbasisCoreOption.Option[exec.Cmd] {
+	return &_optionEnv{env: itbasisCoreOs.EnvMapToSlices(env)}
 }
-func WithRestoreEnv(env []string) itbasisMiddlewareOption.RestoreOption[exec.Cmd] {
+func WithRestoreEnv(env []string) itbasisCoreOption.RestoreOption[exec.Cmd] {
 	return &_optionEnv{env: env, restore: true}
 }
 
@@ -26,7 +26,7 @@ type _optionEnv struct {
 	prev []string
 }
 
-func (r *_optionEnv) Key() itbasisMiddlewareOption.Key { return _optionEnvKey }
+func (r *_optionEnv) Key() itbasisCoreOption.Key { return _optionEnvKey }
 func (r *_optionEnv) Apply(cmd *exec.Cmd) error {
 	cmd.Env = r.env
 

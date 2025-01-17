@@ -6,7 +6,7 @@ import (
 	"os"
 	"path/filepath"
 
-	itbasisMiddlewareLog "github.com/itbasis/tools/middleware/log"
+	itbasisCoreLog "github.com/itbasis/tools/core/log"
 )
 
 const (
@@ -44,7 +44,7 @@ func ExecutableDir() string {
 func BeARegularFile(path string) bool {
 	fileInfo, err := os.Stat(path)
 	if err != nil {
-		slog.Debug("fail get file info", itbasisMiddlewareLog.SlogAttrError(err))
+		slog.Debug("fail get file info", itbasisCoreLog.SlogAttrError(err))
 
 		return false
 	}

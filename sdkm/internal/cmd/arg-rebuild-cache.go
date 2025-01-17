@@ -1,7 +1,7 @@
 package cmd
 
 import (
-	cmd2 "github.com/itbasis/tools/middleware/cmd"
+	itbasisCoreCmd "github.com/itbasis/tools/core/cmd"
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
 )
@@ -16,7 +16,7 @@ func InitFlagRebuildCache(flags *pflag.FlagSet) {
 
 func IsFlagRebuildCache(cmd *cobra.Command) bool {
 	flag, err := cmd.Flags().GetBool(_flagRebuildCache)
-	cmd2.RequireNoError(cmd, err)
+	itbasisCoreCmd.RequireNoError(cmd, err)
 
 	return flag
 }

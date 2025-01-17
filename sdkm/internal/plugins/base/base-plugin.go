@@ -4,7 +4,7 @@ import (
 	"os"
 	"path"
 
-	itbasisMiddlewareOption "github.com/itbasis/tools/middleware/option"
+	itbasisCoreOption "github.com/itbasis/tools/core/option"
 	sdkmPlugin "github.com/itbasis/tools/sdkm/pkg/plugin"
 )
 
@@ -12,11 +12,11 @@ type basePlugin struct {
 	sdkDir string
 }
 
-func NewBasePlugin(opts ...itbasisMiddlewareOption.Option[basePlugin]) (sdkmPlugin.BasePlugin, error) {
+func NewBasePlugin(opts ...itbasisCoreOption.Option[basePlugin]) (sdkmPlugin.BasePlugin, error) {
 	cmp := &basePlugin{}
 
-	if err := itbasisMiddlewareOption.ApplyOptions(
-		cmp, opts, map[itbasisMiddlewareOption.Key]itbasisMiddlewareOption.LazyOptionFunc[basePlugin]{
+	if err := itbasisCoreOption.ApplyOptions(
+		cmp, opts, map[itbasisCoreOption.Key]itbasisCoreOption.LazyOptionFunc[basePlugin]{
 			_optionSdkDirKey: WithDefaultSdkDir,
 		},
 	); err != nil {

@@ -3,7 +3,7 @@ package golang
 import (
 	"path"
 
-	itbasisMiddlewareOs "github.com/itbasis/tools/middleware/os"
+	itbasisCoreOs "github.com/itbasis/tools/core/os"
 	sdkmCache "github.com/itbasis/tools/sdkm/internal/cache"
 	cacheFileStorage "github.com/itbasis/tools/sdkm/internal/cache/storage/file-storage"
 	sdkmCmd "github.com/itbasis/tools/sdkm/internal/cmd"
@@ -24,7 +24,7 @@ func CmdExtPlugin(cmd *cobra.Command) {
 
 func (receiver *goPlugin) InitProcessCommandFlags(cmd *cobra.Command) {
 	if receiver.goCacheRootDir = sdkmCmd.GetCacheRootDir(cmd); receiver.goCacheRootDir == "" {
-		receiver.goCacheRootDir = path.Join(itbasisMiddlewareOs.UserHomeDir(), ".cache", string(pluginGoConsts.PluginID))
+		receiver.goCacheRootDir = path.Join(itbasisCoreOs.UserHomeDir(), ".cache", string(pluginGoConsts.PluginID))
 	}
 
 	receiver.sdkVersions = receiver.sdkVersions.WithCache(

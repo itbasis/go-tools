@@ -10,7 +10,7 @@ import (
 	"strings"
 	"sync"
 
-	itbasisMiddlewareLog "github.com/itbasis/tools/middleware/log"
+	itbasisCoreLog "github.com/itbasis/tools/core/log"
 	sdkmCache "github.com/itbasis/tools/sdkm/internal/cache"
 	sdkmHttp "github.com/itbasis/tools/sdkm/internal/http"
 	sdkmSDKVersion "github.com/itbasis/tools/sdkm/pkg/sdk-version"
@@ -66,7 +66,7 @@ func (receiver *versions) getContent(url string) (string, error) {
 
 	defer func() {
 		if err := resp.Body.Close(); err != nil {
-			slog.Warn("AttrError closing body after receiving content", itbasisMiddlewareLog.SlogAttrError(err))
+			slog.Warn("AttrError closing body after receiving content", itbasisCoreLog.SlogAttrError(err))
 		}
 	}()
 

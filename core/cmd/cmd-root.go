@@ -1,17 +1,17 @@
 package cmd
 
 import (
-	itbasisMiddlewareOption "github.com/itbasis/tools/middleware/option"
+	itbasisCoreOption "github.com/itbasis/tools/core/option"
 
 	"github.com/spf13/cobra"
 )
 
-func InitDefaultCmdRoot(shortName string, opts ...itbasisMiddlewareOption.Option[cobra.Command]) (*cobra.Command, error) {
+func InitDefaultCmdRoot(shortName string, opts ...itbasisCoreOption.Option[cobra.Command]) (*cobra.Command, error) {
 	var cmd = &cobra.Command{Short: shortName}
 
-	if err := itbasisMiddlewareOption.ApplyOptions(
+	if err := itbasisCoreOption.ApplyOptions(
 		cmd,
-		opts, map[itbasisMiddlewareOption.Key]itbasisMiddlewareOption.LazyOptionFunc[cobra.Command]{
+		opts, map[itbasisCoreOption.Key]itbasisCoreOption.LazyOptionFunc[cobra.Command]{
 			_optionVersionKey:   WithDefaultVersion,
 			_optionOutKey:       WithDefaultOut,
 			_optionErrKey:       WithDefaultErr,

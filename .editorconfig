@@ -20,9 +20,6 @@ ij_json_keep_indents_on_empty_lines = false
 ij_json_keep_line_breaks = false
 ij_json_wrap_long_lines = false
 
-[{.env,.env.*}]
-ij_wrap_on_typing = false
-
 [*.proto]
 ij_protobuf_blank_lines_after_imports = 1
 ij_protobuf_blank_lines_after_package = 1
@@ -67,3 +64,4 @@ max_line_length = unset
 
 [{LICENSE,*.adoc}]
 max_line_length = unset
+ij_wrap_on_typing = false

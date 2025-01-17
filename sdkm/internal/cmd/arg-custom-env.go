@@ -4,7 +4,7 @@ import (
 	"log/slog"
 	"os"
 
-	itbasisMiddlewareCmd "github.com/itbasis/tools/middleware/cmd"
+	itbasisCoreCmd "github.com/itbasis/tools/core/cmd"
 	sdkmLog "github.com/itbasis/tools/sdkm/internal/log"
 	sdkmSdk "github.com/itbasis/tools/sdkm/internal/sdk"
 	"github.com/spf13/cobra"
@@ -44,7 +44,7 @@ func _getRootDir(cmd *cobra.Command, flag, envName string) string {
 	)
 
 	rootDir, err = cmd.Flags().GetString(flag)
-	itbasisMiddlewareCmd.RequireNoError(cmd, err)
+	itbasisCoreCmd.RequireNoError(cmd, err)
 
 	if rootDir != "" {
 		slog.Debug("using from a command line argument", sdkmLog.SlogAttrRootDir(rootDir))

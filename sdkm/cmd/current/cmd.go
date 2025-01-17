@@ -1,8 +1,8 @@
 package current
 
 import (
-	itbasisMiddlewareCmd "github.com/itbasis/tools/middleware/cmd"
-	itbasisMiddlewareOs "github.com/itbasis/tools/middleware/os"
+	itbasisCoreCmd "github.com/itbasis/tools/core/cmd"
+	itbasisCoreOs "github.com/itbasis/tools/core/os"
 	sdkmCmd "github.com/itbasis/tools/sdkm/internal/cmd"
 	sdkmPlugins "github.com/itbasis/tools/sdkm/plugins"
 	"github.com/spf13/cobra"
@@ -30,11 +30,11 @@ func _run(cmd *cobra.Command, _ []string) {
 	var (
 		sdkmPlugin       = sdkmPlugins.GetPluginByID(cmd)
 		flagRebuildCache = sdkmCmd.IsFlagRebuildCache(cmd)
-		sdkVersion, err  = sdkmPlugin.Current(cmd.Context(), flagRebuildCache, itbasisMiddlewareOs.Pwd())
+		sdkVersion, err  = sdkmPlugin.Current(cmd.Context(), flagRebuildCache, itbasisCoreOs.Pwd())
 	)
 
 	if err != nil {
-		itbasisMiddlewareCmd.Fatal(cmd, err)
+		itbasisCoreCmd.Fatal(cmd, err)
 	}
 
 	cmd.Println(sdkVersion.PrintWithOptions(false, true, true))

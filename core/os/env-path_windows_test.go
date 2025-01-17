@@ -3,14 +3,14 @@
 package os_test
 
 import (
-	sdkmOs "github.com/itbasis/tools/middleware/os"
+	itbasisCoreOs "github.com/itbasis/tools/core/os"
 	"github.com/onsi/ginkgo/v2"
 	"github.com/onsi/gomega"
 )
 
 var _ = ginkgo.DescribeTable(
 	"CleanPath", func(path string, cleanPaths []string, wantPath string) {
-		gomega.Expect(sdkmOs.CleanPath(path, cleanPaths...)).
+		gomega.Expect(itbasisCoreOs.CleanPath(path, cleanPaths...)).
 			To(gomega.Equal(wantPath))
 	},
 	ginkgo.Entry(nil, "a;b;c", []string{}, "a;b;c"),
@@ -23,7 +23,7 @@ var _ = ginkgo.DescribeTable(
 
 var _ = ginkgo.DescribeTable(
 	"AddBeforePath", func(path string, addPaths []string, wantPath string) {
-		gomega.Expect(sdkmOs.AddBeforePath(path, addPaths...)).
+		gomega.Expect(itbasisCoreOs.AddBeforePath(path, addPaths...)).
 			To(gomega.Equal(wantPath))
 	},
 	ginkgo.Entry(nil, "a;b;c", []string{}, "a;b;c"),

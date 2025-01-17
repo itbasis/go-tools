@@ -8,10 +8,10 @@ import (
 
 	builderCmd "github.com/itbasis/tools/builder/internal/cmd"
 	itbasisBuilderExec "github.com/itbasis/tools/builder/internal/exec"
-	itbasisMiddlewareCmd "github.com/itbasis/tools/middleware/cmd"
-	itbasisMiddlewareExec "github.com/itbasis/tools/middleware/exec"
-	itbasisMiddlewareLog "github.com/itbasis/tools/middleware/log"
-	itbasisMiddlewareVersion "github.com/itbasis/tools/middleware/version"
+	itbasisCoreCmd "github.com/itbasis/tools/core/cmd"
+	itbasisCoreExec "github.com/itbasis/tools/core/exec"
+	itbasisCoreLog "github.com/itbasis/tools/core/log"
+	itbasisCoreVersion "github.com/itbasis/tools/core/version"
 	"github.com/spf13/cobra"
 )
 
@@ -19,15 +19,15 @@ var (
 	_flagOs      string
 	_flagArch    string
 	_flagOutput  string
-	_flagVersion = itbasisMiddlewareVersion.Unversioned
+	_flagVersion = itbasisCoreVersion.Unversioned
 )
 
 func NewBuildCommand() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:    itbasisMiddlewareCmd.BuildUse("build", builderCmd.UseArgPath),
+		Use:    itbasisCoreCmd.BuildUse("build", builderCmd.UseArgPath),
 		Short:  "Building an application for the current platform",
 		Args:   cobra.MatchAll(cobra.OnlyValidArgs, cobra.MaximumNArgs(1)),
-		PreRun: itbasisMiddlewareCmd.LogCommand,
+		PreRun: itbasisCoreCmd.LogCommand,
 		Run:    _run,
 	}
 
@@ -41,7 +41,7 @@ func NewBuildCommand() *cobra.Command {
 
 func _run(cmd *cobra.Command, args []string) {
 	var (
-		versionPkgPath = reflect.TypeFor[itbasisMiddlewareVersion.Version]().PkgPath() + ".version"
+		versionPkgPath = reflect.TypeFor[itbasisCoreVersion.Version]().PkgPath() + ".version"
 		buildArgs      = []string{
 			`-trimpath`,
 			`-pgo`, `auto`,
@@ -53,19 +53,19 @@ func _run(cmd *cobra.Command, args []string) {
 	if _flagOutput != "" {
 		buildArgs = append(buildArgs, "-o", _flagOutput)
 
-		itbasisMiddlewareCmd.RequireNoError(cmd, os.MkdirAll(filepath.Dir(_flagOutput), os.ModePerm))
+		itbasisCoreCmd.RequireNoError(cmd, os.MkdirAll(filepath.Dir(_flagOutput), os.ModePerm))
 	}
 
 	buildArgs = append(buildArgs, args[0])
 
-	slog.Debug("build with arguments", itbasisMiddlewareLog.SlogAttrSliceWithSeparator("buildArgs", " ", buildArgs))
+	slog.Debug("build with arguments", itbasisCoreLog.SlogAttrSliceWithSeparator("buildArgs", " ", buildArgs))
 
 	execGoBuild, errGoBuild := itbasisBuilderExec.NewGoBuildWithCobra(cmd)
-	itbasisMiddlewareCmd.RequireNoError(cmd, errGoBuild)
-	itbasisMiddlewareCmd.RequireNoError(
+	itbasisCoreCmd.RequireNoError(cmd, errGoBuild)
+	itbasisCoreCmd.RequireNoError(
 		cmd,
 		execGoBuild.Execute(
-			itbasisMiddlewareExec.WithRestoreArgsIncludePrevious(itbasisMiddlewareExec.IncludePrevArgsBefore, buildArgs...),
+			itbasisCoreExec.WithRestoreArgsIncludePrevious(itbasisCoreExec.IncludePrevArgsBefore, buildArgs...),
 		),
 	)
 }

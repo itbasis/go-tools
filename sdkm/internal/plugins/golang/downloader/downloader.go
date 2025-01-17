@@ -10,7 +10,7 @@ import (
 	"path/filepath"
 	"time"
 
-	itbasisMiddlewareOs "github.com/itbasis/tools/middleware/os"
+	itbasisCoreOs "github.com/itbasis/tools/core/os"
 	sdkmHttp "github.com/itbasis/tools/sdkm/internal/http"
 	sdkmPlugin "github.com/itbasis/tools/sdkm/pkg/plugin"
 	"github.com/pkg/errors"
@@ -44,7 +44,7 @@ func (receiver *Downloader) Download(version string) (string, error) {
 	url := receiver.URLForDownload(version)
 	outFilePath := filepath.Join(receiver.basePlugin.GetSDKDir(), ".download", filepath.Base(url))
 
-	if err := os.MkdirAll(filepath.Dir(outFilePath), itbasisMiddlewareOs.DefaultDirMode); err != nil {
+	if err := os.MkdirAll(filepath.Dir(outFilePath), itbasisCoreOs.DefaultDirMode); err != nil {
 		return "", errors.Wrapf(sdkmPlugin.ErrDownloadFailed, "fail make directories: %s", err.Error())
 	}
 
@@ -90,7 +90,7 @@ func (receiver *Downloader) Unpack(archiveFilePath, targetDir string) error {
 	slog.Debug(fmt.Sprintf("unpacking '%s' to '%s'", archiveFilePath, targetDir))
 
 	var tmpDirPath = path.Clean(filepath.FromSlash(targetDir + ".tmp"))
-	if err := os.MkdirAll(tmpDirPath, itbasisMiddlewareOs.DefaultDirMode); err != nil {
+	if err := os.MkdirAll(tmpDirPath, itbasisCoreOs.DefaultDirMode); err != nil {
 		return errors.Wrapf(sdkmPlugin.ErrDownloadFailed, "fail create temporary dir: %s", err)
 	}
 
