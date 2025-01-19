@@ -4,6 +4,7 @@ import (
 	"log/slog"
 	"os/exec"
 
+	"github.com/itbasis/tools/core/log"
 	itbasisCoreOption "github.com/itbasis/tools/core/option"
 )
 
@@ -38,7 +39,7 @@ func (ge *Executable) Execute(opts ...itbasisCoreOption.RestoreOption[exec.Cmd])
 
 	if applyErr := itbasisCoreOption.ApplyRestoreOptions(
 		cmd, opts, func() {
-			slog.Info("execute command", slog.String("command", cmd.String()))
+			slog.Debug("execute external program", log.SlogAttrCommand(cmd.Path, cmd.Args[1:]...))
 
 			err = cmd.Run()
 		},

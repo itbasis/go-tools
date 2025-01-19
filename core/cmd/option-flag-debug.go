@@ -9,17 +9,17 @@ import (
 	"github.com/spf13/pflag"
 )
 
-const (
-	FlagDebug = "debug"
+const _optionDebugFlagKey = "option-debug-flag"
 
-	_optionDebugFlagKey = "option-debug-flag"
-)
+var _flagDebug = "debug"
 
 func WithDefaultFlagDebug() itbasisCoreOption.Option[cobra.Command] {
-	return WithFlagDebug(true)
+	return WithFlagDebug(_flagDebug, true)
 }
 
-func WithFlagDebug(persistent bool) itbasisCoreOption.Option[cobra.Command] {
+func WithFlagDebug(name string, persistent bool) itbasisCoreOption.Option[cobra.Command] {
+	_flagDebug = name
+
 	return &_optionDebugFlag{persistent: persistent}
 }
 
@@ -40,7 +40,7 @@ func (r *_optionDebugFlag) Apply(cmd *cobra.Command) error {
 		flags = cmd.Flags()
 	}
 
-	flags.BoolVar(&r.flag, FlagDebug, false, "debug mode")
+	flags.BoolVar(&r.flag, _flagDebug, false, "debug mode")
 
 	cmd.PersistentPreRun = MultipleActions(r.setRootLogLevel, cmd.PersistentPreRun)
 

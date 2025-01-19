@@ -8,9 +8,5 @@ import (
 )
 
 func LogCommand(cmd *cobra.Command, args []string) {
-	slog.Debug(
-		"execute command",
-		slog.String("command", cmd.Name()),
-		itbasisCoreLog.SlogAttrSliceWithSeparator("args", " ", args),
-	)
+	slog.Debug("execute command", itbasisCoreLog.SlogAttrCommand(cmd.Name(), args...))
 }
