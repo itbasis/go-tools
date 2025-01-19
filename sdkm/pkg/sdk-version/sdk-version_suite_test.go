@@ -3,7 +3,7 @@ package sdkversion_test
 import (
 	"testing"
 
-	"github.com/itbasis/go-test-utils/v4/ginkgo"
+	"github.com/itbasis/go-test-utils/v5/ginkgo"
 )
 
 func TestSDKVersionSuite(t *testing.T) {

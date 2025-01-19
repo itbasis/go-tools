@@ -11,15 +11,11 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var (
-	CmdFlagRebuildCache bool
-)
-
 func CmdExtPlugin(cmd *cobra.Command) {
-	sdkmCmd.InitFlagCacheRootDir(cmd.Flags())
+	flags := cmd.Flags()
 
-	cmd.Flags().Bool("rebuild-cache", false, "rebuild cache ")
-
+	sdkmCmd.InitFlagCacheRootDir(flags)
+	sdkmCmd.InitFlagRebuildCache(flags)
 }
 
 func (receiver *goPlugin) InitProcessCommandFlags(cmd *cobra.Command) {

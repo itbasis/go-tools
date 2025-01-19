@@ -29,7 +29,7 @@ type _optionDebugFlag struct {
 	flag bool
 }
 
-func (_ *_optionDebugFlag) Key() itbasisCoreOption.Key { return _optionDebugFlagKey }
+func (r *_optionDebugFlag) Key() itbasisCoreOption.Key { return _optionDebugFlagKey }
 
 func (r *_optionDebugFlag) Apply(cmd *cobra.Command) error {
 	var flags *pflag.FlagSet

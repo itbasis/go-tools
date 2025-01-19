@@ -13,11 +13,11 @@ func SlogAttrSliceWithSeparator[S ~[]T, T any](key, separator string, value S) s
 		return slog.String(key, "")
 	}
 
-	var s = slog.AnyValue(value[0]).String()
+	var valueAsString = slog.AnyValue(value[0]).String()
 
 	for _, v := range value[1:] {
-		s = s + separator + slog.AnyValue(v).String()
+		valueAsString = valueAsString + separator + slog.AnyValue(v).String()
 	}
 
-	return slog.String(key, s)
+	return slog.String(key, valueAsString)
 }

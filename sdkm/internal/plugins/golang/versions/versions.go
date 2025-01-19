@@ -127,6 +127,7 @@ func (receiver *versions) cleanContent() {
 	receiver.contentReleases = ""
 }
 
+//nolint:unparam // the argument "stable" must be left
 func (receiver *versions) updateCache(ctx context.Context, stable, unstable, archived bool) {
 	if stable {
 		receiver.parseVersions(ctx, sdkmSDKVersion.TypeStable, receiver.reStableGroupVersions, false)
