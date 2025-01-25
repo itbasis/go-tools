@@ -6,12 +6,16 @@ import (
 	"os/exec"
 
 	itbasisCoreOption "github.com/itbasis/tools/core/option"
-	"github.com/spf13/cobra"
 )
 
 const _optionOutKey = "option-out"
 
-func WithCobraOut(cmd *cobra.Command) itbasisCoreOption.Option[exec.Cmd] {
+type CobraOut interface {
+	OutOrStdout() io.Writer
+	ErrOrStderr() io.Writer
+}
+
+func WithCobraOut(cmd CobraOut) itbasisCoreOption.Option[exec.Cmd] {
 	return WithCustomOut(cmd.OutOrStdout(), cmd.ErrOrStderr())
 }
 

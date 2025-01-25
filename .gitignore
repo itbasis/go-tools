@@ -1,6 +1,10 @@
 .DS_Store
 tmp.*
 
+# Env
+.env
+.env.*
+
 # Go
 /bin/
 /build/

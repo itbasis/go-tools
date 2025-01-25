@@ -10,13 +10,14 @@ type App struct {
 }
 
 func NewApp(cmdRoot *cobra.Command) *App {
-	itbasisCoreLog.InitDefaultLoggerWIthConsole(cmdRoot.OutOrStdout())
+	itbasisCoreLog.InitDefaultLoggerWithConsole(cmdRoot.OutOrStdout())
 
 	return &App{
 		cmdRoot: cmdRoot,
 	}
 }
 
+// Run If no arguments were passed, "os.Args" will be used.
 func (app *App) Run(args ...string) {
 	if len(args) > 0 {
 		app.cmdRoot.SetArgs(args)

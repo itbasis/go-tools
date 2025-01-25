@@ -5,58 +5,57 @@ import (
 
 	itbasisCoreExec "github.com/itbasis/tools/core/exec"
 	itbasisCoreOption "github.com/itbasis/tools/core/option"
-	"github.com/spf13/cobra"
 )
 
 func NewGoExecutable(opts ...itbasisCoreOption.Option[exec.Cmd]) (*itbasisCoreExec.Executable, error) {
 	return itbasisCoreExec.NewExecutable("go", opts...) //nolint:wrapcheck // TODO
 }
 
-func NewGoInstallWithCobra(cmd *cobra.Command) (*itbasisCoreExec.Executable, error) {
+func NewGoInstallWithCobra(cobraOut itbasisCoreExec.CobraOut) (*itbasisCoreExec.Executable, error) {
 	return NewGoExecutable(
 		itbasisCoreExec.WithArgs("install"),
-		itbasisCoreExec.WithCobraOut(cmd),
+		itbasisCoreExec.WithCobraOut(cobraOut),
 	)
 }
 
-func NewGoGetWithCobra(cmd *cobra.Command) (*itbasisCoreExec.Executable, error) {
+func NewGoGetWithCobra(cobraOut itbasisCoreExec.CobraOut) (*itbasisCoreExec.Executable, error) {
 	return NewGoExecutable(
 		itbasisCoreExec.WithArgs("get"),
-		itbasisCoreExec.WithCobraOut(cmd),
+		itbasisCoreExec.WithCobraOut(cobraOut),
 	)
 }
 
-func NewGoModWithCobra(cmd *cobra.Command) (*itbasisCoreExec.Executable, error) {
+func NewGoModWithCobra(cobraOut itbasisCoreExec.CobraOut) (*itbasisCoreExec.Executable, error) {
 	return NewGoExecutable(
 		itbasisCoreExec.WithArgs("mod"),
-		itbasisCoreExec.WithCobraOut(cmd),
+		itbasisCoreExec.WithCobraOut(cobraOut),
 	)
 }
 
-func NewGoToolWithCobra(cmd *cobra.Command) (*itbasisCoreExec.Executable, error) {
+func NewGoToolWithCobra(cobraOut itbasisCoreExec.CobraOut) (*itbasisCoreExec.Executable, error) {
 	return NewGoExecutable(
 		itbasisCoreExec.WithArgs("tool"),
-		itbasisCoreExec.WithCobraOut(cmd),
+		itbasisCoreExec.WithCobraOut(cobraOut),
 	)
 }
 
-func NewGoGenerateWithCobra(cmd *cobra.Command) (*itbasisCoreExec.Executable, error) {
+func NewGoGenerateWithCobra(cobraOut itbasisCoreExec.CobraOut) (*itbasisCoreExec.Executable, error) {
 	return NewGoExecutable(
 		itbasisCoreExec.WithArgs("generate"),
-		itbasisCoreExec.WithCobraOut(cmd),
+		itbasisCoreExec.WithCobraOut(cobraOut),
 	)
 }
 
-func NewGoBuildWithCobra(cmd *cobra.Command) (*itbasisCoreExec.Executable, error) {
+func NewGoBuildWithCobra(cobraOut itbasisCoreExec.CobraOut) (*itbasisCoreExec.Executable, error) {
 	return NewGoExecutable(
 		itbasisCoreExec.WithArgs("build"),
-		itbasisCoreExec.WithCobraOut(cmd),
+		itbasisCoreExec.WithCobraOut(cobraOut),
 	)
 }
 
-func NewGoRunWithCobra(cmd *cobra.Command) (*itbasisCoreExec.Executable, error) {
+func NewGoRunWithCobra(cobraOut itbasisCoreExec.CobraOut) (*itbasisCoreExec.Executable, error) {
 	return NewGoExecutable(
 		itbasisCoreExec.WithArgs("run"),
-		itbasisCoreExec.WithCobraOut(cmd),
+		itbasisCoreExec.WithCobraOut(cobraOut),
 	)
 }

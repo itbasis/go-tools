@@ -1,38 +1,65 @@
 package dependencies
 
 import (
-	"fmt"
+	_ "embed"
 	"log/slog"
 
-	itbasisBuilderExec "github.com/itbasis/tools/builder/internal/exec"
+	builderInstaller "github.com/itbasis/tools/builder/internal/installer"
 	itbasisCoreCmd "github.com/itbasis/tools/core/cmd"
-	itbasisCoreExec "github.com/itbasis/tools/core/exec"
 	"github.com/spf13/cobra"
 )
 
+//go:embed dependencies.json
+var _defaultDependencies []byte
+
+var (
+	_flagDependenciesFile string
+	_flagShow             bool
+)
+
 func NewDependenciesCommand() *cobra.Command {
-	return &cobra.Command{
+	cmd := &cobra.Command{
 		Use:    itbasisCoreCmd.BuildUse("dependencies"),
 		Short:  "Install dependencies",
 		Args:   cobra.NoArgs,
 		PreRun: itbasisCoreCmd.LogCommand,
 		Run:    _run,
 	}
+
+	flags := cmd.Flags()
+
+	flags.StringVarP(
+		&_flagDependenciesFile,
+		"dependencies-file",
+		"f",
+		"",
+		"dependencies file path. If not specified, the embedded list will be used",
+	)
+	flags.BoolVar(&_flagShow, "show-default", false, "show default dependencies for install")
+
+	return cmd
 }
 
 func _run(cmd *cobra.Command, _ []string) {
-	var execGoInstall, err = itbasisBuilderExec.NewGoInstallWithCobra(cmd)
+	if _flagShow {
+		_, err := cmd.OutOrStdout().Write(_defaultDependencies)
+		itbasisCoreCmd.RequireNoError(cmd, err)
 
-	itbasisCoreCmd.RequireNoError(cmd, err)
-
-	for _, dependency := range _dependencies.GoInstall {
-		slog.Info(fmt.Sprintf("Installing dependency: %s", dependency))
-
-		itbasisCoreCmd.RequireNoError(
-			cmd, execGoInstall.Execute(
-				itbasisCoreExec.WithRerun(),
-				itbasisCoreExec.WithRestoreArgsIncludePrevious(itbasisCoreExec.IncludePrevArgsBefore, dependency.ToString()),
-			),
-		)
+		return
 	}
+
+	var optionDependencies builderInstaller.Option
+
+	if _flagDependenciesFile != "" {
+		slog.Info("using dependencies file: " + _flagDependenciesFile)
+
+		optionDependencies = builderInstaller.WithFile(_flagDependenciesFile)
+	} else {
+		optionDependencies = builderInstaller.WithJsonData(_defaultDependencies)
+	}
+
+	installer, errInstaller := builderInstaller.NewInstaller(cmd, optionDependencies)
+	itbasisCoreCmd.RequireNoError(cmd, errInstaller)
+
+	installer.Install()
 }

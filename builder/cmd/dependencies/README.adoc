@@ -2,12 +2,26 @@
 
 Установка необходимых для builder утилит в Go-окружение - устанавливаются только те, которые работают "за пределами" билдера как самостоятельные утилиты.
 
-Список устанавливаемых зависимостей:
+=== Аргумент `--dependencies-file` или `-f`
+Позволяет указать собственный файл `dependencies.json`. Пример файла можно получить командой xref:Аргумент `--show-default`[`--show-default`]
 
-* link:https://github.com/golangci/golangci-lint[golangci-lint]
-* link:https://github.com/uber-go/mock[mockgen]
-* link:https://github.com/editorconfig-checker/editorconfig-checker[editorconfig-checker]
+[reftext="`--show-default`"]
+=== Аргумент `--show-default`
+Выводит список устанавливаемых зависимостей в консоль: link:dependencies.json[]
 
-Список зависимостей, "упакованные" в builder:
+=== Доступные типы установок
+
+
+|===
+|Тип |Описание
+
+|`go_install`
+|Использует команду `go install` для установки зависимости
+
+|===
+
+
+=== Список зависимостей, "упакованные" в builder:
+Некоторые зависимости не требуют отдельной установки, а уже добавлены внутрь builder утилиты
 
 * link:https://onsi.github.io/ginkgo/[Ginkgo]

@@ -1,15 +1,15 @@
 {
 	"go_install": {
 		"golangci-lint": {
-			"package": "github.com/golangci/golangci-lint/cmd/golangci-lint",
+			"path": "github.com/golangci/golangci-lint/cmd/golangci-lint",
 			"version": "latest"
 		},
 		"mockgen": {
-			"package": "go.uber.org/mock/mockgen",
+			"path": "go.uber.org/mock/mockgen",
 			"version": "latest"
 		},
 		"editorconfig-checker": {
-			"package": "github.com/editorconfig-checker/editorconfig-checker/v3/cmd/editorconfig-checker",
+			"path": "github.com/editorconfig-checker/editorconfig-checker/v3/cmd/editorconfig-checker",
 			"version": "latest"
 		}
 	}

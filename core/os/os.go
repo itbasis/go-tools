@@ -2,11 +2,8 @@ package os
 
 import (
 	"log"
-	"log/slog"
 	"os"
 	"path/filepath"
-
-	itbasisCoreLog "github.com/itbasis/tools/core/log"
 )
 
 const (
@@ -39,15 +36,4 @@ func ExecutableDir() string {
 	}
 
 	return filepath.Dir(executable)
-}
-
-func BeARegularFile(path string) bool {
-	fileInfo, err := os.Stat(path)
-	if err != nil {
-		slog.Debug("fail get file info", itbasisCoreLog.SlogAttrError(err))
-
-		return false
-	}
-
-	return fileInfo.Mode().IsRegular()
 }

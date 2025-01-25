@@ -11,7 +11,7 @@ var (
 	logLevel = &slog.LevelVar{}
 )
 
-func InitDefaultLoggerWIthConsole(logOutput io.Writer) {
+func InitDefaultLoggerWithConsole(logOutput io.Writer) {
 	slog.SetDefault(
 		slog.New(
 			prettylog.New(
