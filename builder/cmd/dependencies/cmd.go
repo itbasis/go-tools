@@ -23,7 +23,7 @@ func NewDependenciesCommand() *cobra.Command {
 		Short:  "Install dependencies",
 		Args:   cobra.NoArgs,
 		PreRun: itbasisCoreCmd.LogCommand,
-		Run:    _run,
+		RunE:   _runE,
 	}
 
 	flags := cmd.Flags()
@@ -40,12 +40,12 @@ func NewDependenciesCommand() *cobra.Command {
 	return cmd
 }
 
-func _run(cmd *cobra.Command, _ []string) {
+func _runE(cmd *cobra.Command, _ []string) error {
 	if _flagShow {
 		_, err := cmd.OutOrStdout().Write(_defaultDependencies)
-		itbasisCoreCmd.RequireNoError(cmd, err)
-
-		return
+		if err != nil {
+			return err
+		}
 	}
 
 	var optionDependencies builderInstaller.Option
@@ -61,5 +61,5 @@ func _run(cmd *cobra.Command, _ []string) {
 	installer, errInstaller := builderInstaller.NewInstaller(cmd, optionDependencies)
 	itbasisCoreCmd.RequireNoError(cmd, errInstaller)
 
-	installer.Install()
+	return installer.Install()
 }

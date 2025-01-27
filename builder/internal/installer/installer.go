@@ -24,12 +24,12 @@ func NewInstaller(cobraOut itbasisCoreExec.CobraOut, opts ...Option) (*Installer
 }
 
 func (r *Installer) Install() error {
-	// if err := r.installGo(); err != nil {
-	// 	return err
-	// }
-	if err := r.installGitHub(); err != nil {
+	if err := r.installGo(); err != nil {
 		return err
 	}
+	// if err := r.installGitHub(); err != nil {
+	// 	return err
+	// }
 
 	return nil
 }

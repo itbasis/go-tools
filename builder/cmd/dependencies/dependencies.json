@@ -1,5 +1,9 @@
 {
 	"go_install": {
+		"golangci-lint": {
+			"path": "github.com/golangci/golangci-lint/cmd/golangci-lint",
+			"version": "latest"
+		},
 		"mockgen": {
 			"path": "go.uber.org/mock/mockgen",
 			"version": "latest"
