@@ -4,7 +4,7 @@ import (
 	"context"
 	"time"
 
-	itbasisMiddlewareAuthModel "github.com/itbasis/tools/middleware/auth/model"
+	itbasisMiddlewareAuthModel "github.com/itbasis/go-tools/middleware/auth/model"
 )
 
 func (receiver *_jwtToken) CreateAccessToken(

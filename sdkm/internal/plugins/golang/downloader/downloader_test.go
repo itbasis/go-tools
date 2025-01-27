@@ -1,9 +1,9 @@
 package downloader_test
 
 import (
-	pluginGoConsts "github.com/itbasis/tools/sdkm/internal/plugins/golang/consts"
-	"github.com/itbasis/tools/sdkm/internal/plugins/golang/downloader"
-	sdkmPlugin "github.com/itbasis/tools/sdkm/pkg/plugin"
+	pluginGoConsts "github.com/itbasis/go-tools/sdkm/internal/plugins/golang/consts"
+	"github.com/itbasis/go-tools/sdkm/internal/plugins/golang/downloader"
+	sdkmPlugin "github.com/itbasis/go-tools/sdkm/pkg/plugin"
 	"github.com/onsi/ginkgo/v2"
 	"github.com/onsi/gomega"
 	"go.uber.org/mock/gomock"

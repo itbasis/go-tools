@@ -3,7 +3,7 @@ package sdk
 import (
 	"path"
 
-	itbasisCoreOs "github.com/itbasis/tools/core/os"
+	itbasisCoreOs "github.com/itbasis/go-tools/core/os"
 )
 
 func GetDefaultSdkRoot() string {

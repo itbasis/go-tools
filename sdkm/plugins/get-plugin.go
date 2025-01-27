@@ -3,10 +3,10 @@ package plugins
 import (
 	"log/slog"
 
-	itbasisCoreCmd "github.com/itbasis/tools/core/cmd"
-	sdkmCmd "github.com/itbasis/tools/sdkm/internal/cmd"
-	pluginBase "github.com/itbasis/tools/sdkm/internal/plugins/base"
-	sdkmPlugin "github.com/itbasis/tools/sdkm/pkg/plugin"
+	itbasisCoreCmd "github.com/itbasis/go-tools/core/cmd"
+	sdkmCmd "github.com/itbasis/go-tools/sdkm/internal/cmd"
+	pluginBase "github.com/itbasis/go-tools/sdkm/internal/plugins/base"
+	sdkmPlugin "github.com/itbasis/go-tools/sdkm/pkg/plugin"
 	"github.com/spf13/cobra"
 )
 

@@ -3,7 +3,7 @@ package main_test
 
 // tag::documentation[]
 import (
-	"github.com/itbasis/tools/builder/cmd"
+	"github.com/itbasis/go-tools/builder/cmd"
 )
 
 // If arguments were not passed, they are taken from the `os.Args`.

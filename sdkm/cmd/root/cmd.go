@@ -1,16 +1,16 @@
 package root
 
 import (
-	itbasisCoreCmd "github.com/itbasis/tools/core/cmd"
-	sdkmCmdCurrent "github.com/itbasis/tools/sdkm/cmd/current"
-	sdkmCmdEnv "github.com/itbasis/tools/sdkm/cmd/env"
-	sdkmCmdExec "github.com/itbasis/tools/sdkm/cmd/exec"
-	sdkmCmdInstall "github.com/itbasis/tools/sdkm/cmd/install"
-	sdkmCmdLatest "github.com/itbasis/tools/sdkm/cmd/latest"
-	sdkmCmdList "github.com/itbasis/tools/sdkm/cmd/list"
-	sdkmCmdPlugins "github.com/itbasis/tools/sdkm/cmd/plugins"
-	sdkmCmdReshim "github.com/itbasis/tools/sdkm/cmd/reshim"
-	sdkmCmd "github.com/itbasis/tools/sdkm/internal/cmd"
+	itbasisCoreCmd "github.com/itbasis/go-tools/core/cmd"
+	sdkmCmdCurrent "github.com/itbasis/go-tools/sdkm/cmd/current"
+	sdkmCmdEnv "github.com/itbasis/go-tools/sdkm/cmd/env"
+	sdkmCmdExec "github.com/itbasis/go-tools/sdkm/cmd/exec"
+	sdkmCmdInstall "github.com/itbasis/go-tools/sdkm/cmd/install"
+	sdkmCmdLatest "github.com/itbasis/go-tools/sdkm/cmd/latest"
+	sdkmCmdList "github.com/itbasis/go-tools/sdkm/cmd/list"
+	sdkmCmdPlugins "github.com/itbasis/go-tools/sdkm/cmd/plugins"
+	sdkmCmdReshim "github.com/itbasis/go-tools/sdkm/cmd/reshim"
+	sdkmCmd "github.com/itbasis/go-tools/sdkm/internal/cmd"
 	"github.com/spf13/cobra"
 )
 

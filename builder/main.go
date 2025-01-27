@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/itbasis/tools/builder/cmd"
+	"github.com/itbasis/go-tools/builder/cmd"
 )
 
 func main() {

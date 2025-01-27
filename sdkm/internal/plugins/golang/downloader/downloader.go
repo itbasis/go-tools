@@ -10,9 +10,9 @@ import (
 	"path/filepath"
 	"time"
 
-	itbasisCoreOs "github.com/itbasis/tools/core/os"
-	sdkmHttp "github.com/itbasis/tools/sdkm/internal/http"
-	sdkmPlugin "github.com/itbasis/tools/sdkm/pkg/plugin"
+	itbasisCoreOs "github.com/itbasis/go-tools/core/os"
+	sdkmHttp "github.com/itbasis/go-tools/sdkm/internal/http"
+	sdkmPlugin "github.com/itbasis/go-tools/sdkm/pkg/plugin"
 	"github.com/pkg/errors"
 	"golift.io/xtractr"
 )

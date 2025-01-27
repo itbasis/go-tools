@@ -14,7 +14,7 @@ import (
 	reflect "reflect"
 	time "time"
 
-	model "github.com/itbasis/tools/middleware/auth/model"
+	model "github.com/itbasis/go-tools/middleware/auth/model"
 	gomock "go.uber.org/mock/gomock"
 )
 

@@ -4,8 +4,8 @@ import (
 	"os"
 	"time"
 
-	itbasisCoreEnv "github.com/itbasis/tools/core/env"
-	itbasisMiddlewareAuthJwtToken "github.com/itbasis/tools/middleware/auth/jwt/token"
+	itbasisCoreEnv "github.com/itbasis/go-tools/core/env"
+	itbasisMiddlewareAuthJwtToken "github.com/itbasis/go-tools/middleware/auth/jwt/token"
 
 	"github.com/google/uuid"
 	"github.com/onsi/ginkgo/v2"

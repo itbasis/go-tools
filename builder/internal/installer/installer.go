@@ -1,25 +1,19 @@
 package installer
 
 import (
-	itbasisBuilderExec "github.com/itbasis/tools/builder/internal/exec"
-	itbasisCoreExec "github.com/itbasis/tools/core/exec"
-	itbasisCoreOption "github.com/itbasis/tools/core/option"
+	itbasisCoreExec "github.com/itbasis/go-tools/core/exec"
+	itbasisCoreOption "github.com/itbasis/go-tools/core/option"
 )
 
 type Installer struct {
 	dependencies Dependencies
 
-	goInstaller *itbasisCoreExec.Executable
+	cobraOut itbasisCoreExec.CobraOut
 }
 
 func NewInstaller(cobraOut itbasisCoreExec.CobraOut, opts ...Option) (*Installer, error) {
-	goInstaller, errGoInstaller := itbasisBuilderExec.NewGoInstallWithCobra(cobraOut)
-	if errGoInstaller != nil {
-		return nil, errGoInstaller
-	}
-
 	installer := &Installer{
-		goInstaller: goInstaller,
+		cobraOut: cobraOut,
 	}
 
 	if err := itbasisCoreOption.ApplyOptions(installer, opts, nil); err != nil {
@@ -29,6 +23,13 @@ func NewInstaller(cobraOut itbasisCoreExec.CobraOut, opts ...Option) (*Installer
 	return installer, nil
 }
 
-func (r *Installer) Install() {
-	r.installGo()
+func (r *Installer) Install() error {
+	// if err := r.installGo(); err != nil {
+	// 	return err
+	// }
+	if err := r.installGitHub(); err != nil {
+		return err
+	}
+
+	return nil
 }

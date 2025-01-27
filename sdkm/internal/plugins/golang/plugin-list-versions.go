@@ -4,7 +4,7 @@ import (
 	"context"
 	"strings"
 
-	sdkmSDKVersion "github.com/itbasis/tools/sdkm/pkg/sdk-version"
+	sdkmSDKVersion "github.com/itbasis/go-tools/sdkm/pkg/sdk-version"
 )
 
 func (receiver *goPlugin) ListAllVersions(ctx context.Context, rebuildCache bool) ([]sdkmSDKVersion.SDKVersion, error) {

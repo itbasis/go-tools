@@ -3,7 +3,7 @@ package cmd
 import (
 	"log/slog"
 
-	itbasisCoreLog "github.com/itbasis/tools/core/log"
+	itbasisCoreLog "github.com/itbasis/go-tools/core/log"
 	"github.com/spf13/cobra"
 )
 

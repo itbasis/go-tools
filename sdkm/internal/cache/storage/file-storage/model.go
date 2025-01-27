@@ -1,7 +1,7 @@
 package filestorage
 
 import (
-	itbasisSdkmSDKVersion "github.com/itbasis/tools/sdkm/pkg/sdk-version"
+	itbasisSdkmSDKVersion "github.com/itbasis/go-tools/sdkm/pkg/sdk-version"
 )
 
 type model struct {

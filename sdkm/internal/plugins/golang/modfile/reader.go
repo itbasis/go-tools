@@ -5,7 +5,7 @@ import (
 	"path"
 	"path/filepath"
 
-	itbasisCoreOs "github.com/itbasis/tools/core/os"
+	itbasisCoreOs "github.com/itbasis/go-tools/core/os"
 	"github.com/pkg/errors"
 	"golang.org/x/mod/modfile"
 )

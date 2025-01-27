@@ -11,10 +11,10 @@ import (
 	"time"
 
 	"github.com/itbasis/go-clock/v2"
-	itbasisCoreLog "github.com/itbasis/tools/core/log"
-	itbasisCoreOs "github.com/itbasis/tools/core/os"
-	sdkmPlugin "github.com/itbasis/tools/sdkm/pkg/plugin"
-	itbasisSdkmSDKVersion "github.com/itbasis/tools/sdkm/pkg/sdk-version"
+	itbasisCoreLog "github.com/itbasis/go-tools/core/log"
+	itbasisCoreOs "github.com/itbasis/go-tools/core/os"
+	sdkmPlugin "github.com/itbasis/go-tools/sdkm/pkg/plugin"
+	itbasisSdkmSDKVersion "github.com/itbasis/go-tools/sdkm/pkg/sdk-version"
 )
 
 const (

@@ -1,7 +1,7 @@
 package cmd
 
 import (
-	itbasisCoreCmd "github.com/itbasis/tools/core/cmd"
+	itbasisCoreCmd "github.com/itbasis/go-tools/core/cmd"
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
 )

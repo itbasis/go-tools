@@ -1,8 +1,8 @@
 package filestorage_test
 
 import (
-	filestorage "github.com/itbasis/tools/sdkm/internal/cache/storage/file-storage"
-	sdkmPlugin "github.com/itbasis/tools/sdkm/pkg/plugin"
+	filestorage "github.com/itbasis/go-tools/sdkm/internal/cache/storage/file-storage"
+	sdkmPlugin "github.com/itbasis/go-tools/sdkm/pkg/plugin"
 	"github.com/onsi/ginkgo/v2"
 	"github.com/onsi/gomega"
 )

@@ -5,8 +5,8 @@ import (
 	"log/slog"
 	"strings"
 
-	sdkmPlugin "github.com/itbasis/tools/sdkm/pkg/plugin"
-	sdkmSDKVersion "github.com/itbasis/tools/sdkm/pkg/sdk-version"
+	sdkmPlugin "github.com/itbasis/go-tools/sdkm/pkg/plugin"
+	sdkmSDKVersion "github.com/itbasis/go-tools/sdkm/pkg/sdk-version"
 	"github.com/pkg/errors"
 )
 

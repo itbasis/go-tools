@@ -4,7 +4,7 @@ import (
 	"log/slog"
 	"os"
 
-	itbasisCoreLog "github.com/itbasis/tools/core/log"
+	itbasisCoreLog "github.com/itbasis/go-tools/core/log"
 )
 
 func BeARegularFile(path string) bool {

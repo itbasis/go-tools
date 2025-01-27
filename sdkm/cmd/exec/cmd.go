@@ -1,10 +1,10 @@
 package exec
 
 import (
-	itbasisCoreCmd "github.com/itbasis/tools/core/cmd"
-	itbasisCoreOs "github.com/itbasis/tools/core/os"
-	sdkmCmd "github.com/itbasis/tools/sdkm/internal/cmd"
-	"github.com/itbasis/tools/sdkm/plugins"
+	itbasisCoreCmd "github.com/itbasis/go-tools/core/cmd"
+	itbasisCoreOs "github.com/itbasis/go-tools/core/os"
+	sdkmCmd "github.com/itbasis/go-tools/sdkm/internal/cmd"
+	"github.com/itbasis/go-tools/sdkm/plugins"
 	"github.com/spf13/cobra"
 )
 

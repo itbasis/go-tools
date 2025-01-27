@@ -3,11 +3,11 @@ package golang
 import (
 	"path"
 
-	itbasisCoreOs "github.com/itbasis/tools/core/os"
-	sdkmCache "github.com/itbasis/tools/sdkm/internal/cache"
-	cacheFileStorage "github.com/itbasis/tools/sdkm/internal/cache/storage/file-storage"
-	sdkmCmd "github.com/itbasis/tools/sdkm/internal/cmd"
-	pluginGoConsts "github.com/itbasis/tools/sdkm/internal/plugins/golang/consts"
+	itbasisCoreOs "github.com/itbasis/go-tools/core/os"
+	sdkmCache "github.com/itbasis/go-tools/sdkm/internal/cache"
+	cacheFileStorage "github.com/itbasis/go-tools/sdkm/internal/cache/storage/file-storage"
+	sdkmCmd "github.com/itbasis/go-tools/sdkm/internal/cmd"
+	pluginGoConsts "github.com/itbasis/go-tools/sdkm/internal/plugins/golang/consts"
 	"github.com/spf13/cobra"
 )
 

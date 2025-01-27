@@ -4,8 +4,8 @@ import (
 	"log/slog"
 	"os/exec"
 
-	"github.com/itbasis/tools/core/log"
-	itbasisCoreOption "github.com/itbasis/tools/core/option"
+	"github.com/itbasis/go-tools/core/log"
+	itbasisCoreOption "github.com/itbasis/go-tools/core/option"
 )
 
 type Executable struct {

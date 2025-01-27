@@ -4,7 +4,7 @@ import (
 	"context"
 	"io"
 
-	"github.com/itbasis/tools/sdkm/pkg/plugin"
+	"github.com/itbasis/go-tools/sdkm/pkg/plugin"
 	"github.com/pkg/errors"
 )
 

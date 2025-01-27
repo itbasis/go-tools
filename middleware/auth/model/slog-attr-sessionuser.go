@@ -3,7 +3,7 @@ package model
 import (
 	"log/slog"
 
-	itbasisCoreLog "github.com/itbasis/tools/core/log"
+	itbasisCoreLog "github.com/itbasis/go-tools/core/log"
 )
 
 func SlogAttrSessionUser(sessionUser SessionUser) slog.Attr {

@@ -1,10 +1,10 @@
 package latest
 
 import (
-	itbasisCoreCmd "github.com/itbasis/tools/core/cmd"
-	sdkmCmd "github.com/itbasis/tools/sdkm/internal/cmd"
-	sdkmSDKVersion "github.com/itbasis/tools/sdkm/pkg/sdk-version"
-	sdkmPlugins "github.com/itbasis/tools/sdkm/plugins"
+	itbasisCoreCmd "github.com/itbasis/go-tools/core/cmd"
+	sdkmCmd "github.com/itbasis/go-tools/sdkm/internal/cmd"
+	sdkmSDKVersion "github.com/itbasis/go-tools/sdkm/pkg/sdk-version"
+	sdkmPlugins "github.com/itbasis/go-tools/sdkm/plugins"
 	"github.com/spf13/cobra"
 )
 

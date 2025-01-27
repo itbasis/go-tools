@@ -8,9 +8,9 @@ import (
 
 	"github.com/golang-jwt/jwt/v5"
 
-	itbasisCoreEnv "github.com/itbasis/tools/core/env"
-	itbasisCoreLog "github.com/itbasis/tools/core/log"
-	itbasisMiddlewareAuthJwtToken "github.com/itbasis/tools/middleware/auth/jwt/token"
+	itbasisCoreEnv "github.com/itbasis/go-tools/core/env"
+	itbasisCoreLog "github.com/itbasis/go-tools/core/log"
+	itbasisMiddlewareAuthJwtToken "github.com/itbasis/go-tools/middleware/auth/jwt/token"
 )
 
 type _jwtToken struct {

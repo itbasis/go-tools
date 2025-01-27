@@ -3,7 +3,7 @@ package token
 import (
 	"context"
 
-	itbasisMiddlewareAuthModel "github.com/itbasis/tools/middleware/auth/model"
+	itbasisMiddlewareAuthModel "github.com/itbasis/go-tools/middleware/auth/model"
 )
 
 //go:generate mockgen -source=$GOFILE -package=$GOPACKAGE -destination=token-parser.mock.go

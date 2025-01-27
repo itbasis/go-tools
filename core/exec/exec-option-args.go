@@ -4,8 +4,8 @@ import (
 	"log/slog"
 	"os/exec"
 
-	itbasisCoreLog "github.com/itbasis/tools/core/log"
-	itbasisCoreOption "github.com/itbasis/tools/core/option"
+	itbasisCoreLog "github.com/itbasis/go-tools/core/log"
+	itbasisCoreOption "github.com/itbasis/go-tools/core/option"
 )
 
 func WithArgs(args ...string) itbasisCoreOption.Option[exec.Cmd] {

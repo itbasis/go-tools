@@ -3,10 +3,10 @@ package golang_test
 import (
 	"context"
 
-	sdkmPluginGo "github.com/itbasis/tools/sdkm/internal/plugins/golang"
-	pluginGoConsts "github.com/itbasis/tools/sdkm/internal/plugins/golang/consts"
-	sdkmPlugin "github.com/itbasis/tools/sdkm/pkg/plugin"
-	sdkmSDKVersion "github.com/itbasis/tools/sdkm/pkg/sdk-version"
+	sdkmPluginGo "github.com/itbasis/go-tools/sdkm/internal/plugins/golang"
+	pluginGoConsts "github.com/itbasis/go-tools/sdkm/internal/plugins/golang/consts"
+	sdkmPlugin "github.com/itbasis/go-tools/sdkm/pkg/plugin"
+	sdkmSDKVersion "github.com/itbasis/go-tools/sdkm/pkg/sdk-version"
 	"github.com/onsi/ginkgo/v2"
 	"github.com/onsi/gomega"
 	"go.uber.org/mock/gomock"

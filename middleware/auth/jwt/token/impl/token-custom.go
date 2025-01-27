@@ -7,9 +7,9 @@ import (
 	"time"
 
 	"github.com/golang-jwt/jwt/v5"
-	itbasisCoreLog "github.com/itbasis/tools/core/log"
-	itbasisMiddlewareAuthJwtToken "github.com/itbasis/tools/middleware/auth/jwt/token"
-	itbasisMiddlewareAuthModel "github.com/itbasis/tools/middleware/auth/model"
+	itbasisCoreLog "github.com/itbasis/go-tools/core/log"
+	itbasisMiddlewareAuthJwtToken "github.com/itbasis/go-tools/middleware/auth/jwt/token"
+	itbasisMiddlewareAuthModel "github.com/itbasis/go-tools/middleware/auth/model"
 
 	"github.com/itbasis/go-clock/v2"
 	"github.com/pkg/errors"

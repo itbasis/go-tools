@@ -3,8 +3,8 @@ package plugins
 import (
 	"strings"
 
-	itbasisCoreCmd "github.com/itbasis/tools/core/cmd"
-	"github.com/itbasis/tools/sdkm/plugins"
+	itbasisCoreCmd "github.com/itbasis/go-tools/core/cmd"
+	"github.com/itbasis/go-tools/sdkm/plugins"
 	"github.com/spf13/cobra"
 )
 

@@ -1,7 +1,7 @@
 package sdkversion_test
 
 import (
-	sdkmSDKVersion "github.com/itbasis/tools/sdkm/pkg/sdk-version"
+	sdkmSDKVersion "github.com/itbasis/go-tools/sdkm/pkg/sdk-version"
 	"github.com/onsi/ginkgo/v2"
 	"github.com/onsi/gomega"
 )

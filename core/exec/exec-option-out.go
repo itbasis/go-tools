@@ -5,7 +5,7 @@ import (
 	"os"
 	"os/exec"
 
-	itbasisCoreOption "github.com/itbasis/tools/core/option"
+	itbasisCoreOption "github.com/itbasis/go-tools/core/option"
 )
 
 const _optionOutKey = "option-out"

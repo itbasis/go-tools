@@ -6,12 +6,12 @@ import (
 	"path/filepath"
 	"reflect"
 
-	builderCmd "github.com/itbasis/tools/builder/internal/cmd"
-	itbasisBuilderExec "github.com/itbasis/tools/builder/internal/exec"
-	itbasisCoreCmd "github.com/itbasis/tools/core/cmd"
-	itbasisCoreExec "github.com/itbasis/tools/core/exec"
-	itbasisCoreLog "github.com/itbasis/tools/core/log"
-	itbasisCoreVersion "github.com/itbasis/tools/core/version"
+	builderCmd "github.com/itbasis/go-tools/builder/internal/cmd"
+	itbasisBuilderExec "github.com/itbasis/go-tools/builder/internal/exec"
+	itbasisCoreCmd "github.com/itbasis/go-tools/core/cmd"
+	itbasisCoreExec "github.com/itbasis/go-tools/core/exec"
+	itbasisCoreLog "github.com/itbasis/go-tools/core/log"
+	itbasisCoreVersion "github.com/itbasis/go-tools/core/version"
 	"github.com/spf13/cobra"
 )
 

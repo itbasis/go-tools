@@ -3,11 +3,11 @@ package lint
 import (
 	"os/exec"
 
-	builderCmd "github.com/itbasis/tools/builder/internal/cmd"
-	itbasisCoreCmd "github.com/itbasis/tools/core/cmd"
-	itbasisCoreExec "github.com/itbasis/tools/core/exec"
-	itbasisCoreOption "github.com/itbasis/tools/core/option"
-	itbasisCoreOs "github.com/itbasis/tools/core/os"
+	builderCmd "github.com/itbasis/go-tools/builder/internal/cmd"
+	itbasisCoreCmd "github.com/itbasis/go-tools/core/cmd"
+	itbasisCoreExec "github.com/itbasis/go-tools/core/exec"
+	itbasisCoreOption "github.com/itbasis/go-tools/core/option"
+	itbasisCoreOs "github.com/itbasis/go-tools/core/os"
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 )

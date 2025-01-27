@@ -4,9 +4,9 @@ import (
 	"log/slog"
 	"os"
 
-	itbasisCoreCmd "github.com/itbasis/tools/core/cmd"
-	sdkmLog "github.com/itbasis/tools/sdkm/internal/log"
-	sdkmSdk "github.com/itbasis/tools/sdkm/internal/sdk"
+	itbasisCoreCmd "github.com/itbasis/go-tools/core/cmd"
+	sdkmLog "github.com/itbasis/go-tools/sdkm/internal/log"
+	sdkmSdk "github.com/itbasis/go-tools/sdkm/internal/sdk"
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
 )

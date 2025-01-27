@@ -1,7 +1,7 @@
 package cmd_test
 
 import (
-	itbasisCoreCmd "github.com/itbasis/tools/core/cmd"
+	itbasisCoreCmd "github.com/itbasis/go-tools/core/cmd"
 	"github.com/onsi/ginkgo/v2"
 	"github.com/onsi/gomega"
 )

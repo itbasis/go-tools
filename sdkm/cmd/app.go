@@ -3,8 +3,8 @@ package cmd
 import (
 	"log"
 
-	itbasisCoreApp "github.com/itbasis/tools/core/app"
-	"github.com/itbasis/tools/sdkm/cmd/root"
+	itbasisCoreApp "github.com/itbasis/go-tools/core/app"
+	"github.com/itbasis/go-tools/sdkm/cmd/root"
 )
 
 func InitApp() *itbasisCoreApp.App {

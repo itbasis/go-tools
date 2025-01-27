@@ -4,8 +4,8 @@ import (
 	"os"
 	"path"
 
-	itbasisCoreOption "github.com/itbasis/tools/core/option"
-	sdkmPlugin "github.com/itbasis/tools/sdkm/pkg/plugin"
+	itbasisCoreOption "github.com/itbasis/go-tools/core/option"
+	sdkmPlugin "github.com/itbasis/go-tools/sdkm/pkg/plugin"
 )
 
 type basePlugin struct {

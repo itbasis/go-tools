@@ -1,7 +1,7 @@
 package log_test
 
 import (
-	itbasisCoreLog "github.com/itbasis/tools/core/log"
+	itbasisCoreLog "github.com/itbasis/go-tools/core/log"
 	"github.com/onsi/ginkgo/v2"
 	"github.com/onsi/gomega"
 )

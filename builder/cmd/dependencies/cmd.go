@@ -4,8 +4,8 @@ import (
 	_ "embed"
 	"log/slog"
 
-	builderInstaller "github.com/itbasis/tools/builder/internal/installer"
-	itbasisCoreCmd "github.com/itbasis/tools/core/cmd"
+	builderInstaller "github.com/itbasis/go-tools/builder/internal/installer"
+	itbasisCoreCmd "github.com/itbasis/go-tools/core/cmd"
 	"github.com/spf13/cobra"
 )
 
@@ -55,7 +55,7 @@ func _run(cmd *cobra.Command, _ []string) {
 
 		optionDependencies = builderInstaller.WithFile(_flagDependenciesFile)
 	} else {
-		optionDependencies = builderInstaller.WithJsonData(_defaultDependencies)
+		optionDependencies = builderInstaller.WithJSONData(_defaultDependencies)
 	}
 
 	installer, errInstaller := builderInstaller.NewInstaller(cmd, optionDependencies)

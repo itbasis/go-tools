@@ -14,7 +14,7 @@ import (
 	io "io"
 	reflect "reflect"
 
-	sdkversion "github.com/itbasis/tools/sdkm/pkg/sdk-version"
+	sdkversion "github.com/itbasis/go-tools/sdkm/pkg/sdk-version"
 	gomock "go.uber.org/mock/gomock"
 )
 

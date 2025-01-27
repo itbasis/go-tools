@@ -4,8 +4,8 @@ import (
 	"context"
 	"path"
 
-	pluginGoVersions "github.com/itbasis/tools/sdkm/internal/plugins/golang/versions"
-	sdkmSDKVersion "github.com/itbasis/tools/sdkm/pkg/sdk-version"
+	pluginGoVersions "github.com/itbasis/go-tools/sdkm/internal/plugins/golang/versions"
+	sdkmSDKVersion "github.com/itbasis/go-tools/sdkm/pkg/sdk-version"
 	"github.com/onsi/ginkgo/v2"
 	"github.com/onsi/gomega"
 )

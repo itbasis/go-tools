@@ -4,8 +4,8 @@ import (
 	"io"
 	"os"
 
-	itbasisCoreExec "github.com/itbasis/tools/core/exec"
-	itbasisCoreOs "github.com/itbasis/tools/core/os"
+	itbasisCoreExec "github.com/itbasis/go-tools/core/exec"
+	itbasisCoreOs "github.com/itbasis/go-tools/core/os"
 	"github.com/pkg/errors"
 )
 

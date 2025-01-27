@@ -3,8 +3,8 @@ package exec
 import (
 	"os/exec"
 
-	itbasisCoreExec "github.com/itbasis/tools/core/exec"
-	itbasisCoreOption "github.com/itbasis/tools/core/option"
+	itbasisCoreExec "github.com/itbasis/go-tools/core/exec"
+	itbasisCoreOption "github.com/itbasis/go-tools/core/option"
 )
 
 func NewGoExecutable(opts ...itbasisCoreOption.Option[exec.Cmd]) (*itbasisCoreExec.Executable, error) {

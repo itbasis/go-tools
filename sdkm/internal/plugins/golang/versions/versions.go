@@ -10,10 +10,10 @@ import (
 	"strings"
 	"sync"
 
-	itbasisCoreLog "github.com/itbasis/tools/core/log"
-	sdkmCache "github.com/itbasis/tools/sdkm/internal/cache"
-	sdkmHttp "github.com/itbasis/tools/sdkm/internal/http"
-	sdkmSDKVersion "github.com/itbasis/tools/sdkm/pkg/sdk-version"
+	itbasisCoreLog "github.com/itbasis/go-tools/core/log"
+	sdkmCache "github.com/itbasis/go-tools/sdkm/internal/cache"
+	sdkmHttp "github.com/itbasis/go-tools/sdkm/internal/http"
+	sdkmSDKVersion "github.com/itbasis/go-tools/sdkm/pkg/sdk-version"
 	"github.com/pkg/errors"
 )
 

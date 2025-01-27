@@ -4,7 +4,7 @@ import (
 	"context"
 	"io"
 
-	sdkmSDKVersion "github.com/itbasis/tools/sdkm/pkg/sdk-version"
+	sdkmSDKVersion "github.com/itbasis/go-tools/sdkm/pkg/sdk-version"
 )
 
 //nolint:interfacebloat // TODO

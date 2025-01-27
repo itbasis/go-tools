@@ -3,9 +3,9 @@ package base
 import (
 	"log/slog"
 
-	itbasisCoreOption "github.com/itbasis/tools/core/option"
-	sdkmLog "github.com/itbasis/tools/sdkm/internal/log"
-	sdkmSdk "github.com/itbasis/tools/sdkm/internal/sdk"
+	itbasisCoreOption "github.com/itbasis/go-tools/core/option"
+	sdkmLog "github.com/itbasis/go-tools/sdkm/internal/log"
+	sdkmSdk "github.com/itbasis/go-tools/sdkm/internal/sdk"
 )
 
 const _optionSdkDirKey = "option-sdk-dir"

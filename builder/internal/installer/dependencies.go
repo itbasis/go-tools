@@ -6,8 +6,17 @@ import (
 	"golang.org/x/mod/module"
 )
 
+const _versionLatest = "latest"
+
 type Dependencies struct {
-	GoDependencies map[DependencyName]module.Version `json:"go_install"`
+	GoDependencies     map[DependencyName]module.Version   `json:"go_install"`
+	GithubDependencies map[DependencyName]GithubDependency `json:"github_install"`
+}
+
+type GithubDependency struct {
+	Owner   string `json:"owner"`
+	Repo    string `json:"repo"`
+	Version string `json:"version"`
 }
 
 type DependencyName = string

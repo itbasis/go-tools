@@ -1,9 +1,9 @@
 package reshim
 
 import (
-	itbasisCoreCmd "github.com/itbasis/tools/core/cmd"
-	itbasisCoreOs "github.com/itbasis/tools/core/os"
-	sdkmScripts "github.com/itbasis/tools/sdkm/scripts"
+	itbasisCoreCmd "github.com/itbasis/go-tools/core/cmd"
+	itbasisCoreOs "github.com/itbasis/go-tools/core/os"
+	sdkmScripts "github.com/itbasis/go-tools/sdkm/scripts"
 	"github.com/spf13/cobra"
 )
 

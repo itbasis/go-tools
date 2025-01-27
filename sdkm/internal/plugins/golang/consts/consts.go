@@ -1,6 +1,6 @@
 package consts
 
-import sdkmPlugin "github.com/itbasis/tools/sdkm/pkg/plugin"
+import sdkmPlugin "github.com/itbasis/go-tools/sdkm/pkg/plugin"
 
 const (
 	PluginID sdkmPlugin.ID = "go"

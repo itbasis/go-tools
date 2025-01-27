@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"log/slog"
 
-	itbasisCoreLog "github.com/itbasis/tools/core/log"
-	"github.com/itbasis/tools/sdkm/internal/plugins/golang/modfile"
-	sdkmSDKVersion "github.com/itbasis/tools/sdkm/pkg/sdk-version"
+	itbasisCoreLog "github.com/itbasis/go-tools/core/log"
+	"github.com/itbasis/go-tools/sdkm/internal/plugins/golang/modfile"
+	sdkmSDKVersion "github.com/itbasis/go-tools/sdkm/pkg/sdk-version"
 )
 
 func (receiver *goPlugin) Current(ctx context.Context, rebuildCache bool, baseDir string) (sdkmSDKVersion.SDKVersion, error) {

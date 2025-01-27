@@ -4,7 +4,7 @@ import (
 	"context"
 	"sync"
 
-	itbasisSdkmSDKVersion "github.com/itbasis/tools/sdkm/pkg/sdk-version"
+	itbasisSdkmSDKVersion "github.com/itbasis/go-tools/sdkm/pkg/sdk-version"
 	"golang.org/x/exp/maps"
 )
 

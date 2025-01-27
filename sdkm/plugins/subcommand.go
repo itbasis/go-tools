@@ -1,8 +1,8 @@
 package plugins
 
 import (
-	itbasisCoreCmd "github.com/itbasis/tools/core/cmd"
-	sdkmPlugin "github.com/itbasis/tools/sdkm/pkg/plugin"
+	itbasisCoreCmd "github.com/itbasis/go-tools/core/cmd"
+	sdkmPlugin "github.com/itbasis/go-tools/sdkm/pkg/plugin"
 	"github.com/spf13/cobra"
 )
 

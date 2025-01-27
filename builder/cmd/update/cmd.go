@@ -1,10 +1,10 @@
 package update
 
 import (
-	builderCmd "github.com/itbasis/tools/builder/internal/cmd"
-	itbasisBuilderExec "github.com/itbasis/tools/builder/internal/exec"
-	itbasisCoreCmd "github.com/itbasis/tools/core/cmd"
-	itbasisCoreExec "github.com/itbasis/tools/core/exec"
+	builderCmd "github.com/itbasis/go-tools/builder/internal/cmd"
+	itbasisBuilderExec "github.com/itbasis/go-tools/builder/internal/exec"
+	itbasisCoreCmd "github.com/itbasis/go-tools/core/cmd"
+	itbasisCoreExec "github.com/itbasis/go-tools/core/exec"
 	"github.com/spf13/cobra"
 )
 

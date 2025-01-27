@@ -6,9 +6,9 @@ import (
 	"os"
 	"path"
 
-	itbasisCoreLog "github.com/itbasis/tools/core/log"
-	itbasisCoreOs "github.com/itbasis/tools/core/os"
-	pluginGoConsts "github.com/itbasis/tools/sdkm/internal/plugins/golang/consts"
+	itbasisCoreLog "github.com/itbasis/go-tools/core/log"
+	itbasisCoreOs "github.com/itbasis/go-tools/core/os"
+	pluginGoConsts "github.com/itbasis/go-tools/sdkm/internal/plugins/golang/consts"
 )
 
 func (receiver *goPlugin) Env(ctx context.Context, rebuildCache bool, baseDir string) (map[string]string, error) {

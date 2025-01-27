@@ -6,9 +6,9 @@ import (
 	"log/slog"
 	"time"
 
-	itbasisMiddlewareAuthJwtToken "github.com/itbasis/tools/middleware/auth/jwt/token"
-	itbasisMiddlewareAuthJwtTokenImpl "github.com/itbasis/tools/middleware/auth/jwt/token/impl"
-	itbasisMiddlewareAuthModel "github.com/itbasis/tools/middleware/auth/model"
+	itbasisMiddlewareAuthJwtToken "github.com/itbasis/go-tools/middleware/auth/jwt/token"
+	itbasisMiddlewareAuthJwtTokenImpl "github.com/itbasis/go-tools/middleware/auth/jwt/token/impl"
+	itbasisMiddlewareAuthModel "github.com/itbasis/go-tools/middleware/auth/model"
 
 	"github.com/golang-jwt/jwt/v5"
 	"github.com/google/uuid"

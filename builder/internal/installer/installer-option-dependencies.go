@@ -4,12 +4,12 @@ import (
 	"log/slog"
 	"os"
 
-	itbasisCoreOption "github.com/itbasis/tools/core/option"
+	itbasisCoreOption "github.com/itbasis/go-tools/core/option"
 )
 
 const _optionDependenciesKey = "dependencies"
 
-func WithJsonData(data []byte) Option {
+func WithJSONData(data []byte) Option {
 	return &_optionDependencies{data: data}
 }
 

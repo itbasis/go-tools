@@ -3,8 +3,8 @@ package impl_test
 import (
 	"context"
 
-	itbasisMiddlewareAuthJwtToken "github.com/itbasis/tools/middleware/auth/jwt/token"
-	itbasisMiddlewareAuthJwtTokenImpl "github.com/itbasis/tools/middleware/auth/jwt/token/impl"
+	itbasisMiddlewareAuthJwtToken "github.com/itbasis/go-tools/middleware/auth/jwt/token"
+	itbasisMiddlewareAuthJwtTokenImpl "github.com/itbasis/go-tools/middleware/auth/jwt/token/impl"
 
 	"github.com/dchest/uniuri"
 	"github.com/itbasis/go-clock/v2"

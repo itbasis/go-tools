@@ -1,8 +1,8 @@
 package list
 
 import (
-	itbasisCoreCmd "github.com/itbasis/tools/core/cmd"
-	sdkmCmd "github.com/itbasis/tools/sdkm/internal/cmd"
+	itbasisCoreCmd "github.com/itbasis/go-tools/core/cmd"
+	sdkmCmd "github.com/itbasis/go-tools/sdkm/internal/cmd"
 	"github.com/spf13/cobra"
 )
 

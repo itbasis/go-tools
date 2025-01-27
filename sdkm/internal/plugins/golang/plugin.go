@@ -5,12 +5,12 @@ import (
 	"path"
 	"runtime"
 
-	sdkmCache "github.com/itbasis/tools/sdkm/internal/cache"
-	pluginGoConsts "github.com/itbasis/tools/sdkm/internal/plugins/golang/consts"
-	pluginsGoDownloader "github.com/itbasis/tools/sdkm/internal/plugins/golang/downloader"
-	pluginGoVersions "github.com/itbasis/tools/sdkm/internal/plugins/golang/versions"
-	sdkmPlugin "github.com/itbasis/tools/sdkm/pkg/plugin"
-	sdkmSDKVersion "github.com/itbasis/tools/sdkm/pkg/sdk-version"
+	sdkmCache "github.com/itbasis/go-tools/sdkm/internal/cache"
+	pluginGoConsts "github.com/itbasis/go-tools/sdkm/internal/plugins/golang/consts"
+	pluginsGoDownloader "github.com/itbasis/go-tools/sdkm/internal/plugins/golang/downloader"
+	pluginGoVersions "github.com/itbasis/go-tools/sdkm/internal/plugins/golang/versions"
+	sdkmPlugin "github.com/itbasis/go-tools/sdkm/pkg/plugin"
+	sdkmSDKVersion "github.com/itbasis/go-tools/sdkm/pkg/sdk-version"
 )
 
 type goPlugin struct {

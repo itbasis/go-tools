@@ -1,9 +1,9 @@
 package plugins
 
 import (
-	sdkmPluginGo "github.com/itbasis/tools/sdkm/internal/plugins/golang"
-	pluginGoConsts "github.com/itbasis/tools/sdkm/internal/plugins/golang/consts"
-	"github.com/itbasis/tools/sdkm/pkg/plugin"
+	sdkmPluginGo "github.com/itbasis/go-tools/sdkm/internal/plugins/golang"
+	pluginGoConsts "github.com/itbasis/go-tools/sdkm/internal/plugins/golang/consts"
+	"github.com/itbasis/go-tools/sdkm/pkg/plugin"
 )
 
 var (
