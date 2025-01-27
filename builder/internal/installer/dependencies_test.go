@@ -11,6 +11,8 @@ import (
 
 var _ = ginkgo.Describe(
 	"Unmarshal", func() {
+		defer ginkgo.GinkgoRecover()
+
 		data := files.ReadFile(vfs.OS("."), "sample.json")
 
 		gomega.Expect(builderInstaller.ParseDependencies(data)).To(
