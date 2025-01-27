@@ -1,4 +1,4 @@
-//nolint:govet // Example file
+//nolint:govet // Snippets file
 package main_test
 
 // tag::documentation[]
@@ -6,12 +6,18 @@ import (
 	"github.com/itbasis/go-tools/builder/cmd"
 )
 
+// end::documentation[]
+// nolint:unused
+// tag::documentation[]
 // If arguments were not passed, they are taken from the `os.Args`.
-func ExampleRunWithoutArguments() {
+func SnippetRunWithoutArguments() {
 	cmd.InitApp().Run()
 }
 
-func ExampleRunWithArguments() {
+// end::documentation[]
+// nolint:unused
+// tag::documentation[]
+func SnippetRunWithArguments() {
 	cmd.InitApp().Run("generate", "--debug")
 }
 

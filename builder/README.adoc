@@ -8,7 +8,7 @@
 
 [source,go]
 ----
-include::main_example_test.go[tag=documentation]
+include::main_snippet_test.go[tag=documentation]
 ----
 
 == Команды
