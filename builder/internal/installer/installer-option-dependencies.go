@@ -1,13 +1,15 @@
 package installer
 
 import (
+	"encoding/json"
 	"log/slog"
 	"os"
 
+	"github.com/itbasis/go-tools/builder/internal/installer/model"
 	itbasisCoreOption "github.com/itbasis/go-tools/core/option"
 )
 
-const _optionDependenciesKey = "dependencies"
+const _optionDependenciesKey itbasisCoreOption.Key = "dependencies"
 
 func WithJSONData(data []byte) Option {
 	return &_optionDependencies{data: data}
@@ -20,7 +22,7 @@ func WithFile(filePath string) Option {
 type _optionDependencies struct {
 	filePath     string
 	data         []byte
-	dependencies Dependencies
+	dependencies model.Dependencies
 }
 
 func (r _optionDependencies) Key() itbasisCoreOption.Key { return _optionDependenciesKey }
@@ -32,14 +34,13 @@ func (r _optionDependencies) Apply(obj *Installer) error {
 
 		r.data, err = os.ReadFile(r.filePath)
 		if err != nil {
-			return err
+			return err //nolint:wrapcheck // TODO
 		}
 	}
 
 	if len(r.data) > 0 {
-		r.dependencies, err = ParseDependencies(r.data)
-		if err != nil {
-			return err
+		if err = json.Unmarshal(r.data, &r.dependencies); err != nil {
+			return err //nolint:wrapcheck // TODO
 		}
 	}
 

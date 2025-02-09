@@ -1,12 +1,9 @@
 package lint
 
 import (
-	"os/exec"
-
 	builderCmd "github.com/itbasis/go-tools/builder/internal/cmd"
 	itbasisCoreCmd "github.com/itbasis/go-tools/core/cmd"
 	itbasisCoreExec "github.com/itbasis/go-tools/core/exec"
-	itbasisCoreOption "github.com/itbasis/go-tools/core/option"
 	itbasisCoreOs "github.com/itbasis/go-tools/core/os"
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
@@ -43,7 +40,7 @@ func _run(cmd *cobra.Command, args []string) {
 	}
 }
 
-func _execEditorConfigChecker(opts ...itbasisCoreOption.Option[exec.Cmd]) error {
+func _execEditorConfigChecker(opts ...itbasisCoreExec.Option) error {
 	executable, err := itbasisCoreExec.NewExecutable("editorconfig-checker", opts...)
 	if err != nil {
 		return errors.Wrap(err, itbasisCoreExec.ErrFailedExecuteCommand.Error())
@@ -56,11 +53,11 @@ func _execEditorConfigChecker(opts ...itbasisCoreOption.Option[exec.Cmd]) error 
 	return nil
 }
 
-func _execGolangCiLint(lintPackages string, opts ...itbasisCoreOption.Option[exec.Cmd]) error {
+func _execGolangCiLint(lintPackages string, opts ...itbasisCoreExec.Option) error {
 	executable, err := itbasisCoreExec.NewExecutable(
 		"golangci-lint",
 		append(
-			[]itbasisCoreOption.Option[exec.Cmd]{itbasisCoreExec.WithArgs("run", lintPackages)},
+			[]itbasisCoreExec.Option{itbasisCoreExec.WithArgs("run", lintPackages)},
 			opts...,
 		)...,
 	)

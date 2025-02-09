@@ -3,46 +3,49 @@ package exec
 import (
 	"os/exec"
 
+	itbasisCoreEnv "github.com/itbasis/go-tools/core/env"
 	itbasisCoreOption "github.com/itbasis/go-tools/core/option"
-	itbasisCoreOs "github.com/itbasis/go-tools/core/os"
 )
 
-const _optionEnvKey = "option-env"
+const _optionEnvKey itbasisCoreOption.Key = "option-env"
 
-func WithEnv(env []string) itbasisCoreOption.Option[exec.Cmd] {
-	return &_optionEnv{env: env}
+func WithEnv[E itbasisCoreEnv.ListOrMap](env E) Option {
+	return &_optionEnv[E]{env: env}
 }
-func WithEnvAsMap(env map[string]string) itbasisCoreOption.Option[exec.Cmd] {
-	return &_optionEnv{env: itbasisCoreOs.EnvMapToSlices(env)}
-}
-func WithRestoreEnv(env []string) itbasisCoreOption.RestoreOption[exec.Cmd] {
-	return &_optionEnv{env: env, restore: true}
+func WithRestoreEnv[E itbasisCoreEnv.ListOrMap](env E) RestoreOption {
+	return &_optionEnv[E]{env: env, restore: true}
 }
 
-type _optionEnv struct {
+type _optionEnv[E itbasisCoreEnv.ListOrMap] struct {
 	restore bool
 
-	env  []string
-	prev []string
+	env  E
+	prev itbasisCoreEnv.List
 }
 
-func (r *_optionEnv) Key() itbasisCoreOption.Key { return _optionEnvKey }
-func (r *_optionEnv) Apply(cmd *exec.Cmd) error {
-	cmd.Env = r.env
+func (r *_optionEnv[E]) Key() itbasisCoreOption.Key { return _optionEnvKey }
+func (r *_optionEnv[E]) Apply(cmd *exec.Cmd) error {
+	switch v := any(r.env).(type) {
+	case itbasisCoreEnv.List:
+		cmd.Env = v
+
+	case itbasisCoreEnv.Map:
+		cmd.Env = itbasisCoreEnv.MapToSlices(v)
+	}
 
 	return nil
 }
 
-func (r *_optionEnv) Save(cmd *exec.Cmd) error {
+func (r *_optionEnv[E]) Save(cmd *exec.Cmd) error {
 	if r.restore {
 		r.prev = cmd.Env
 	}
 
 	return nil
 }
-func (r *_optionEnv) Restore(cmd *exec.Cmd) error {
+func (r *_optionEnv[E]) Restore(cmd *exec.Cmd) error {
 	if r.restore {
-		cmd.Env = r.env
+		cmd.Env = r.prev
 	}
 
 	return nil

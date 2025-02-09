@@ -6,7 +6,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-func InitDefaultCmdRoot(shortName string, opts ...itbasisCoreOption.Option[cobra.Command]) (*cobra.Command, error) {
+func InitDefaultCmdRoot(shortName string, opts ...Option) (*cobra.Command, error) {
 	var cmd = &cobra.Command{Short: shortName}
 
 	if err := itbasisCoreOption.ApplyOptions(

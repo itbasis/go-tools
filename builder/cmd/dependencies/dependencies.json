@@ -1,5 +1,5 @@
 {
-	"go_install": {
+	"go": {
 		"golangci-lint": {
 			"path": "github.com/golangci/golangci-lint/cmd/golangci-lint",
 			"version": "latest"
@@ -10,13 +10,6 @@
 		},
 		"editorconfig-checker": {
 			"path": "github.com/editorconfig-checker/editorconfig-checker/v3/cmd/editorconfig-checker",
-			"version": "latest"
-		}
-	},
-	"github_install": {
-		"golangci-lint": {
-			"owner": "golangci",
-			"repo": "golangci-lint",
 			"version": "latest"
 		}
 	}

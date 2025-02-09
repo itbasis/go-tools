@@ -44,7 +44,7 @@ func _runE(cmd *cobra.Command, _ []string) error {
 	if _flagShow {
 		_, err := cmd.OutOrStdout().Write(_defaultDependencies)
 		if err != nil {
-			return err
+			return err //nolint:wrapcheck // TODO
 		}
 	}
 
@@ -61,5 +61,5 @@ func _runE(cmd *cobra.Command, _ []string) error {
 	installer, errInstaller := builderInstaller.NewInstaller(cmd, optionDependencies)
 	itbasisCoreCmd.RequireNoError(cmd, errInstaller)
 
-	return installer.Install()
+	return installer.Install(nil) //nolint:wrapcheck // TODO
 }

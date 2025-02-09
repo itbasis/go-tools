@@ -2,6 +2,7 @@ package env
 
 import (
 	itbasisCoreCmd "github.com/itbasis/go-tools/core/cmd"
+	itbasisCoreEnv "github.com/itbasis/go-tools/core/env"
 	itbasisCoreOs "github.com/itbasis/go-tools/core/os"
 	sdkmCmd "github.com/itbasis/go-tools/sdkm/internal/cmd"
 	sdkmPlugins "github.com/itbasis/go-tools/sdkm/plugins"
@@ -47,7 +48,7 @@ func _run(cmd *cobra.Command, args []string) {
 		itbasisCoreCmd.Fatal(cmd, err)
 	}
 
-	for _, env := range itbasisCoreOs.EnvMapToSlices(envMap) {
+	for _, env := range itbasisCoreEnv.MapToSlices(envMap) {
 		cmd.Println(env)
 	}
 }

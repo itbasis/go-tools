@@ -6,6 +6,11 @@ run:
 issues:
     exclude-dirs:
         - testdata
+    exclude-rules:
+        -   path: _snippet_test.go
+            linters:
+                - unused
+
 
 linters-settings:
     gosec:

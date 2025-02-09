@@ -4,6 +4,7 @@ import (
 	"io"
 	"os"
 
+	itbasisCoreEnv "github.com/itbasis/go-tools/core/env"
 	itbasisCoreExec "github.com/itbasis/go-tools/core/exec"
 	itbasisCoreOs "github.com/itbasis/go-tools/core/os"
 	"github.com/pkg/errors"
@@ -15,7 +16,7 @@ func (receiver *basePlugin) Exec(
 	stdIn io.Reader, stdOut, stdErr io.Writer,
 	args []string,
 ) error {
-	var envMap = itbasisCoreOs.MergeEnvAsMap(os.Environ(), overrideEnv)
+	var envMap = itbasisCoreEnv.MergeEnvs(os.Environ(), overrideEnv)
 
 	envMap["SDKM_BACKUP_PATH"] = envMap["PATH"]
 	envMap["PATH"] = itbasisCoreOs.CleanPath(envMap["PATH"], itbasisCoreOs.ExecutableDir())
@@ -29,7 +30,7 @@ func (receiver *basePlugin) Exec(
 		itbasisCoreExec.WithArgs(args...),
 		itbasisCoreExec.WithCustomIn(stdIn),
 		itbasisCoreExec.WithCustomOut(stdOut, stdErr),
-		itbasisCoreExec.WithEnvAsMap(envMap),
+		itbasisCoreExec.WithEnv(envMap),
 	)
 	if err != nil {
 		return errors.Wrap(err, "error executing plugin")

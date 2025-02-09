@@ -5,10 +5,12 @@ import (
 	"os"
 	"path/filepath"
 	"reflect"
+	"runtime"
 
 	builderCmd "github.com/itbasis/go-tools/builder/internal/cmd"
 	itbasisBuilderExec "github.com/itbasis/go-tools/builder/internal/exec"
 	itbasisCoreCmd "github.com/itbasis/go-tools/core/cmd"
+	itbasisCoreEnv "github.com/itbasis/go-tools/core/env"
 	itbasisCoreExec "github.com/itbasis/go-tools/core/exec"
 	itbasisCoreLog "github.com/itbasis/go-tools/core/log"
 	itbasisCoreVersion "github.com/itbasis/go-tools/core/version"
@@ -32,8 +34,8 @@ func NewBuildCommand() *cobra.Command {
 	}
 
 	cmd.Flags().StringVarP(&_flagOutput, "output", "", "", "")
-	cmd.Flags().StringVarP(&_flagOs, "build-os", "", "", "")
-	cmd.Flags().StringVarP(&_flagArch, "build-arch", "", "", "")
+	cmd.Flags().StringVarP(&_flagOs, "build-os", "", runtime.GOOS, "")
+	cmd.Flags().StringVarP(&_flagArch, "build-arch", "", runtime.GOARCH, "")
 	cmd.Flags().StringVarP(&_flagVersion, "build-version", "", _flagVersion, "")
 
 	return cmd
@@ -65,6 +67,15 @@ func _run(cmd *cobra.Command, args []string) {
 	itbasisCoreCmd.RequireNoError(
 		cmd,
 		execGoBuild.Execute(
+			itbasisCoreExec.WithRestoreEnv(
+				itbasisCoreEnv.MergeEnvs(
+					os.Environ(),
+					itbasisCoreEnv.Map{
+						"GOOS":   _flagOs,
+						"GOARCH": _flagArch,
+					},
+				),
+			),
 			itbasisCoreExec.WithRestoreArgsIncludePrevious(itbasisCoreExec.IncludePrevArgsBefore, buildArgs...),
 		),
 	)

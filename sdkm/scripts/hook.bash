@@ -8,6 +8,5 @@ sdkm-export-env() {
 	done
 }
 
-trap sdkm-export-env
-
-source <($cmd completion bash)
+trap sdkm-export-env INT
+#source <($cmd completion bash)

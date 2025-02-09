@@ -8,9 +8,9 @@ import (
 	"github.com/spf13/cobra"
 )
 
-const _optionOutKey = "option-out"
+const _optionOutKey itbasisCoreOption.Key = "option-out"
 
-func WithDefaultOut() itbasisCoreOption.Option[cobra.Command] {
+func WithDefaultOut() Option {
 	return &_optionOut{out: os.Stdout}
 }
 

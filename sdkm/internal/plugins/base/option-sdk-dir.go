@@ -8,7 +8,7 @@ import (
 	sdkmSdk "github.com/itbasis/go-tools/sdkm/internal/sdk"
 )
 
-const _optionSdkDirKey = "option-sdk-dir"
+const _optionSdkDirKey itbasisCoreOption.Key = "option-sdk-dir"
 
 func WithDefaultSdkDir() itbasisCoreOption.Option[basePlugin] {
 	return &_optionSdkDir{}

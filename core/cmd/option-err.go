@@ -8,9 +8,9 @@ import (
 	"github.com/spf13/cobra"
 )
 
-const _optionErrKey = "option-err"
+const _optionErrKey itbasisCoreOption.Key = "option-err"
 
-func WithDefaultErr() itbasisCoreOption.Option[cobra.Command] {
+func WithDefaultErr() Option {
 	return &_optionErr{out: os.Stdout}
 }
 

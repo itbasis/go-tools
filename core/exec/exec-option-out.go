@@ -8,22 +8,22 @@ import (
 	itbasisCoreOption "github.com/itbasis/go-tools/core/option"
 )
 
-const _optionOutKey = "option-out"
+const _optionOutKey itbasisCoreOption.Key = "option-out"
 
 type CobraOut interface {
 	OutOrStdout() io.Writer
 	ErrOrStderr() io.Writer
 }
 
-func WithCobraOut(cmd CobraOut) itbasisCoreOption.Option[exec.Cmd] {
+func WithCobraOut(cmd CobraOut) Option {
 	return WithCustomOut(cmd.OutOrStdout(), cmd.ErrOrStderr())
 }
 
-func WithStdOut() itbasisCoreOption.Option[exec.Cmd] {
+func WithStdOut() Option {
 	return WithCustomOut(os.Stdout, os.Stderr)
 }
 
-func WithCustomOut(out, err io.Writer) itbasisCoreOption.Option[exec.Cmd] {
+func WithCustomOut(out, err io.Writer) Option {
 	return &_optionOut{out: out, err: err}
 }
 

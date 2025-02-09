@@ -22,7 +22,7 @@ var _ = ginkgo.Describe(
 						gomega.Expect(
 							itbasisCoreOption.ApplyOptions(
 								cmd,
-								[]itbasisCoreOption.Option[exec.Cmd]{itbasisCoreExec.WithArgs(optionArgs...)},
+								[]itbasisCoreExec.Option{itbasisCoreExec.WithArgs(optionArgs...)},
 								nil,
 							),
 						).
@@ -42,7 +42,7 @@ var _ = ginkgo.Describe(
 						gomega.Expect(
 							itbasisCoreOption.ApplyOptions(
 								cmd,
-								[]itbasisCoreOption.Option[exec.Cmd]{
+								[]itbasisCoreExec.Option{
 									itbasisCoreExec.WithArgsIncludePrevious(includePrevArgs, optionArgs...),
 								},
 								nil,
@@ -79,7 +79,7 @@ var _ = ginkgo.Describe(
 						gomega.Expect(
 							itbasisCoreOption.ApplyRestoreOptions(
 								cmd,
-								[]itbasisCoreOption.RestoreOption[exec.Cmd]{itbasisCoreExec.WithRestoreArgs(optionArgs...)}, func() {
+								[]itbasisCoreExec.RestoreOption{itbasisCoreExec.WithRestoreArgs(optionArgs...)}, func() {
 									gomega.Expect(cmd.Args).To(gomega.HaveExactElements(wantArgs))
 								},
 							),
@@ -102,7 +102,7 @@ var _ = ginkgo.Describe(
 						gomega.Expect(
 							itbasisCoreOption.ApplyRestoreOptions(
 								cmd,
-								[]itbasisCoreOption.RestoreOption[exec.Cmd]{itbasisCoreExec.WithRestoreArgsIncludePrevious(
+								[]itbasisCoreExec.RestoreOption{itbasisCoreExec.WithRestoreArgsIncludePrevious(
 									includePrevArgs,
 									optionArgs...,
 								)}, func() {

@@ -15,7 +15,11 @@ import (
 )
 
 func NewRootCommand() (*cobra.Command, error) {
-	var cmdRoot, err = itbasisCoreCmd.InitDefaultCmdRoot("SDK Manager")
+	var cmdRoot, err = itbasisCoreCmd.InitDefaultCmdRoot(
+		"SDK Manager",
+		itbasisCoreCmd.WithFlagDebug(sdkmCmd.FlagDebugName, itbasisCoreCmd.DefaultFlagDebugDescription, true, true),
+	)
+
 	if err != nil {
 		return nil, err //nolint:wrapcheck // TODO
 	}

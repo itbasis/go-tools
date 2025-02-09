@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"testing"
 
-	"github.com/itbasis/go-test-utils/v5/files"
+	itbasisTestUtilsFiles "github.com/itbasis/go-test-utils/v5/files"
 	"github.com/itbasis/go-test-utils/v5/ginkgo"
 	"github.com/onsi/gomega/ghttp"
 	"golang.org/x/tools/godoc/vfs"
@@ -24,7 +24,7 @@ func initFakeServer(testResponseFile string) *ghttp.Server {
 	server.AppendHandlers(
 		ghttp.CombineHandlers(
 			ghttp.VerifyRequest("GET", "/"),
-			ghttp.RespondWith(http.StatusOK, files.ReadFile(vfs.FromFS(testHTMLContents), testResponseFile)),
+			ghttp.RespondWith(http.StatusOK, itbasisTestUtilsFiles.ReadFile(vfs.FromFS(testHTMLContents), testResponseFile)),
 		),
 	)
 

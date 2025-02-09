@@ -1,13 +1,10 @@
 package exec
 
 import (
-	"os/exec"
-
 	itbasisCoreExec "github.com/itbasis/go-tools/core/exec"
-	itbasisCoreOption "github.com/itbasis/go-tools/core/option"
 )
 
-func NewGoExecutable(opts ...itbasisCoreOption.Option[exec.Cmd]) (*itbasisCoreExec.Executable, error) {
+func NewGoExecutable(opts ...itbasisCoreExec.Option) (*itbasisCoreExec.Executable, error) {
 	return itbasisCoreExec.NewExecutable("go", opts...) //nolint:wrapcheck // TODO
 }
 

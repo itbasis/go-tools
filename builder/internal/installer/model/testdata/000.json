@@ -1,11 +1,11 @@
 {
-	"go_install": {
+	"go": {
 		"mockgen": {
 			"path": "go.uber.org/mock/mockgen",
 			"version": "latest"
 		}
 	},
-	"github_install": {
+	"github": {
 		"golangci-lint": {
 			"owner": "golangci",
 			"repo": "golangci-lint",

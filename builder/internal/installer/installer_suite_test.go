@@ -6,6 +6,6 @@ import (
 	"github.com/itbasis/go-test-utils/v5/ginkgo"
 )
 
-func TestInstaller(t *testing.T) {
-	ginkgo.InitGinkgoSuite(t, "Builder dependency installer test Suite")
+func TestInstallerSuite(t *testing.T) {
+	ginkgo.InitGinkgoSuite(t, "Builder dependency installer test suite")
 }

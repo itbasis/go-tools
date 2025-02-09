@@ -8,23 +8,23 @@ import (
 	itbasisCoreOption "github.com/itbasis/go-tools/core/option"
 )
 
-func WithArgs(args ...string) itbasisCoreOption.Option[exec.Cmd] {
+func WithArgs(args ...string) Option {
 	return &optionArgs{includePrevArgs: IncludePrevArgsNo, args: args}
 }
 
-func WithArgsIncludePrevious(includePrevArgs IncludePrevArgs, args ...string) itbasisCoreOption.Option[exec.Cmd] {
+func WithArgsIncludePrevious(includePrevArgs IncludePrevArgs, args ...string) Option {
 	return &optionArgs{includePrevArgs: includePrevArgs, args: args}
 }
 
-func WithRestoreArgs(args ...string) itbasisCoreOption.RestoreOption[exec.Cmd] {
+func WithRestoreArgs(args ...string) RestoreOption {
 	return &optionArgs{includePrevArgs: IncludePrevArgsNo, args: args, restore: true}
 }
 
-func WithRestoreArgsIncludePrevious(includePrevArgs IncludePrevArgs, args ...string) itbasisCoreOption.RestoreOption[exec.Cmd] {
+func WithRestoreArgsIncludePrevious(includePrevArgs IncludePrevArgs, args ...string) RestoreOption {
 	return &optionArgs{includePrevArgs: includePrevArgs, args: args, restore: true}
 }
 
-const _optionArgsKey = "option-args"
+const _optionArgsKey itbasisCoreOption.Key = "option-args"
 
 type IncludePrevArgs int
 

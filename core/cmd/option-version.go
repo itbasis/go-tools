@@ -6,12 +6,12 @@ import (
 	"github.com/spf13/cobra"
 )
 
-const _optionVersionKey = "option-version"
+const _optionVersionKey itbasisCoreOption.Key = "option-version"
 
-func WithDefaultVersion() itbasisCoreOption.Option[cobra.Command] {
+func WithDefaultVersion() Option {
 	return &_optionVersion{version: itbasisCoreVersion.NewDefaultVersion()}
 }
-func WithCustomVersion(version itbasisCoreVersion.Version) itbasisCoreOption.Option[cobra.Command] {
+func WithCustomVersion(version itbasisCoreVersion.Version) Option {
 	return &_optionVersion{version: version}
 }
 

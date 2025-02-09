@@ -6,9 +6,9 @@ import (
 	itbasisCoreOption "github.com/itbasis/go-tools/core/option"
 )
 
-const _optionRerunKey = "option-rerun"
+const _optionRerunKey itbasisCoreOption.Key = "option-rerun"
 
-func WithRerun() itbasisCoreOption.RestoreOption[exec.Cmd] { return &optionRerun{} }
+func WithRerun() RestoreOption { return &optionRerun{} }
 
 type optionRerun struct{}
 

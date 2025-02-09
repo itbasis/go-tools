@@ -1,6 +1,8 @@
 package exec
 
 import (
+	"slices"
+
 	itbasisCoreCmd "github.com/itbasis/go-tools/core/cmd"
 	itbasisCoreOs "github.com/itbasis/go-tools/core/os"
 	sdkmCmd "github.com/itbasis/go-tools/sdkm/internal/cmd"
@@ -10,15 +12,15 @@ import (
 
 func NewExecCommand() *cobra.Command {
 	var cmd = &cobra.Command{
-		Use:                "exec",
-		Short:              "Execute a command in a plugin",
-		DisableFlagParsing: true,
+		Use:   "exec",
+		Short: "Execute a command in a plugin",
 	}
 
 	sdkmCmd.InitFlagRebuildCache(cmd.PersistentFlags())
 
 	plugins.AddPluginsAsSubCommands(
 		cmd, func(cmdChild *cobra.Command) {
+			cmdChild.DisableFlagParsing = true
 			cmdChild.Use = itbasisCoreCmd.BuildUse(cmdChild.Use, "{<program>}", "[<args...>]")
 			cmdChild.Args = cobra.MinimumNArgs(1)
 			cmdChild.ArgAliases = []string{"program"}
@@ -30,6 +32,8 @@ func NewExecCommand() *cobra.Command {
 }
 
 func _runE(cmd *cobra.Command, args []string) error {
+	argDebugFlagName := "--" + sdkmCmd.FlagDebugName
+
 	//nolint:wrapcheck // TODO
 	return plugins.GetPluginByID(cmd).
 		Exec(
@@ -39,6 +43,10 @@ func _runE(cmd *cobra.Command, args []string) error {
 			cmd.InOrStdin(),
 			cmd.OutOrStdout(),
 			cmd.OutOrStderr(),
-			args,
+			slices.DeleteFunc(
+				args, func(s string) bool {
+					return s == argDebugFlagName
+				},
+			),
 		)
 }

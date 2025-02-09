@@ -9,15 +9,15 @@ import (
 	"github.com/spf13/cobra"
 )
 
-const _optionInKey = "option-in"
+const _optionInKey itbasisCoreOption.Key = "option-in"
 
-func WithCobraIn(cmd *cobra.Command) itbasisCoreOption.Option[exec.Cmd] {
+func WithCobraIn(cmd *cobra.Command) Option {
 	return WithCustomIn(cmd.InOrStdin())
 }
-func WithStdIn() itbasisCoreOption.Option[exec.Cmd] {
+func WithStdIn() Option {
 	return WithCustomIn(os.Stdin)
 }
-func WithCustomIn(in io.Reader) itbasisCoreOption.Option[exec.Cmd] {
+func WithCustomIn(in io.Reader) Option {
 	return &_optionIn{in: in}
 }
 

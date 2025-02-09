@@ -1,5 +1,6 @@
 {
 	"Exclude": [
-		"testdata/"
+		"testdata/",
+		"go\\.sum"
 	]
 }
