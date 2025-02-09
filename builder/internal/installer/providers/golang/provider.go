@@ -34,8 +34,6 @@ func NewGoInstaller(out itbasisCoreExec.CobraOut) (GoInstaller, error) {
 }
 
 func (r *installer) Install(list model.GoDependencyList) error {
-	slog.Info("installing Go dependencies")
-
 	for name, dependency := range list {
 		slog.Info(fmt.Sprintf("install dependency: %s[%s]", name, dependency.Version))
 

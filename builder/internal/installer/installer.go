@@ -1,6 +1,8 @@
 package installer
 
 import (
+	"log/slog"
+
 	"github.com/itbasis/go-tools/builder/internal/installer/model"
 	"github.com/itbasis/go-tools/builder/internal/installer/providers/github"
 	"github.com/itbasis/go-tools/builder/internal/installer/providers/golang"
@@ -19,7 +21,8 @@ type Installer struct {
 
 func NewInstaller(cobraOut itbasisCoreExec.CobraOut, opts ...Option) (*Installer, error) {
 	installer := &Installer{
-		cobraOut: cobraOut,
+		cobraOut:  cobraOut,
+		providers: map[model.ProviderKey]any{},
 	}
 
 	if err := itbasisCoreOption.ApplyOptions(installer, opts, nil); err != nil {
@@ -62,6 +65,8 @@ func (r *Installer) installGo() error {
 		installer = value.(golang.GoInstaller)
 	}
 
+	slog.Info("installing dependencies with provider: " + string(golang.ProviderGoKey))
+
 	if err = installer.Install(r.dependencies.Go); err != nil {
 		return err //nolint:wrapcheck // TODO
 	}
@@ -85,6 +90,8 @@ func (r *Installer) installGitHub() error {
 	} else {
 		installer = value.(github.Installer)
 	}
+
+	slog.Info("installing dependencies with provider: " + string(github.ProviderGithubKey))
 
 	if err = installer.Install(r.dependencies.Github); err != nil {
 		return err //nolint:wrapcheck // TODO

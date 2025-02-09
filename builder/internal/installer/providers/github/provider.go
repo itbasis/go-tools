@@ -31,8 +31,6 @@ func NewGithubInstaller() (Installer, error) {
 }
 
 func (r *installer) Install(list model.GithubDependencyList) error {
-	slog.Info("installing Github dependencies")
-
 	for name, dependency := range list {
 		if err := r.installDependency(name, dependency); err != nil {
 			return err
